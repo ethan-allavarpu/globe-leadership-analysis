@@ -17,11 +17,13 @@ culture %>%
   ggplot() +
   geom_boxplot(aes(reorder(country_cluster, collectivism), collectivism,
                    color = country_cluster), show.legend = FALSE) +
+  scale_y_continuous(breaks = seq(4, 5.5, by = 0.25), minor_breaks = NULL) +
   scale_color_manual(values = colors) +
   labs(title = 'Mean Collectivism Score by Country Cluster',
        caption = 'Note: countries with missing country clusters were excluded.',
        x = 'Country Cluster', y = 'Mean Collectivism Score') +
-  theme_bw()
+  theme_minimal() + theme(axis.text.x = element_text(angle = 45),
+                          panel.grid.major.x = element_blank())
 
   # practices v. values ----
 
