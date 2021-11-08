@@ -64,7 +64,7 @@ points(x = test[1], y = test[2], pch = 19, col = "black", cex = 3)
 ```{r}
 plot(train, pch = 19, col = train_col, cex = 2, asp = 1, las = 1)
 points(x = test[1], y = test[2], pch = 19,
-       col = max(train_col[which.min(test_dists)]), cex = 2)
+       col = max(train_col[which.min(test_dists)]), cex = 3)
 symbols(x = test[1], y = test[2], circles = min(test_dists),
         inches = FALSE, add = TRUE)
 segments(x0 = test[1], y0 = test[2],
