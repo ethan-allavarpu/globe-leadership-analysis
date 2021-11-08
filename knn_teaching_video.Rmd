@@ -1,0 +1,127 @@
+---
+title: "K-Nearest Neighbors (KNN)"
+author: 
+  - Ethan Allavarpu $\cdot$ Raymond Bai $\cdot$ Jaclyn Chiu \newline Ariel Chow $\cdot$ Carlie Lin $\cdot$ Dara Tan \newline \textbf{Explore the GLOBE}
+subtitle:
+  - STATS 140XP Teaching Video
+date: |
+  | Fall 2021
+output:
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "rose"
+    slide_level: 1
+header-includes:
+  - \setbeamertemplate{footline}{}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
+                      out.height = "90%")
+library(tidyverse)
+```
+
+# What is KNN?
+
+  - KNN: K-nearest neighbors
+  - Classification method to predict a certain response
+  - Numeric predictor variables (distance)
+  
+# The Algorithm
+
+  - Standardize variables to be on the same scale
+  - Calculate the $k$ nearest observations by distance
+  - Find the response values of those observations
+  - Assign the new point's response value to the most common of the $k$ neighbors
+  
+# An Example
+
+```{r}
+set.seed(3)
+x <- runif(n = 7, min = -2, max = 6)
+y <- runif(n = 7, min = 0, max = 5)
+train <- cbind(x, y)
+train_col <- sample(x = rgb(c(0.5, 0), 0, c(0, 0.5), alpha = 0.75),
+                    size = nrow(train),
+                    replace = TRUE)
+test <- c(1.5, 3)
+distance <- function(a, b) {
+  sqrt(sum((a - b)^2))
+}
+test_dists <- apply(train, 1, distance, b = test)
+plot(train, pch = 19, col = train_col, cex = 2, asp = 1, las = 1)
+```
+
+# A New Observation
+
+```{r}
+plot(train, pch = 19, col = train_col, cex = 2, asp = 1, las = 1)
+points(x = test[1], y = test[2], pch = 19, col = "black", cex = 3)
+```
+
+# $k = 1$
+
+```{r}
+plot(train, pch = 19, col = train_col, cex = 2, asp = 1, las = 1)
+points(x = test[1], y = test[2], pch = 19,
+       col = max(train_col[which.min(test_dists)]), cex = 2)
+symbols(x = test[1], y = test[2], circles = min(test_dists),
+        inches = FALSE, add = TRUE)
+segments(x0 = test[1], y0 = test[2],
+         x1 = train[which.min(test_dists), 1],
+         y1 = train[which.min(test_dists), 2])
+text(x = 1.75, y = 1, labels = "Blue", col = max(train_col[which.min(test_dists)]),
+     cex = 3)
+```
+
+# $k = 3$
+
+```{r}
+plot(train, pch = 19, col = train_col, cex = 2, asp = 1, las = 1)
+points(x = test[1], y = test[2], pch = 19,
+       col = names(which.max(table(train_col[order(test_dists)[1:3]]))),
+       cex = 3)
+symbols(x = test[1], y = test[2], circles = sort(test_dists)[3],
+        inches = FALSE, add = TRUE)
+segments(x0 = test[1], y0 = test[2],
+         x1 = train[order(test_dists)[1:3], 1],
+         y1 = train[order(test_dists)[1:3], 2])
+text(x = 1.75, y = 1, labels = "Red",
+     col = names(which.max(table(train_col[order(test_dists)[1:3]]))), cex = 3)
+```
+
+# $k = 5$
+
+```{r}
+plot(train, pch = 19, col = train_col, cex = 2, asp = 1, las = 1)
+points(x = test[1], y = test[2], pch = 19,
+       col = names(which.max(table(train_col[order(test_dists)[1:5]]))),
+       cex = 3)
+symbols(x = test[1], y = test[2], circles = sort(test_dists)[5],
+        inches = FALSE, add = TRUE)
+segments(x0 = test[1], y0 = test[2],
+         x1 = train[order(test_dists)[1:5], 1],
+         y1 = train[order(test_dists)[1:5], 2])
+text(x = 1.75, y = 1, labels = "Blue",
+     col = names(which.max(table(train_col[order(test_dists)[1:5]]))), cex = 3)
+```
+
+# $k = 7$
+
+```{r}
+plot(train, pch = 19, col = train_col, cex = 2, asp = 1, las = 1)
+points(x = test[1], y = test[2], pch = 19,
+       col = names(which.max(table(train_col[order(test_dists)[1:7]]))),
+       cex = 3)
+symbols(x = test[1], y = test[2], circles = sort(test_dists)[7],
+        inches = FALSE, add = TRUE)
+segments(x0 = test[1], y0 = test[2],
+         x1 = train[order(test_dists)[1:7], 1],
+         y1 = train[order(test_dists)[1:7], 2])
+text(x = 1.75, y = 1, labels = "Blue",
+     col = names(which.max(table(train_col[order(test_dists)[1:7]]))), cex = 3)
+```
+
+
+
+
