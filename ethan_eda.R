@@ -2,9 +2,9 @@ library(tidyverse)
 library(rworldmap)
 source("iso_codes.R")
 
-col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15),
-                   c(0.50, 0.00, 0.50, 0.60, 0.00, 0.45, 0.45, 0.75),
-                   c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45),
+col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15, 0.32, 0.53),
+                   c(0.50, 0.00, 0.50, 0.60, 0.00, 0.45, 0.45, 0.75, 0.25, 0.23),
+                   c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45, 0.70, 0.20),
                    alpha = 0.75)
 
 leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
@@ -56,8 +56,10 @@ combined_data %>%
   group_by(Country.Cluster) %>%
   filter(Country.Cluster != "") %>%
   ggplot() +
-  geom_boxplot(aes(reorder(Country.Cluster, Autocratic), Autocratic, color = Country.Cluster),
+  geom_boxplot(aes(reorder(Country.Cluster, Autocratic), Autocratic,
+                   color = Country.Cluster),
                show.legend = FALSE) +
+  scale_color_manual(values = col_palette) +
   labs(title = "Autocratic Scores by Country Cluster",
        x = "Country Cluster", y = "Autocratic Score") +
   theme_minimal() +
