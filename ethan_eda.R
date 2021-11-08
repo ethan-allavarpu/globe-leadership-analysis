@@ -2,9 +2,16 @@ library(tidyverse)
 library(rworldmap)
 source("iso_codes.R")
 
+col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15),
+                   c(0.50, 0.00, 0.50, 0.60, 0.00, 0.45, 0.45, 0.75),
+                   c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45),
+                   alpha = 0.75)
+
 leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+leadership$Country.Cluster <- trimws(leadership$Country.Cluster)
 society <- read.csv("GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
 society$Country.Name[society$Country.Name == "IRAN"] <- "Iran"
+society$Country.Cluster <- trimws(society$Country.Cluster)
 
 combined_data <- full_join(leadership, society,
                            by = c("Country", "Country.Name", "Country.Cluster"))
@@ -34,6 +41,8 @@ par(mai = rep(0.85, 4), xaxs = "i", yaxs = "i")
 ### Edit the from and to arguments to match the variable of interest
 ### Divide by the maximum value of the variable of interest
 
+# Autocratic Scores by Country and Country Cluster ----
+
 mapCountryData(mapped_data, nameColumnToPlot = "Autocratic",
                numCats = 44,
                colourPalette = rgb(0.5, 0, 0,
@@ -45,11 +54,14 @@ mapCountryData(mapped_data, nameColumnToPlot = "Autocratic",
 
 combined_data %>%
   group_by(Country.Cluster) %>%
-  summarize(avg_autocratic = mean(Autocratic),
-            med_autocratic = median(Autocratic)) %>%
-  arrange(desc(avg_autocratic))
-
-boxplot(Autocratic ~ Country.Cluster, data = combined_data,
-        cex.axis = 0.5, las = 2)
-
+  filter(Country.Cluster != "") %>%
+  ggplot() +
+  geom_boxplot(aes(reorder(Country.Cluster, Autocratic), Autocratic, color = Country.Cluster),
+               show.legend = FALSE) +
+  labs(title = "Autocratic Scores by Country Cluster",
+       x = "Country Cluster", y = "Autocratic Score") +
+  theme_minimal() +
+  ylim(1.65, 4) +
+  theme(axis.text.x = element_text(size = 8, angle = 45),
+        panel.grid.major.x = element_blank())
 
