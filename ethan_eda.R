@@ -30,7 +30,7 @@ country_codes[is.na(country_codes$code), "code"] <- c("GBR", "CZE", "VEN",
 combined_data <- combined_data %>% mutate("Code" = country_codes$code)
 mapped_data <- joinCountryData2Map(combined_data, nameJoinColumn = "Code")
 
-par(mai = rep(0.85, 4), xaxs = "i", yaxs = "i")
+par(mai = rep(0.95, 4), xaxs = "i", yaxs = "i")
 
 
 # Edit the following function to create maps for different variables
