@@ -8,8 +8,8 @@ date: |
   | Fall 2021
 output:
   beamer_presentation:
-    theme: "CambridgeUS"
-    colortheme: "rose"
+    theme: "Boadilla"
+    colortheme: "seahorse"
     slide_level: 1
 header-includes:
   - \setbeamertemplate{footline}{}
