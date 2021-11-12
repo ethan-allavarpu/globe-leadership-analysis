@@ -46,11 +46,46 @@ par(mai = rep(0.95, 4), xaxs = "i", yaxs = "i")
 mapCountryData(mapped_data, nameColumnToPlot = "Autocratic",
                numCats = 44,
                colourPalette = rgb(0.5, 0, 0,
-                                   alpha = seq(from = 1.89, to = 3.86,
+                                   alpha = seq(from = 1.89 / 2, to = 3.86,
                                                length.out = 44) / 3.86),
                borderCol = "black",
                missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
                mapTitle = "Autocratic Levels by Country")
+mapCountryData(mapped_data, nameColumnToPlot = "Diplomatic",
+               numCats = 26,
+               colourPalette = rgb(0, 0, 0.5,
+                                   alpha = seq(from = 4.49 / 2, to = 6.05,
+                                               length.out = 26) / 6.05),
+               borderCol = "black",
+               missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
+               mapTitle = "Diplomatic Levels by Country")
+mapCountryData(mapped_data,
+               nameColumnToPlot = "Gender.Egalitarianism.Societal.Practices",
+               numCats = 44,
+               colourPalette = rgb(0, 0.33, 0,
+                                   alpha = seq(from = 1, to = 7,
+                                               length.out = 44) / 7),
+               borderCol = "black",
+               missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
+               mapTitle = "Gender Egalitarianism Practices by Country")
+mapCountryData(mapped_data,
+               nameColumnToPlot = "Gender.Egalitarianism.Societal.Values",
+               numCats = 44,
+               colourPalette = rgb(0, 0.33, 0,
+                                   alpha = seq(from = 1, to = 7,
+                                               length.out = 44) / 7),
+               borderCol = "black",
+               missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
+               mapTitle = "Gender Egalitarianism Values by Country")
+mapCountryData(mapped_data,
+               nameColumnToPlot = "Future.Orientation.Societal.Values",
+               numCats = 32,
+               colourPalette = rgb(0, 0.5, 0.5,
+                                   alpha = seq(from = 2.95 / 2, to = 6.2,
+                                               length.out = 32) / 6.2),
+               borderCol = "black",
+               missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
+               mapTitle = "Future Orientation by Country")
 
 combined_data %>%
   group_by(Country.Cluster) %>%
