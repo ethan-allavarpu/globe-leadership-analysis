@@ -1,0 +1,66 @@
+---
+title: "Stats 140XP Final Project - RBai EDA"
+author: "Raymond Bai"
+date: "11/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Desktop/Stats 140XP/Stats 140XP Final Project")
+
+# Necessary libraries
+library(ggplot2)
+library(dplyr)
+library(readxl)
+library(readr)
+library(stringr)
+```
+
+## Data loading, "beautifying" and joining
+
+```{r}
+leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+social <- read.csv("GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
+
+colnames(leadership) <- vapply(colnames(leadership),
+                               function(x){gsub(pattern = "[\\.]+",
+                                                replacement = " ", x)},
+                               character(1))
+colnames(social) <- vapply(colnames(social),
+                               function(x){gsub(pattern = "[\\.]+",
+                                                replacement = " ", x)},
+                           character(1))
+social$`Country Name`[social$`Country Name` == "IRAN"] <- "Iran"
+data <- full_join(leadership, social,
+                  by = c("Country" = "Country",
+                         "Country Name" = "Country Name",
+                         "Country Cluster" = "Country Cluster")
+                  )
+```
+
+```{r}
+# Just because society considers being humane as essential,
+# Doesn't mean it necessarily value humane practices
+plot(data$`Human Orientation Societal Values`, # double check on this
+     data$`Humane Orientation Societal Practices`,
+     xlab = "Humane Orientation - Societal Values",
+     ylab = "Humane Orientation - Societal Practices")
+```
+
+```{r}
+# No significant relationship between Social humane orientation
+# and Leadership humane orientation
+plot(data$`Human Orientation Societal Values`,
+     data$`Humane oriented`,
+     xlab = "Humane Orientation - Societal Values",
+     ylab = "Humane Orientation - Leadership")
+
+# BUT Social humane practice does seem to have positive relationship
+# with Leadership humane orientation
+plot(data$`Humane Orientation Societal Practices`,
+     data$`Humane oriented`,
+     xlab = "Humane Orientation - Societal Values",
+     ylab = "Humane Orientation - Leadership")
+cor(data$`Humane Orientation Societal Practices`, data$`Humane oriented`)
+```
