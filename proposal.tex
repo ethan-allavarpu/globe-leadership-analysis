@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[portrait, margin=1in]{geometry}
+\title{%
+  Final Project Proposal \\
+  \large Explore the GLOBE \\
+  STATS 140XP Lecture 1}
+\author{Ethan Allavarpu $\cdot$ Raymond Bai $\cdot$ Jaclyn Chiu \\ Ariel Chow $\cdot$ Carlie Lin $\cdot$ Dara Tan}
+\date{16 November 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{The Team}
+\subsection{Members}
+\begin{itemize}
+    \item Ethan Allavarpu: Programmer
+    \item Raymond Bai: Poster
+    \item Jaclyn Chiu: Poster
+    \item Ariel Chow: Report
+    \item Carlie Lin: Report
+    \item Dara Tan: Programmer
+\end{itemize}
+
+\subsection{Deliverables}
+\begin{itemize}
+    \item Poster: Raymond, Jackie
+    \item Presentation: Everyone
+    \item Report: Ariel, Carlie
+\end{itemize}
+
+\section{Problem Statement and Background}
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+    \item Which characteristics or traits do countries tend to group together when determining ``good" leadership values?
+    \item Do societal practices and societal values align?
+    \begin{itemize}
+        \item If they do not, which practices and values deviate most significantly?
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Background}
+
+Develop some background on the problem: why it is interesting, who might find it interested, what do we already know about the problem.
+
+\begin{enumerate}
+    \item The first question about leadership characteristics has value because we can see the types of values that get aggregated together--post-hoc analysis could also demonstrate which global regions fit into which categories.
+    \begin{itemize}
+        \item If we can understand how certain values are perceived, leaders can use this information to further their perception in the public eye. We already see this through propaganda used in numerous countries to push a specific narrative.
+    \end{itemize}
+    \item The alignment (or lack thereof) of societal practices and values may indicate for which topics is virtue signaling without any legitimate action an issue. We know that many countries--especially first-world countries--make claims about what we \textit{should} do, but have little in terms of tangible efforts.
+\end{enumerate}
+
+
+\section{The Data}
+\subsection{Sources}
+\begin{itemize}
+    \item Dana Landis Leadership
+    \item GLOBE Research Survey
+    \item ISO-3 Codes (via Wikipedia)
+\end{itemize}
+\subsection{Cleaning and Joining the Data}
+\begin{itemize}
+    \item Join leadership and society and culture data by country, country name, annd country cluster
+    \item Added ISO-3 codes for visualizing data on a world map
+    \item Eliminated duplicate variables
+    \item Changed variable names for easier access and understanding
+\end{itemize}
+
+\section{Analysis}
+
+\begin{enumerate}
+    \item Clustering methods and/or PCA to find the best groupings of the data.
+    \item Tests for slope coefficient $\beta$ when comparing societal value with its associated practice
+    \begin{itemize}
+        \item $H_0: \beta = 0$
+        \item $H_A: \beta \neq 0$
+        \item We would perform these hypotheses for all practice-value pairs, adjusting $\alpha$ accordingly to limit the possibility of a false positive
+    \end{itemize}
+\end{enumerate}
+
+\section{Description of Analysis Tools}
+
+\begin{itemize}
+    \item EDA
+        \begin{itemize}
+            \item Visualizations (Heat Maps)
+            \item Correlation Matrices
+            \item Box Plots
+        \end{itemize}
+    \item Problem Statements
+        \begin{enumerate}
+            \item Leadership Values
+            \begin{itemize}
+                \item Clustering (K-means, hierarchical)
+                \item PCA (Principal Component Analysis)
+            \end{itemize}
+            \item Societal Values and Practices
+            \begin{itemize}
+                \item $t$-tests for signficance of the slope
+                \item Bonferroni's correction for adjusting the significance level $\alpha$
+            \end{itemize}
+        \end{enumerate}
+\end{itemize}
+
+\end{document}

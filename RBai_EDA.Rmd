@@ -7,7 +7,6 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("~/Desktop/Stats 140XP/Stats 140XP Final Project")
 
 # Necessary libraries
 library(ggplot2)
