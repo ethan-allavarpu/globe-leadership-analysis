@@ -112,11 +112,27 @@ par(mai = rep(0.95, 4), xaxs = "i", yaxs = "i")
 
 # Autocratic Scores by Country and Country Cluster ----
 
-set.seed(10)
 mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
                numCats = 4, catMethod = "categorical",
-               colourPalette = sample(col_palette, 4),
+               colourPalette = col_palette[seq_len(4) + 3],
                borderCol = "black",
                missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
                mapTitle = "Similar Leadership Values",
                addLegend = FALSE)
+
+characteristic_values <- sapply(num_data, FUN = function(x) {
+  tapply(X = x, INDEX = leadership$`Similar Values`, FUN = median)
+  })
+barplot(characteristic_values, beside = TRUE,
+        col = col_palette[seq_len(4) + 3])
+abline(h = 4)
+melt(characteristic_values) %>%
+  ggplot(aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = rgb(0.33, 0, 0, alpha = 1),
+                       high = rgb(0, 0.33, 0, alpha = 1),
+                       midpoint = 4, space = "Lab",
+                       name = "PCA Coefficient") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1))
+
