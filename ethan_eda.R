@@ -22,9 +22,9 @@ names(iso_codes) <- c("code", "country")
 country_codes <- countries %>% left_join(iso_codes)
 country_codes[is.na(country_codes$code), "code"] <- c("GBR", "CZE", "VEN",
                                                       "IRN", "RUS", "KOR",
-                                                      "ZAF", "BOL", NA,
-                                                      "ZAF", "CAN", "GER",
-                                                      "GER", "USA")
+                                                      "ZAF", "BOL", "CHE",
+                                                      "ZAF", "CAN", "DEU",
+                                                      "DEU", "USA")
 
 
 combined_data <- combined_data %>% mutate("Code" = country_codes$code)
