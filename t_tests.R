@@ -26,16 +26,19 @@ get_t_test_p_values <- function(n) {
   tibble(name = n, p_value = p)
 }
 p_values <- map_df(unique(spv$name), get_t_test_p_values)
-
 alpha <- 0.05 / nrow(p_values)
 
   # visualize results ----
 
-ggplot(p_values) +
-  geom_col(aes(reorder(name, p_value), p_value,
-               color = p_value < alpha, fill = p_value < alpha)) +
+p_values %>%
+  mutate(corrected = p_value / nrow(p_values),
+         name = ifelse(str_detect(name, 'Collectivism'),
+                       str_extract(name, '(?<=\\()[A-z- ]{1,}'), name)) %>%
+  ggplot() + geom_col(aes(reorder(name, p_value), p_value,
+                          color = p_value < alpha, fill = p_value < alpha)) +
   scale_color_manual(values = c('#d62728', '#2ca02c'), name = 'Significant') +
   scale_fill_manual(values = c('#d62728', '#2ca02c'), name = 'Significant') +
-  labs(title = 'Significance of Values in Modeling Practices',
+  labs(title = str_c('Significance of Societal Values as Predictors of ',
+                     'Societal Practices, by Cultural Dimension'),
        x = 'Cultural Dimension', y = 'p-value') +
   theme_bw() + coord_flip()
