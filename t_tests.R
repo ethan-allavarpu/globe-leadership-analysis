@@ -40,5 +40,30 @@ p_values %>%
   scale_fill_manual(values = c('#d62728', '#2ca02c'), name = 'Significant') +
   labs(title = str_c('Significance of Societal Values as Predictors of ',
                      'Societal Practices, by Cultural Dimension'),
-       x = 'Cultural Dimension', y = 'p-value') +
+       x = 'Cultural Dimension', y = 'p-value',
+       caption = paste0("Significance Threshold: ", round(alpha, 5))) +
+  geom_hline(yintercept = alpha, colour = "blue", lty = 2, show.legend = TRUE) +
+  theme_bw() + coord_flip()
+
+  # correlations ----
+
+get_correlations <- function(n) {
+  tibble(name = n,
+         r = cor(spv %>% filter(name == n) %>% select(practice, value)))
+}
+correlations <- map_df(unique(spv$name),
+                       get_correlations)[seq(from = 1, by = 2,
+                                             length.out = 9), ]
+correlations <- with(correlations, tibble(name, corr = r[,2]))
+
+  # visualize correlations ----
+correlations %>%
+  ggplot() + geom_col(aes(reorder(name, corr), corr,
+                          color = c("Positive", "Negative")[(corr < 0) + 1],
+                          fill = c("Positive", "Negative")[(corr < 0) + 1])) +
+  scale_color_manual(values = c('#d62728', '#2ca02c'), name = 'Correlation') +
+  scale_fill_manual(values = c('#d62728', '#2ca02c'), name = 'Correlation') +
+  labs(title = str_c('Correlation Between Societal Values and Practices'),
+       x = 'Cultural Dimension', y = 'Correlation Coefficient') +
+  geom_hline(yintercept = 0, colour = "black", lty = 2, show.legend = TRUE) +
   theme_bw() + coord_flip()

@@ -72,7 +72,7 @@ melt(pca$rotation) %>%
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1)) +
   coord_flip()
-biplot(pca, cex = 0.25)
+biplot(pca, cex = 0.5)
 pca_sum <- summary(pca)
 var_explain <- c(0, pca_sum$importance["Cumulative Proportion", ])
 plot(x = seq(from = 0, by = 1, length.out = length(var_explain)), var_explain,
@@ -97,21 +97,9 @@ plot(w_ss, type = "o")
 best_4 <- k_clust[[4]]
 leadership <- mutate(leadership, "Similar Values" = factor(best_4$cluster))
 
+# K-means Clusters and Leadership Values ----
 mapped_data <- joinCountryData2Map(leadership, nameJoinColumn = "Code")
-
 par(mai = rep(0.95, 4), xaxs = "i", yaxs = "i")
-
-
-# Edit the following function to create maps for different variables
-# nameColumnToPlot should be the variable name
-# numCats defines how many breaks you want (44 is the maximum)
-# colourPalette defines the range of colors to plot
-## alpha in rgb() is the transparency factor
-### Edit the from and to arguments to match the variable of interest
-### Divide by the maximum value of the variable of interest
-
-# Autocratic Scores by Country and Country Cluster ----
-
 mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
                numCats = 4, catMethod = "categorical",
                colourPalette = col_palette[seq_len(4) + 3],
@@ -123,16 +111,16 @@ mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
 characteristic_values <- sapply(num_data, FUN = function(x) {
   tapply(X = x, INDEX = leadership$`Similar Values`, FUN = median)
   })
-barplot(characteristic_values, beside = TRUE,
-        col = col_palette[seq_len(4) + 3])
-abline(h = 4)
+characteristic_values <- characteristic_values[, apply(characteristic_values,
+                                                       2, mean) %>% order()]
 melt(characteristic_values) %>%
   ggplot(aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() +
-  scale_fill_gradient2(low = rgb(0.33, 0, 0, alpha = 1),
-                       high = rgb(0, 0.33, 0, alpha = 1),
+  scale_fill_gradient2(low = rgb(0.75, 0, 0, alpha = 1),
+                       high = rgb(0, 0.5, 0, alpha = 1),
                        midpoint = 4, space = "Lab",
-                       name = "PCA Coefficient") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1))
+                       name = "Median Survey Score") +
+  labs(title = "Median Survey Scores for Leadership Categories by Cluster",
+       x = "Cluster", y = "Leadership Category") +
+  theme_minimal()
 
