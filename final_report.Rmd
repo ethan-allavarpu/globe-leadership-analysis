@@ -1,0 +1,107 @@
+---
+title: 'Stats 140XP: Final Project'
+author: "Ethan Allavarpu, Raymond Bai, Jaclyn Chiu, Ariel Chow, Carlie Lin, Dara Tan"
+date: "11/12/2021"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 1
+    number_sections: false
+  self-contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA, fig.align = "center", out.width = "85%")
+options(digits = 4)
+library(knitr)
+library(MASS)
+library(leaps)
+library(dplyr)
+library(purrr)
+library(kableExtra)
+
+# source("data_readin_clean.R")
+
+```
+
+
+\vfill
+
+\newpage
+
+# Abstract
+
+We wanted to answer two main questions: what qualities are grouped together when evaluating "good" leadership and if societal practices and values align with one another. We used the ____ method to ____. We found that ____. We also looked at _____. In the future, we recommend looking into _____. Some limitations to our project are ______. 
+
+
+
+# Problem Statement
+
+There are two main questions we want to answer. 
+
+1. Which characteristics or traits do countries tend to group together when determining "good" leadership values
+
+2. Do societal practices and societal values align? 
+    - If they do not, which practices and values deviate most significantly?
+    
+    
+# Description of Dataset
+
+The data set we have chosen to analyze is the **Dana Landis Leadership** dataset, which comes from the GLOBE Research Survey. The data provided in the folder had survey results for (1) leadership and (2) societal and culture data and a PDF describing the nature of the survey, but nothing more. To glean more information, we found the two questionnaires (alpha and beta) described in the informational PDF to get the original questions asked in the surveys. While we do not have a "codebook" in a traditional sense, the original questions asked may help guide us in understanding what each variable means and how the survey represents respondents answers numerically. The survey is on a 1 to 7 scale, with 1 being a negative response, 4 a "neutral" score, and 7 positive.
+
+Here is a look at 6 full and complete observations from the leadership survey:
+
+```{r}
+
+leadership <- read.csv("leadership.csv")
+
+sociocultural <- read.csv("social-cultural.csv")
+
+
+```
+
+Here is a look at 6 full and complete observations from the social and cultural survey:
+
+```{r}
+
+
+
+```
+
+# Description of Variables 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Visualization and Exploratory Data Analysis
+
+
+# Analysis
+
+
+
+
+
+
+# Conclusions
+
+
+
+# Suggestions for Further Research 
+
+# Limitations
+
+While promising, there are a few issues with the data we have to consider. First, the number of observations: 62 observations is a rather small dataset, which suggest that any analysis will likely be limited. Also, the data silences are important and should not be overlooked. Why were certain countries not surveyed? Another potential issue is running multiple significance tests: with nine societal practice vs. value concepts to considers, maintaining a $\alpha$ = 0.05 significant level would increase the experimentwise error rate and thus the likelihood of a false positive (P(False Positive) = 1 - P(No False Positive) = 1 - $0.95^{9} \approx$ 0.3698). To remedy this issue, we may either consider employing a *Bonferroni correction* or *Tukey's method (HSD)*
