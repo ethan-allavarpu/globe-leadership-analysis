@@ -26,8 +26,7 @@ rename_columns <- function(x) {
   gsub(pattern = "_", replacement = ")", new_name)
 }
 colnames(leadership) <- vapply(colnames(leadership), rename_columns, character(1))
-leadership <- leadership %>%
-  select(-Country)
+leadership <- leadership %>% dplyr::select(-Country)
 leadership <- leadership[, is.na(str_match(names(leadership),
                                            "Global Leadership Dimension"))]
 num_data <- leadership[, vapply(leadership, is.numeric, logical(1))]
@@ -44,24 +43,10 @@ melted_cor_mat %>%
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1))
 
-set.seed(1)
-w_ss <- numeric(30)
-k_clust <- list()
-length(k_clust) <- 30
-for (k in seq_along(w_ss)) {
-  k_clusters <- kmeans(num_data, centers = k, nstart = 20)
-  k_clust[[k]] <- k_clusters
-  w_ss[k] <- k_clusters$tot.withinss
-}
-plot(w_ss, type = "o")
-
-# k = 4 seems best
-best_k_clusters <- k_clust[[4]]
-
 # PCA
 rownames(num_data) <- leadership$`Country Name`
 pca <- prcomp(num_data)
-melt(pca$rotation) %>%
+melt(pca$rotation[, seq_len(4)]) %>%
   ggplot(aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() +
   scale_fill_gradient2(low = rgb(0, 0.5, 0, alpha = 1),
@@ -79,6 +64,25 @@ plot(x = seq(from = 0, by = 1, length.out = length(var_explain)), var_explain,
              type = "o",
      main = "Total Proportion of Varaince Explained",
      xlab = "Number of Principal Components")
+
+# Cluster the leadership characteristics
+pca4 <- pca$rotation[, 1:4]
+set.seed(0)
+w_ss <- numeric(20)
+k_clust <- list()
+length(k_clust) <- 20
+for (k in seq_along(w_ss)) {
+  k_clusters <- kmeans(pca4, centers = k, nstart = 20)
+  k_clust[[k]] <- k_clusters
+  w_ss[k] <- k_clusters$tot.withinss
+}
+plot(w_ss, type = "o")
+
+## k = 5 seems best, but k = 3 provides more relevant groups
+cols <- k_clust[[3]]$cluster
+plot(pca4[, 1:2], xlim = c(-0.5, 0.5), ylim = c(-0.4, 0.4), pch = 19, col = cols)
+abline(h = 0)
+abline(v = 0)
 
 # Use first four principal components for clustering
 pca_x <- pca$x[, 1:4]
