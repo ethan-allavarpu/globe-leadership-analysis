@@ -1,0 +1,11 @@
+\contentsline {section}{Abstract}{2}{section*.2}%
+\contentsline {section}{Problem Statements}{2}{section*.3}%
+\contentsline {section}{Description of Dataset}{2}{section*.4}%
+\contentsline {section}{Description of Variables}{2}{section*.5}%
+\contentsline {section}{Visualization and Exploratory Data Analysis}{2}{section*.6}%
+\contentsline {section}{Analysis}{2}{section*.7}%
+\contentsline {subsection}{Leadership Values}{2}{section*.8}%
+\contentsline {subsection}{Societal Practices and Values}{5}{section*.9}%
+\contentsline {section}{Conclusions}{5}{section*.10}%
+\contentsline {section}{Suggestions for Further Research}{5}{section*.11}%
+\contentsline {section}{Limitations}{5}{section*.12}%

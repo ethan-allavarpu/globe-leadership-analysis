@@ -1,0 +1,290 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{Stats 140XP: Final Project}
+\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
+\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
+Tan \and \textbf{Explore the GLOBE}}
+\date{1 December 2021}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Stats 140XP: Final Project},
+  pdfauthor={Ethan Allavarpu \textbackslash cdot Raymond Bai \textbackslash cdot Jaclyn Chiu \textbackslash cdot Ariel Chow \textbackslash cdot Carlie Lin \textbackslash cdot Dara Tan; },
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\vfill
+
+\newpage
+
+\hypertarget{abstract}{%
+\section{Abstract}\label{abstract}}
+
+We wanted to answer two main questions: which leadership qualities do
+countries tend to view similarly and if countries align their
+perceptions societal practices and values. For determining leadership
+qualities and similar countries, we used principal component analysis
+(PCA) then \(k\)-means clustering to create four ``clusters'' of
+countries with similar leadership beliefs. We used the \_\_\_\_ method
+to \_\_\_\_. We found that \_\_\_\_. We also looked at \_\_\_\_\_. In
+the future, we recommend looking into \_\_\_\_\_. Some limitations to
+our project are \_\_\_\_\_\_.
+
+\hypertarget{problem-statements}{%
+\section{Problem Statements}\label{problem-statements}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Which characteristics or traits do countries tend to group together
+  when determining ``good'' leadership values?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Which countries have similar perceptions of these leadership values?
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Do societal practices and societal values align?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If they do not, which practices and values deviate most
+    significantly?
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{description-of-dataset}{%
+\section{Description of Dataset}\label{description-of-dataset}}
+
+The data set we have chosen to analyze is the \textbf{Dana Landis
+Leadership} dataset, which comes from the GLOBE Research Survey. The
+data provided in the folder had survey results for (1) leadership and
+(2) societal and culture data and a PDF describing the nature of the
+survey, but nothing more. To glean more information, we found the two
+questionnaires (alpha and beta) described in the informational PDF to
+get the original questions asked in the surveys. While we do not have a
+``codebook'' in a traditional sense, the original questions asked may
+help guide us in understanding what each variable means and how the
+survey represents respondents answers numerically. The survey is on a 1
+to 7 scale, with 1 being a negative response, 4 a ``neutral'' score, and
+7 positive.
+
+Here is a look at 6 full and complete observations from the leadership
+survey:
+
+Here is a look at 6 full and complete observations from the social and
+cultural survey:
+
+\hypertarget{description-of-variables}{%
+\section{Description of Variables}\label{description-of-variables}}
+
+\hypertarget{visualization-and-exploratory-data-analysis}{%
+\section{Visualization and Exploratory Data
+Analysis}\label{visualization-and-exploratory-data-analysis}}
+
+\hypertarget{analysis}{%
+\section{Analysis}\label{analysis}}
+
+\hypertarget{leadership-values}{%
+\subsection{Leadership Values}\label{leadership-values}}
+
+For the leadership values problem statement, the first objective is to
+collapse the data into the first four principal components through
+principal component analysis (PCA). PCA finds the directions which
+capture the most variability in the data, so the first four account for
+the maximum variation. PCA allows us to visualize trends in the
+leadership values: countries tend to have similar sentiments about
+variables that ``point'' in the same direction (had principal component
+values that aligned).
+
+Before performing PCA, though, we remove the second-order factor
+analysis variables due to the heavy correlation with the original
+predictor variables and a more difficult interpretation of these
+variables. Since our goal is to understand the relationship between
+certain leadership characteristics, keeping these complicated variables
+might reduce our understanding of some characteristics.
+
+After performing PCA, we visualize the directions of the first two
+principal components. We also perform \(k\)-means clustering on the
+first four principal components to determine the ``groups'' of
+leadership characteristics that have similar perceptions:
+
+\begin{center}\includegraphics[width=0.7\linewidth]{final_report_files/figure-latex/unnamed-chunk-3-1} \end{center}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+After considering the leadership characteristics, we cluster countries
+based on similar perceptions. We do this by using the variables of the
+countries transformed into the first four principal components, then
+running PCA on those components. The clustering results segregate the
+countries into the following segments:
+
+\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{table}[h]
+
+\caption{\label{tab:unnamed-chunk-6}Regions with Similar Leadership Perceptions}
+\centering
+\begin{tabular}[t]{>{}l>{}l>{}l>{}l}
+\toprule
+Cluster 1 & Cluster 2 & Cluster 3 & Cluster 4\\
+\midrule
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Costa Rica}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{India}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{Qatar}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{England}}\\
+\textcolor[HTML]{739999}{Italy} & \textcolor[HTML]{000026}{Venezuela} & \textcolor[HTML]{407326}{Morocco} & \textcolor[HTML]{BF7300}{Namibia}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Ecuador}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Taiwan}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{South Africa (Black Sample)}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Czech Republic}}\\
+\textcolor[HTML]{739999}{El Salvador} & \textcolor[HTML]{000026}{Hong Kong} & \textcolor[HTML]{407326}{France} & \textcolor[HTML]{BF7300}{Singapore}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Israel}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Iran}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Kazakhstan}}\\
+\addlinespace
+\textcolor[HTML]{739999}{Hungary} & \textcolor[HTML]{000026}{Mexico} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Portugal}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Zambia}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Russia}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Finland}}\\
+\textcolor[HTML]{739999}{Zimbabwe} & \textcolor[HTML]{000026}{Indonesia} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Ireland}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Colombia}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{South Korea}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Austria}}\\
+\textcolor[HTML]{739999}{Turkey} & \textcolor[HTML]{000026}{China} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Switzerland}\\
+\addlinespace
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Spain}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Japan}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Netherlands}}\\
+\textcolor[HTML]{739999}{Guatemala} & \textcolor[HTML]{000026}{Albania} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{French Switzerland}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Bolivia}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Poland}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Australia}}\\
+\textcolor[HTML]{739999}{Greece} & \textcolor[HTML]{000026}{Egypt} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Sweden}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Brazil}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Kuwait}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{South Africa (White Sample)}}\\
+\addlinespace
+\textcolor[HTML]{739999}{Philippines} & \textcolor[HTML]{000026}{Nigeria} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Canada (English-speaking)}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Argentina}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Malaysia}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{New Zealand}}\\
+\textcolor[HTML]{739999}{Slovenia} & \textcolor[HTML]{000026}{Georgia} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Germany (EAST)}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Thailand}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Germany (WEST)}}\\
+\textcolor[HTML]{739999}{} & \textcolor[HTML]{000026}{} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Denmark}\\
+\addlinespace
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{USA}}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/unnamed-chunk-7-1} \end{center}
+
+\hypertarget{societal-practices-and-values}{%
+\subsection{Societal Practices and
+Values}\label{societal-practices-and-values}}
+
+For this section, since we consider nine societal practice vs.~value
+concepts, so maintaining a significance level of \(\alpha = 0.05\)
+increases the experimentwise error rate:
+\(P(\text{Any False Positive}) = 1 - P(\text{No False Positives}) = 1 - 0.95^{9} \approx 0.3698\).
+To remedy this issue, we employ a \emph{Bonferroni correction} to change
+the significance threshold from \(\alpha = 0.05\) to
+\(\alpha = \frac{0.05}{9} \approx 0.0056\).
+
+\hypertarget{conclusions}{%
+\section{Conclusions}\label{conclusions}}
+
+\hypertarget{suggestions-for-further-research}{%
+\section{Suggestions for Further
+Research}\label{suggestions-for-further-research}}
+
+\hypertarget{limitations}{%
+\section{Limitations}\label{limitations}}
+
+While promising, there are a few issues with the data we have to
+consider. First, the number of observations: 62 observations is a rather
+small dataset, which suggest that any analysis will likely be limited.
+Also, the data silences are important and should not be overlooked. Why
+were certain countries not surveyed?
+
+\end{document}

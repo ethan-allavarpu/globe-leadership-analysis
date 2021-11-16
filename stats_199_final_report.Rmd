@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = FALSE, comment = NA, fig.align = "center", out.widt
 options(digits = 4)
 library(knitr)
 library(MASS)
-library(alr3)
+library(alr4)
 library(leaps)
 library(dplyr)
 source("data_readin_clean.R")

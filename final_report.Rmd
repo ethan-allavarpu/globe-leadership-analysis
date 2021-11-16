@@ -4,17 +4,32 @@ author:
   - Ethan Allavarpu $\cdot$ Raymond Bai $\cdot$ Jaclyn Chiu $\cdot$ Ariel Chow $\cdot$ Carlie Lin $\cdot$ Dara Tan
   - \textbf{Explore the GLOBE}
 date: "1 December 2021"
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
+  - \usepackage[normalem]{ulem}
+  - \usepackage{makecell}
+  - \usepackage{xcolor}
 output:
   pdf_document:
     toc: true
     toc_depth: 1
     number_sections: false
-  self-contained: true
+    keep_tex: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, comment = NA, fig.align = "center",
-                      results = FALSE, warning = FALSE, message = FALSE,
+                      warning = FALSE, message = FALSE, results = FALSE,
                       out.width = "85%")
 options(digits = 4)
 library(knitr)
@@ -23,9 +38,6 @@ library(leaps)
 library(dplyr)
 library(purrr)
 library(kableExtra)
-
-# source("data_readin_clean.R")
-
 ```
 
 
@@ -134,7 +146,7 @@ For the leadership values problem statement, the first objective is to collapse 
 
 Before performing PCA, though, we remove the second-order factor analysis variables due to the heavy correlation with the original predictor variables and a more difficult interpretation of these variables. Since our goal is to understand the relationship between certain leadership characteristics, keeping these complicated variables might reduce our understanding of some characteristics.
 
-After performing PCA, we visualize the directions of the first two principal components:
+After performing PCA, we visualize the directions of the first two principal components. We also perform $k$-means clustering on the first four principal components to determine the "groups" of leadership characteristics that have similar perceptions:
 ```{r, out.width="70%"}
 # PCA
 num_data <- leadership[, vapply(leadership, is.numeric, logical(1))]
@@ -171,7 +183,7 @@ legend("bottomleft",
        cex = 0.75)
 ```
 
-On the first four principal components, we perform $k$-means clustering to determine the "groups" of leadership characteristics that have similar perceptions:
+
 
 ```{r}
 melt(pca4) %>%
@@ -220,15 +232,27 @@ mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
                missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
                mapTitle = "Country Clusters with Similar Leadership Values",
                addLegend = FALSE)
-
-# First two PCA components
-plot(pca_x[, 1:2],
-     xlim = range(pca_x[, 1]) + c(-0.5, 0.5),
-     ylim = range(pca_x[, 2]) + c(-0.5, 0.5),
-     col = (col_palette[seq_len(4) + 3])[best_4$cluster],
-     pch = 19, cex = 0.75, las = 1,
-     main = "Country Clusters by First Two Principal Components")
 ```
+```{r, results = TRUE}
+country_clusters <- matrix(nrow = max(table(best_4$cluster)), ncol = 4)
+for (i in unique(best_4$cluster)) {
+  country_clusters[seq_len(sum(best_4$cluster == i)), i] <-
+    names(best_4$cluster)[best_4$cluster == i]
+}
+cluster_cols <- col_palette[seq_len(4) + 3]
+country_clusters[is.na(country_clusters)] <- ""
+kbl(data.frame(country_clusters),
+    col.names = paste("Cluster", 1:4),
+    booktabs = TRUE,
+    position = "h",
+    caption = "Regions with Similar Leadership Perceptions") %>%
+  kable_styling(latex_options = "striped") %>%
+  column_spec(1, color = cluster_cols[1]) %>%
+  column_spec(2, color = cluster_cols[2]) %>%
+  column_spec(3, color = cluster_cols[3]) %>%
+  column_spec(4, color = cluster_cols[4])
+```
+
 ```{r}
 characteristic_values <- sapply(num_data, FUN = function(x) {
   tapply(X = x, INDEX = leadership$`Similar Values`, FUN = median)
@@ -242,7 +266,7 @@ melt(characteristic_values) %>%
                        high = rgb(0, 0.5, 0, alpha = 1),
                        midpoint = 4, space = "Lab",
                        name = "Median Survey Score") +
-  labs(title = "Median Survey Scores for Leadership Categories by Cluster",
+  labs(title = "Median Leadership Category Scores by Cluster",
        x = "Cluster", y = "Leadership Category") +
   theme_minimal() +
   theme(axis.text.x = element_text(color = col_palette[seq_len(4) + 3]),
