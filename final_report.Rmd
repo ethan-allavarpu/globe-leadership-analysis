@@ -13,7 +13,9 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, comment = NA, fig.align = "center", out.width = "85%")
+knitr::opts_chunk$set(echo = FALSE, comment = NA, fig.align = "center",
+                      results = FALSE, warning = FALSE, message = FALSE,
+                      out.width = "85%")
 options(digits = 4)
 library(knitr)
 library(MASS)
@@ -127,29 +129,17 @@ leadership <- leadership %>% dplyr::select(-Country)
 leadership <- leadership[, is.na(str_match(names(leadership),
                                            "Global Leadership Dimension"))]
 ```
-```{r}
+
+For the leadership values problem statement, the first objective is to collapse the data into the first four principal components through principal component analysis (PCA). PCA finds the directions which capture the most variability in the data, so the first four account for the maximum variation. PCA allows us to visualize trends in the leadership values: countries tend to have similar sentiments about variables that "point" in the same direction (had principal component values that aligned).
+
+Before performing PCA, though, we remove the second-order factor analysis variables due to the heavy correlation with the original predictor variables and a more difficult interpretation of these variables. Since our goal is to understand the relationship between certain leadership characteristics, keeping these complicated variables might reduce our understanding of some characteristics.
+
+After performing PCA, we visualize the directions of the first two principal components:
+```{r, out.width="70%"}
 # PCA
 num_data <- leadership[, vapply(leadership, is.numeric, logical(1))]
 rownames(num_data) <- leadership$`Country Name`
 pca <- prcomp(num_data)
-melt(pca$rotation) %>%
-  ggplot(aes(x = Var1, y = Var2, fill = value)) +
-  geom_tile() +
-  scale_fill_gradient2(low = rgb(0, 0.5, 0, alpha = 1),
-                       high = rgb(0.5, 0, 0, alpha = 1),
-                       mid = "white",
-                       midpoint = 0, space = "Lab",
-                       name = "PCA Coefficient") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1)) +
-  coord_flip()
-biplot(pca, cex = 0.5)
-pca_sum <- summary(pca)
-var_explain <- c(0, pca_sum$importance["Cumulative Proportion", ])
-plot(x = seq(from = 0, by = 1, length.out = length(var_explain)), var_explain,
-             type = "o",
-     main = "Total Proportion of Varaince Explained",
-     xlab = "Number of Principal Components")
 
 # Cluster the leadership characteristics
 pca4 <- pca$rotation[, 1:4]
@@ -162,14 +152,49 @@ for (k in seq_along(w_ss)) {
   k_clust[[k]] <- k_clusters
   w_ss[k] <- k_clusters$tot.withinss
 }
-plot(w_ss, type = "o")
-
 ## k = 5 seems best, but k = 3 provides more relevant groups
-cols <- k_clust[[3]]$cluster
-plot(pca4[, 1:2], xlim = c(-0.5, 0.5), ylim = c(-0.4, 0.4), pch = 19, col = cols)
+cols <- rgb(c(0.25, 0.50, 0.00), c(0.50, 0.00, 0.50), c(0.00, 0.50, 0.50),
+            alpha = 0.75)[k_clust[[3]]$cluster]
+plot(pca4[, 1:2], xlim = c(-0.5, 0.5), ylim = c(-0.4, 0.4), pch = 19,
+     col = cols, type = "n", las = 1,
+     main = "First Two Principal Components with Each Variable's Loading")
+arrows(0, 0, x1 = pca4[, 1], y1 = pca4[, 2], length = 0.1, col = cols)
 abline(h = 0)
 abline(v = 0)
+legend("bottomleft",
+       col = rgb(c(0.25, 0.50, 0.00), c(0.50, 0.00, 0.50), c(0.00, 0.50, 0.50),
+                 alpha = 0.75),
+       lty = 1,
+       legend = 1:3,
+       title = "Variable Cluster",
+       inset = 0.05,
+       cex = 0.75)
+```
 
+On the first four principal components, we perform $k$-means clustering to determine the "groups" of leadership characteristics that have similar perceptions:
+
+```{r}
+melt(pca4) %>%
+  ggplot(aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = rgb(0.5, 0, 0, alpha = 1),
+                       high = rgb(0, 0.5, 0, alpha = 1),
+                       mid = "white",
+                       midpoint = 0, space = "Lab",
+                       name = "PCA Coefficient") +
+  labs(title = "PCA Coefficients for Each Variable",
+       x = "Variable", y = "Principal Component Number",
+       caption = "Note: Variables colored by cluster") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 8, hjust = 1),
+        axis.text.y = element_text(color = cols, size = 8)) +
+  coord_flip()
+```
+
+
+After considering the leadership characteristics, we cluster countries based on similar perceptions. We do this by using the variables of the countries transformed into the first four principal components, then running PCA on those components. The clustering results segregate the countries into the following segments:
+
+```{r}
 # Use first four principal components for clustering
 pca_x <- pca$x[, 1:4]
 set.seed(85)
@@ -181,7 +206,6 @@ for (k in seq_along(w_ss)) {
   k_clust[[k]] <- k_clusters
   w_ss[k] <- k_clusters$tot.withinss
 }
-plot(w_ss, type = "o")
 
 ## 4 clusters appears to be the best
 best_4 <- k_clust[[4]]
@@ -189,29 +213,40 @@ leadership <- mutate(leadership, "Similar Values" = factor(best_4$cluster))
 
 # K-means Clusters and Leadership Values ----
 mapped_data <- joinCountryData2Map(leadership, nameJoinColumn = "Code")
-par(mai = rep(0.95, 4), xaxs = "i", yaxs = "i")
 mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
                numCats = 4, catMethod = "categorical",
                colourPalette = col_palette[seq_len(4) + 3],
                borderCol = "black",
                missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
-               mapTitle = "Similar Leadership Values",
+               mapTitle = "Country Clusters with Similar Leadership Values",
                addLegend = FALSE)
+
+# First two PCA components
+plot(pca_x[, 1:2],
+     xlim = range(pca_x[, 1]) + c(-0.5, 0.5),
+     ylim = range(pca_x[, 2]) + c(-0.5, 0.5),
+     col = (col_palette[seq_len(4) + 3])[best_4$cluster],
+     pch = 19, cex = 0.75, las = 1,
+     main = "Country Clusters by First Two Principal Components")
 ```
-
-
-For the leadership values problem statement, the first objective is to collapse the data into the first four principal components through principal component analysis (PCA). PCA finds the directions which capture the most variability in the data, so the first four account for the maximum variation. PCA allows us to visualize trends in the leadership values: countries tend to have similar sentiments about variables that "point" in the same direction (had principal component values that aligned).
-
-Before performing PCA, though, we remove the second-order factor analysis variables due to the heavy correlation with the original predictor variables and a more difficult interpretation of these variables. Since our goal is to understand the relationship between certain leadership characteristics, keeping these complicated variables might reduce our understanding of some characteristics.
-
-After performing PCA, we visualize the directions of the first two principal components:
-
-On the first four principal components, we perform $k$-means clustering to determine the "groups" of leadership characteristics that have similar perceptions.
-
-After considering the leadership characteristics, we cluster countries based on similar perceptions. We do this by using the variables of the countries transformed into the first four principal components, then running PCA on those components. The clustering results segregate the countries into the following segments:
-
 ```{r}
-
+characteristic_values <- sapply(num_data, FUN = function(x) {
+  tapply(X = x, INDEX = leadership$`Similar Values`, FUN = median)
+  })
+characteristic_values <- characteristic_values[, apply(characteristic_values,
+                                                       2, mean) %>% order()]
+melt(characteristic_values) %>%
+  ggplot(aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = rgb(0.5, 0, 0, alpha = 1),
+                       high = rgb(0, 0.5, 0, alpha = 1),
+                       midpoint = 4, space = "Lab",
+                       name = "Median Survey Score") +
+  labs(title = "Median Survey Scores for Leadership Categories by Cluster",
+       x = "Cluster", y = "Leadership Category") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(color = col_palette[seq_len(4) + 3]),
+        axis.text.y = element_text(color = cols, size = 8))
 ```
 
 
