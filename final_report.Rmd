@@ -55,7 +55,7 @@ We wanted to answer two main questions: which leadership qualities do countries 
 
 
 1. Which characteristics or traits do countries tend to group together when determining "good" leadership values?
-  - Which countries have similar perceptions of these leadership values?
+    - Which countries have similar perceptions of these leadership values?
 
 2. Do societal practices and societal values align? 
     - If they do not, which practices and values deviate most significantly?
