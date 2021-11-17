@@ -6,6 +6,6 @@
 \contentsline {section}{Analysis}{2}{section*.7}%
 \contentsline {subsection}{Leadership Values}{2}{section*.8}%
 \contentsline {subsection}{Societal Practices and Values}{5}{section*.9}%
-\contentsline {section}{Conclusions}{5}{section*.10}%
-\contentsline {section}{Suggestions for Further Research}{5}{section*.11}%
-\contentsline {section}{Limitations}{5}{section*.12}%
+\contentsline {section}{Conclusions}{7}{section*.10}%
+\contentsline {section}{Suggestions for Further Research}{7}{section*.11}%
+\contentsline {section}{Limitations}{7}{section*.12}%

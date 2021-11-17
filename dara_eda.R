@@ -77,3 +77,19 @@ ggplot(tc) +
        caption = 'Note: countries with missing country clusters were excluded.',
        x = 'Mean Team Score', y = 'Mean Charismatic Score') +
   theme_bw() + coord_fixed()
+
+  # global leadership dimensions ----
+
+leadership %>%
+  select(country = 'Country', country_name = 'Country Name',
+         country_cluster = 'Country Cluster', 
+         contains('Global Leadership Dimension')) %>%
+  filter(!is.na(country_cluster)) %>%
+  pivot_longer(contains('Global Leadership Dimension')) %>%
+  ggplot() + geom_density(aes(value, color = country_cluster)) +
+  scale_color_manual(values = colors, name = 'Country Cluster') +
+  labs(title = 'Distributions of Global Leadership Dimensions',
+       caption = 'Note: countries with missing country clusters were excluded.',
+       x = 'Global Leadership Dimension Value', y = 'Count') +
+  facet_wrap(~ name, nrow = 2, scales = 'free') +
+  theme_bw()

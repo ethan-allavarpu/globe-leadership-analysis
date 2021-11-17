@@ -35,8 +35,9 @@ options(digits = 4)
 library(knitr)
 library(MASS)
 library(leaps)
-library(dplyr)
-library(purrr)
+# library(dplyr) -> tidyverse
+# library(purrr) -> tidyverse
+library(tidyverse)
 library(kableExtra)
 ```
 
@@ -276,12 +277,74 @@ melt(characteristic_values) %>%
 
 ## Societal Practices and Values
 
-For this section, since we consider nine societal practice vs. value concepts, so maintaining a significance level of $\alpha = 0.05$ increases the experimentwise error rate: $P(\text{Any False Positive}) = 1 - P(\text{No False Positives}) = 1 - 0.95^{9} \approx `r round(1 - 0.95^9, 4)`$. To remedy this issue, we employ a *Bonferroni correction* to change the significance threshold from $\alpha = 0.05$ to $\alpha = \frac{0.05}{9} \approx `r round(0.05 / 9, 4)`$.
+```{r SPV Data}
+culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
+colors <- c('#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
+            '#e377c2', '#7f7f7f', '#bcbd22', '#17becf')
 
+spv <- culture %>%
+  select('Country', 'Country Name', 'Country Cluster', contains('Practices')) %>%
+  pivot_longer(contains('Practices'), values_to = 'practice') %>%
+  mutate(name = str_replace_all(name, ' Societal Practices', '')) %>%
+  full_join(culture %>%
+              select('Country', 'Country Name', 'Country Cluster',
+                     contains('Values')) %>%
+              pivot_longer(contains('Values')) %>%
+              mutate(name = str_replace_all(name, ' Societal Values', ''),
+                     name = str_replace(name, 'Human', 'Humane')),
+            by = c('Country', 'Country Name', 'Country Cluster', 'name')) %>%
+  mutate(name = ifelse(str_detect(name, 'Collectivism'),
+                       str_extract(name, '(?<=\\()[A-z- ]{1,}'), name)) %>%
+  rename(country = 'Country', country_name = 'Country Name',
+         country_cluster = 'Country Cluster')
+```
 
+To determine whether societal practices and societal values align, we first create scatterplots of societal values against societal practices for each of the nine cultural dimensions:
 
+```{r SPV Plots}
+spv %>%
+  filter(!is.na(country_cluster)) %>%
+  ggplot() + geom_point(aes(value, practice, color = country_cluster),
+                      cex = 2.3, alpha = 0.65) +
+  scale_color_manual(values = colors, name = 'Country Cluster') +
+  labs(title = 'Practices v. Values by Cultural Dimension and Country Cluster',
+       caption = 'Note: countries with missing country clusters were excluded.',
+       x = 'Societal Values', y = 'Societal Practices') +
+  theme_bw() +
+  facet_wrap(~ name, nrow = 3, scales = 'free')
+```
 
+From the scatterplots above, we note that societal practices and societal values do not always align. For instance, in the case of the Humane Orientation cultural dimension, there does not appear to be any correlation between practices and values at all, with societal practices in this dimension varying from less than 3.5 to more than 5.0 on the survey's seven-point scale even though societal values were rated relatively similarly across all of the surveyed countries. In some other cases, such as for the Uncertainty Avoidance cultural dimension, there appears to be a negative correlation between practices and values, as indicated by the general trend of scores for practices in this dimension decreasing even as scores for values increase. This negative correlation might suggest that, rather than aligning, societal practices and societal values are in fact in conflict.
 
+To quantify the observations we made from our scatterplots above, we fit simple linear regression models for each of the nine cultural dimensions, using the societal values rating as the predictor and the societal practices rating as the response. In other words, we fit the model:
+
+$$
+y = \beta_0 + \beta_1 x
+$$
+
+Where $x$ is the societal values rating and $y$ is the societal practices rating for each of the nine cultural dimensions. Additionally, we performed $t$-tests for each dimension, to test the hypotheses $H_0: \beta_1 = 0$ and $H_1: \beta_1 \ne 0$. For this, we employed the *Bonferroni correction* to change the significance threshold from $\alpha = 0.05$ to $\alpha = \frac{0.05}{9} \approx `r round(0.05 / 9, 4)`$ since maintaining a significance level of $\alpha = 0.05$ would increase the experiment-wise error rate: $P(\text{Any False Positive}) = 1 - P(\text{No False Positives}) = 1 - 0.95^{9} \approx `r round(1 - 0.95^9, 4)`$. The table below shows the values of $\beta_1$ that we obtained and the corresponding p-values. Cultural dimensions for which the p-value is lower than the corrected $\alpha \approx `r round(0.05 / 9, 4)`$ are indicated with green shading.
+
+```{r SPV SLR Calculations}
+get_spv_slr <- function(n) {
+  model <- lm(practice ~ value, data = spv %>% filter(name == n))
+  results <- summary(model)$coefficients['value', ]
+  tibble(name = n, coefficient = unname(results['Estimate']),
+         p_value = unname(results['Pr(>|t|)']))
+}
+slr_results <- map_df(unique(spv$name), get_spv_slr) %>%
+  arrange(coefficient)
+alpha <- 0.05 / nrow(slr_results)
+```
+
+```{r SPV SLR Table, results = TRUE}
+kable(slr_results, col.names = c('Cultural Dimension', 'Coefficient Value',
+                                 'p-value'), booktabs = TRUE,
+      caption = 'Results of Simple Linear Regression by Cultural Dimension') %>%
+  kable_styling(latex_options = "striped") %>%
+  row_spec(which(slr_results$p_value < alpha), background = '#E5F5E0')
+```
+
+As shown above, most of the $\beta_1$ values obtained were negative, including all three values that were significant at the $\alpha = `r round(alpha, 4) * 100`$% significant level as calculated using the Bonferroni correction. This means that, as the rating for the societal values of a cultural dimension increase, the rating for the societal practices of that cultural dimension actually decrease. In other words, rather than being aligned, societal practices in fact run counter to societal values.
 
 # Conclusions
 

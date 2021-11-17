@@ -4,16 +4,10 @@
 %
 \documentclass[
 ]{article}
-\title{Stats 140XP: Final Project}
-\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
-\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
-Tan \and \textbf{Explore the GLOBE}}
-\date{1 December 2021}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -93,9 +87,15 @@ Tan \and \textbf{Explore the GLOBE}}
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifLuaTeX
+\ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+
+\title{Stats 140XP: Final Project}
+\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
+\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
+Tan \and \textbf{Explore the GLOBE}}
+\date{1 December 2021}
 
 \begin{document}
 \maketitle
@@ -130,18 +130,12 @@ our project are \_\_\_\_\_\_.
 \item
   Which characteristics or traits do countries tend to group together
   when determining ``good'' leadership values?
-\end{enumerate}
 
-\begin{itemize}
-\tightlist
-\item
-  Which countries have similar perceptions of these leadership values?
-\end{itemize}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
+  \begin{itemize}
+  \tightlist
+  \item
+    Which countries have similar perceptions of these leadership values?
+  \end{itemize}
 \item
   Do societal practices and societal values align?
 
@@ -263,13 +257,80 @@ Cluster 1 & Cluster 2 & Cluster 3 & Cluster 4\\
 \subsection{Societal Practices and
 Values}\label{societal-practices-and-values}}
 
-For this section, since we consider nine societal practice vs.~value
-concepts, so maintaining a significance level of \(\alpha = 0.05\)
-increases the experimentwise error rate:
+To determine whether societal practices and societal values align, we
+first create scatterplots of societal values against societal practices
+for each of the nine cultural dimensions:
+
+\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/SPV Plots-1} \end{center}
+
+From the scatterplots above, we note that societal practices and
+societal values do not always align. For instance, in the case of the
+Humane Orientation cultural dimension, there does not appear to be any
+correlation between practices and values at all, with societal practices
+in this dimension varying from less than 3.5 to more than 5.0 on the
+survey's seven-point scale even though societal values were rated
+relatively similarly across all of the surveyed countries. In some other
+cases, such as for the Uncertainty Avoidance cultural dimension, there
+appears to be a negative correlation between practices and values, as
+indicated by the general trend of scores for practices in this dimension
+decreasing even as scores for values increase. This negative correlation
+might suggest that, rather than aligning, societal practices and
+societal values are in fact in conflict.
+
+To quantify the observations we made from our scatterplots above, we fit
+simple linear regression models for each of the nine cultural
+dimensions, using the societal values rating as the predictor and the
+societal practices rating as the response. In other words, we fit the
+model:
+
+\[
+y = \beta_0 + \beta_1 x
+\]
+
+Where \(x\) is the societal values rating and \(y\) is the societal
+practices rating for each of the nine cultural dimensions. Additionally,
+we performed \(t\)-tests for each dimension, to test the hypotheses
+\(H_0: \beta_1 = 0\) and \(H_1: \beta_1 \ne 0\). For this, we employed
+the \emph{Bonferroni correction} to change the significance threshold
+from \(\alpha = 0.05\) to \(\alpha = \frac{0.05}{9} \approx 0.0056\)
+since maintaining a significance level of \(\alpha = 0.05\) would
+increase the experiment-wise error rate:
 \(P(\text{Any False Positive}) = 1 - P(\text{No False Positives}) = 1 - 0.95^{9} \approx 0.3698\).
-To remedy this issue, we employ a \emph{Bonferroni correction} to change
-the significance threshold from \(\alpha = 0.05\) to
-\(\alpha = \frac{0.05}{9} \approx 0.0056\).
+The table below shows the values of \(\beta_1\) that we obtained and the
+corresponding p-values. Cultural dimensions for which the p-value is
+lower than the corrected \(\alpha \approx 0.0056\) are indicated with
+green shading.
+
+\begin{table}
+
+\caption{\label{tab:SPV SLR Table}Results of Simple Linear Regression by Cultural Dimension}
+\centering
+\begin{tabular}[t]{lrr}
+\toprule
+Cultural Dimension & Coefficient Value & p-value\\
+\midrule
+\cellcolor[HTML]{E5F5E0}{\cellcolor{gray!6}{Power Distance}} & \cellcolor[HTML]{E5F5E0}{\cellcolor{gray!6}{-0.6240}} & \cellcolor[HTML]{E5F5E0}{\cellcolor{gray!6}{0.0000}}\\
+\cellcolor[HTML]{E5F5E0}{Uncertainty Avoidance} & \cellcolor[HTML]{E5F5E0}{-0.6059} & \cellcolor[HTML]{E5F5E0}{0.0000}\\
+\cellcolor[HTML]{E5F5E0}{\cellcolor{gray!6}{Institutional Collectivism}} & \cellcolor[HTML]{E5F5E0}{\cellcolor{gray!6}{-0.4619}} & \cellcolor[HTML]{E5F5E0}{\cellcolor{gray!6}{0.0000}}\\
+Humane Orientation & -0.3092 & 0.0603\\
+\cellcolor{gray!6}{Future Orientation} & \cellcolor{gray!6}{-0.2545} & \cellcolor{gray!6}{0.0247}\\
+\addlinespace
+Assertiveness & -0.1557 & 0.0352\\
+\cellcolor{gray!6}{Performance Orientation} & \cellcolor{gray!6}{-0.1223} & \cellcolor{gray!6}{0.1861}\\
+Gender Egalitarianism & 0.2140 & 0.0266\\
+\cellcolor{gray!6}{In-group Collectivism} & \cellcolor{gray!6}{0.6347} & \cellcolor{gray!6}{0.0074}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As shown above, most of the \(\beta_1\) values obtained were negative,
+including all three values that were significant at the
+\(\alpha = 0.56\)\% significant level as calculated using the Bonferroni
+correction. This means that, as the rating for the societal values of a
+cultural dimension increase, the rating for the societal practices of
+that cultural dimension actually decrease. In other words, rather than
+being aligned, societal practices in fact run counter to societal
+values.
 
 \hypertarget{conclusions}{%
 \section{Conclusions}\label{conclusions}}
