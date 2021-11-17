@@ -4,10 +4,16 @@
 %
 \documentclass[
 ]{article}
+\title{Stats 140XP: Final Project}
+\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
+\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
+Tan \and \textbf{Explore the GLOBE}}
+\date{1 December 2021}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -87,15 +93,9 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-
-\title{Stats 140XP: Final Project}
-\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
-\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
-Tan \and \textbf{Explore the GLOBE}}
-\date{1 December 2021}
 
 \begin{document}
 \maketitle
@@ -309,16 +309,16 @@ green shading.
 \toprule
 Cultural Dimension & Coefficient Value & p-value\\
 \midrule
-\cellcolor[HTML]{E5F5E0}{Power Distance} & \cellcolor[HTML]{E5F5E0}{-0.6240} & \cellcolor[HTML]{E5F5E0}{0.0000}\\
-\cellcolor[HTML]{E5F5E0}{Uncertainty Avoidance} & \cellcolor[HTML]{E5F5E0}{-0.6059} & \cellcolor[HTML]{E5F5E0}{0.0000}\\
-\cellcolor[HTML]{E5F5E0}{Institutional Collectivism} & \cellcolor[HTML]{E5F5E0}{-0.4619} & \cellcolor[HTML]{E5F5E0}{0.0000}\\
-Humane Orientation & -0.3092 & 0.0603\\
-\cellcolor[HTML]{F0F0F0}{Future Orientation} & \cellcolor[HTML]{F0F0F0}{-0.2545} & \cellcolor[HTML]{F0F0F0}{0.0247}\\
+\cellcolor[HTML]{E5F5E0}{Uncertainty Avoidance} & \cellcolor[HTML]{E5F5E0}{-0.6199} & \cellcolor[HTML]{E5F5E0}{0.0000}\\
+\cellcolor[HTML]{E5F5E0}{Institutional Collectivism} & \cellcolor[HTML]{E5F5E0}{-0.5251} & \cellcolor[HTML]{E5F5E0}{0.0000}\\
+\cellcolor[HTML]{E5F5E0}{Power Distance} & \cellcolor[HTML]{E5F5E0}{-0.4991} & \cellcolor[HTML]{E5F5E0}{0.0006}\\
+\cellcolor[HTML]{E5F5E0}{Future Orientation} & \cellcolor[HTML]{E5F5E0}{-0.4725} & \cellcolor[HTML]{E5F5E0}{0.0009}\\
+Humane Orientation & -0.5944 & 0.0116\\
 \addlinespace
-Assertiveness & -0.1557 & 0.0352\\
-\cellcolor[HTML]{F0F0F0}{Performance Orientation} & \cellcolor[HTML]{F0F0F0}{-0.1223} & \cellcolor[HTML]{F0F0F0}{0.1861}\\
-Gender Egalitarianism & 0.2140 & 0.0266\\
-\cellcolor[HTML]{F0F0F0}{In-group Collectivism} & \cellcolor[HTML]{F0F0F0}{0.6347} & \cellcolor[HTML]{F0F0F0}{0.0074}\\
+\cellcolor[HTML]{F0F0F0}{Gender Egalitarianism} & \cellcolor[HTML]{F0F0F0}{0.2437} & \cellcolor[HTML]{F0F0F0}{0.0124}\\
+Performance Orientation & -0.3459 & 0.0268\\
+\cellcolor[HTML]{F0F0F0}{Assertiveness} & \cellcolor[HTML]{F0F0F0}{-0.1507} & \cellcolor[HTML]{F0F0F0}{0.0414}\\
+In-group Collectivism & 0.4393 & 0.0991\\
 \bottomrule
 \end{tabular}
 \end{table}

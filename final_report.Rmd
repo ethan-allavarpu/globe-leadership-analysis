@@ -302,16 +302,39 @@ spv <- culture %>%
 To determine whether societal practices and societal values align, we first create scatterplots of societal values against societal practices for each of the nine cultural dimensions:
 
 ```{r SPV Plots}
-spv %>%
-  filter(!is.na(country_cluster)) %>%
-  ggplot() + geom_point(aes(value, practice, color = country_cluster),
-                      cex = 2.3, alpha = 0.65) +
+leadership <- read_csv('GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
+culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
+colors <- c('#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
+            '#e377c2', '#7f7f7f', '#bcbd22', '#17becf')
+
+
+spv <- culture %>%
+  select(country = 'Country', country_name = 'Country Name',
+         country_cluster = 'Country Cluster', contains('Practices')) %>%
+  pivot_longer(contains('Practices'), values_to = 'practice') %>%
+  mutate(name = str_replace_all(name, ' Societal Practices', '')) %>%
+  full_join(culture %>%
+              select(country = 'Country', country_name = 'Country Name',
+                     country_cluster = 'Country Cluster', contains('Values')) %>%
+              pivot_longer(contains('Values')) %>%
+              mutate(name = str_replace_all(name, ' Societal Values', ''),
+                     name = str_replace(name, 'Human', 'Humane')),
+            by = c('country', 'country_name', 'country_cluster', 'name')) %>%
+  filter(!is.na(country_cluster))
+
+change_name <- !is.na(str_extract(spv$name, "(?<=\\().+(?=\\))"))
+spv$name[change_name] <- str_extract(spv$name, "(?<=\\().+(?=\\))")[change_name]
+
+ggplot(spv) +
+  geom_point(aes(practice, value, color = country_cluster),
+             cex = 1.5, alpha = 0.65) +
   scale_color_manual(values = colors, name = 'Country Cluster') +
-  labs(title = 'Practices v. Values by Cultural Dimension and Country Cluster',
-       caption = 'Note: countries with missing country clusters were excluded.',
-       x = 'Societal Values', y = 'Societal Practices') +
+  labs(title = 'Values vs. Practices by Cultural Dimension and Country Cluster',
+       caption = 'Note: Countries with missing country clusters were excluded.',
+       x = 'Societal Practices', y = 'Societal Values') +
   theme_bw() +
-  facet_wrap(~ name, nrow = 3, scales = 'free')
+  facet_wrap(~ name, nrow = 3, scales = 'free') + 
+  theme(strip.text.x = element_text(size = 7))
 ```
 
 From the scatterplots above, we note that societal practices and societal values do not always align. For instance, in the case of the Humane Orientation cultural dimension, there does not appear to be any correlation between practices and values at all, with societal practices in this dimension varying from less than 3.5 to more than 5.0 on the survey's seven-point scale even though societal values were rated relatively similarly across all of the surveyed countries. In some other cases, such as for the Uncertainty Avoidance cultural dimension, there appears to be a negative correlation between practices and values, as indicated by the general trend of scores for practices in this dimension decreasing even as scores for values increase. This negative correlation might suggest that, rather than aligning, societal practices and societal values are in fact in conflict.
@@ -332,7 +355,7 @@ get_spv_slr <- function(n) {
          p_value = unname(results['Pr(>|t|)']))
 }
 slr_results <- map_df(unique(spv$name), get_spv_slr) %>%
-  arrange(coefficient)
+  arrange(p_value)
 alpha <- 0.05 / nrow(slr_results)
 ```
 
