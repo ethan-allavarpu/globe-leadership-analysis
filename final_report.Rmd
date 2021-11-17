@@ -337,11 +337,13 @@ alpha <- 0.05 / nrow(slr_results)
 ```
 
 ```{r SPV SLR Table, results = TRUE}
+significant <- slr_results$p_value < alpha
 kable(slr_results, col.names = c('Cultural Dimension', 'Coefficient Value',
                                  'p-value'), booktabs = TRUE,
       caption = 'Results of Simple Linear Regression by Cultural Dimension') %>%
-  # kable_styling(latex_options = "striped") %>%
-  row_spec(which(slr_results$p_value < alpha), background = '#E5F5E0')
+  kable_styling(latex_options = "hold_position") %>%
+  row_spec(which(significant), background = '#E5F5E0') %>%
+  row_spec(which(!significant)[c(FALSE, TRUE)], background = '#F0F0F0')
 ```
 
 As shown above, most of the $\beta_1$ values obtained were negative, including all three values that were significant at the $\alpha = `r round(alpha, 4) * 100`$% significant level as calculated using the Bonferroni correction. This means that, as the rating for the societal values of a cultural dimension increase, the rating for the societal practices of that cultural dimension actually decrease. In other words, rather than being aligned, societal practices in fact run counter to societal values.
