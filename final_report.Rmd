@@ -340,7 +340,7 @@ alpha <- 0.05 / nrow(slr_results)
 kable(slr_results, col.names = c('Cultural Dimension', 'Coefficient Value',
                                  'p-value'), booktabs = TRUE,
       caption = 'Results of Simple Linear Regression by Cultural Dimension') %>%
-  kable_styling(latex_options = "striped") %>%
+  # kable_styling(latex_options = "striped") %>%
   row_spec(which(slr_results$p_value < alpha), background = '#E5F5E0')
 ```
 
