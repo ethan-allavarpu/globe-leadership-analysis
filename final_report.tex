@@ -185,9 +185,9 @@ Analysis}\label{visualization-and-exploratory-data-analysis}}
 For the leadership values problem statement, the first objective is to
 collapse the data into the first four principal components through
 principal component analysis (PCA). PCA finds the directions which
-capture the most variability in the data, so the first four account for
-the maximum variation. PCA allows us to visualize trends in the
-leadership values: countries tend to have similar sentiments about
+capture the most variability (spread) in the data--the first four
+account for the maximum variation. PCA allows us to visualize trends in
+the leadership values: countries tend to have similar sentiments about
 variables that ``point'' in the same direction (had principal component
 values that aligned).
 
@@ -196,62 +196,101 @@ analysis variables due to the heavy correlation with the original
 predictor variables and a more difficult interpretation of these
 variables. Since our goal is to understand the relationship between
 certain leadership characteristics, keeping these complicated variables
-might reduce our understanding of some characteristics.
+might reduce our understanding and make interpretation more difficult.
 
-After performing PCA, we visualize the directions of the first two
-principal components. We also perform \(k\)-means clustering on the
-first four principal components to determine the ``groups'' of
-leadership characteristics that have similar perceptions:
+After performing PCA, we perform \(k\)-means clustering on the first
+four principal components to determine the ``groups'' of leadership
+characteristics that have similar perceptions. \(K\)-means clustering
+creates \(k\) groups that are the ``most similar'' to the other
+observations in their groups, minimizing the between-group variability:
 
-\begin{center}\includegraphics[width=0.7\linewidth]{final_report_files/figure-latex/unnamed-chunk-3-1} \end{center}
+\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/pca_heatmap-1} \end{center}
 
-\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/unnamed-chunk-4-1} \end{center}
+Here, we see three clusters: two large clusters and a group of two for
+the other cluster. The green cluster seems to describe positive
+characteristics (e.g., participative, inspirational), while the blue
+cluster appears to describe negative characteristics (e.g., malevolent,
+self-centered). From this, we note that these ``positive'' and
+``negative'' characteristics tend to occur together. The third
+``cluster'' (i.e., humane oriented and modesty) did not closely fit with
+the other groups, leading us to believe that they may be considered
+separately from the other characteristics.
 
 After considering the leadership characteristics, we cluster countries
 based on similar perceptions. We do this by using the variables of the
 countries transformed into the first four principal components, then
-running PCA on those components. The clustering results segregate the
-countries into the following segments:
+running \(k\)-means clustering on those components. The clustering
+results segregate the countries into the following segments:
 
-\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/kmeans-1} \end{center}
 \begin{table}[h]
 
-\caption{\label{tab:unnamed-chunk-6}Regions with Similar Leadership Perceptions}
+\caption{\label{tab:country_table}Regions with Similar Leadership Perceptions}
 \centering
 \begin{tabular}[t]{>{}l>{}l>{}l>{}l}
 \toprule
 Cluster 1 & Cluster 2 & Cluster 3 & Cluster 4\\
 \midrule
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{Costa Rica}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{India}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{Qatar}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{England}}\\
-\textcolor[HTML]{739999}{Italy} & \textcolor[HTML]{000026}{Venezuela} & \textcolor[HTML]{407326}{Morocco} & \textcolor[HTML]{BF7300}{Namibia}\\
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{Ecuador}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Taiwan}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{South Africa (Black Sample)}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Czech Republic}}\\
-\textcolor[HTML]{739999}{El Salvador} & \textcolor[HTML]{000026}{Hong Kong} & \textcolor[HTML]{407326}{France} & \textcolor[HTML]{BF7300}{Singapore}\\
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{Israel}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Iran}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Kazakhstan}}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Argentina}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Albania}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{France}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Australia}}\\
+\textcolor[HTML]{739999}{Bolivia} & \textcolor[HTML]{000026}{China} & \textcolor[HTML]{407326}{Morocco} & \textcolor[HTML]{BF7300}{Austria}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Brazil}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Egypt}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{Qatar}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Canada (English-speaking)}}\\
+\textcolor[HTML]{739999}{Colombia} & \textcolor[HTML]{000026}{Georgia} & \textcolor[HTML]{407326}{South Africa (Black Sample)} & \textcolor[HTML]{BF7300}{Czech Republic}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Costa Rica}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Hong Kong}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Denmark}}\\
 \addlinespace
-\textcolor[HTML]{739999}{Hungary} & \textcolor[HTML]{000026}{Mexico} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Portugal}\\
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{Zambia}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Russia}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Finland}}\\
-\textcolor[HTML]{739999}{Zimbabwe} & \textcolor[HTML]{000026}{Indonesia} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Ireland}\\
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{Colombia}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{South Korea}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Austria}}\\
-\textcolor[HTML]{739999}{Turkey} & \textcolor[HTML]{000026}{China} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Switzerland}\\
+\textcolor[HTML]{739999}{Ecuador} & \textcolor[HTML]{000026}{India} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{England}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{El Salvador}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Indonesia}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Finland}}\\
+\textcolor[HTML]{739999}{Greece} & \textcolor[HTML]{000026}{Iran} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{French Switzerland}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Guatemala}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Japan}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Germany (EAST)}}\\
+\textcolor[HTML]{739999}{Hungary} & \textcolor[HTML]{000026}{Kuwait} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Germany (WEST)}\\
 \addlinespace
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{Spain}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Japan}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Netherlands}}\\
-\textcolor[HTML]{739999}{Guatemala} & \textcolor[HTML]{000026}{Albania} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{French Switzerland}\\
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{Bolivia}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Poland}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Australia}}\\
-\textcolor[HTML]{739999}{Greece} & \textcolor[HTML]{000026}{Egypt} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Sweden}\\
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{Brazil}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Kuwait}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{South Africa (White Sample)}}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Israel}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Malaysia}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Ireland}}\\
+\textcolor[HTML]{739999}{Italy} & \textcolor[HTML]{000026}{Mexico} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Kazakhstan}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Philippines}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Nigeria}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Namibia}}\\
+\textcolor[HTML]{739999}{Slovenia} & \textcolor[HTML]{000026}{Poland} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Netherlands}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Spain}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Russia}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{New Zealand}}\\
 \addlinespace
-\textcolor[HTML]{739999}{Philippines} & \textcolor[HTML]{000026}{Nigeria} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Canada (English-speaking)}\\
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{Argentina}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Malaysia}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{New Zealand}}\\
-\textcolor[HTML]{739999}{Slovenia} & \textcolor[HTML]{000026}{Georgia} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Germany (EAST)}\\
-\textcolor[HTML]{739999}{\cellcolor{gray!6}{}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Thailand}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Germany (WEST)}}\\
-\textcolor[HTML]{739999}{} & \textcolor[HTML]{000026}{} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Denmark}\\
+\textcolor[HTML]{739999}{Turkey} & \textcolor[HTML]{000026}{South Korea} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Portugal}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{Zambia}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Taiwan}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Singapore}}\\
+\textcolor[HTML]{739999}{Zimbabwe} & \textcolor[HTML]{000026}{Thailand} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{South Africa (White Sample)}\\
+\textcolor[HTML]{739999}{\cellcolor{gray!6}{}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{Venezuela}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{Sweden}}\\
+\textcolor[HTML]{739999}{} & \textcolor[HTML]{000026}{} & \textcolor[HTML]{407326}{} & \textcolor[HTML]{BF7300}{Switzerland}\\
 \addlinespace
 \textcolor[HTML]{739999}{\cellcolor{gray!6}{}} & \textcolor[HTML]{000026}{\cellcolor{gray!6}{}} & \textcolor[HTML]{407326}{\cellcolor{gray!6}{}} & \textcolor[HTML]{BF7300}{\cellcolor{gray!6}{USA}}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/unnamed-chunk-7-1} \end{center}
+From the above grouping, we see that regionality (generally) determines
+a country's respective cluster and leadership perspectives. Cluster 1
+tends to describe Latin American and the Mediterranean, Cluster 2
+generally includes Asia, and Cluster 4 describes the Anglo regions and
+northern Europe. The one cluster that appears to be ``out there'' is
+Cluster 3, which does not have a particular region associated with it.
+To visualize the differences between these clusters, we create a heatmap
+of the median variable values for each cluster:
+
+\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/cluster_values-1} \end{center}
+
+From here, we see that, despite the clustering, the countries tend to
+agree on beneficial and detrimental leadership qualities; the main
+difference is in the intensity: clusters 1 and 4 seem to have the
+strongest responses (most positive and most negative), while cluster 3
+does not seem to feel terribly strongly about positive leadership
+characteristics. The few qualities of intrigue, though, are the ones for
+which some clusters viewed positively (green) while others viewed
+negatively (red):
+
+\begin{itemize}
+\tightlist
+\item
+  Status Conscious
+\item
+  Internally Competitive (Conflict Inducer)
+\item
+  Bureaucratic (Procedural)
+\item
+  Autonomous
+\end{itemize}
 
 \hypertarget{societal-practices-and-values}{%
 \subsection{Societal Practices and
@@ -338,6 +377,27 @@ values.
 \hypertarget{suggestions-for-further-research}{%
 \section{Suggestions for Further
 Research}\label{suggestions-for-further-research}}
+
+Regarding the leadership investigation, some further research we may
+consider is investigating \emph{why} Cluster 3 differs so greatly from
+the other three clusters. In Cluster 3 we have France, Qatar, Morocco,
+and South Africa (Black Sample). Understanding why these countries are
+so different may help us see if there is an underlying link. Similarly,
+we may want to consider the differences between South Africa's Black and
+White samples and Germany's East and West samples. Since the survey was
+conducted in 2006, Apartheid and the Berlin Wall, respectively, may play
+a role in any potential differences. Ultimately, the above two
+suggestions relate to us considering the country's framework: looking at
+other indices (such as a freedom index, government approval ratings, or
+a happiness index) could shift us from an unsupervised learning
+situation (just understanding relationships between variables) to a
+model-building mindset in which we might determine which characteristics
+seem to have associations with more freedom/approval/happiness.
+
+For both leadership and the societal analyses, further research may be
+conducting more surveys to look at the potential changes in ideology and
+perspectives over time to understanding the changing dynamics at both
+the national and global level.
 
 \hypertarget{limitations}{%
 \section{Limitations}\label{limitations}}

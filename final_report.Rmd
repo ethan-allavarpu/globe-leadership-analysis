@@ -69,12 +69,9 @@ The data set we have chosen to analyze is the **Dana Landis Leadership** dataset
 Here is a look at 6 full and complete observations from the leadership survey:
 
 ```{r, eval = FALSE}
-
 leadership <- read.csv("leadership.csv")
 
 sociocultural <- read.csv("social-cultural.csv")
-
-
 ```
 
 Here is a look at 6 full and complete observations from the social and cultural survey:
@@ -143,12 +140,12 @@ leadership <- leadership[, is.na(str_match(names(leadership),
                                            "Global Leadership Dimension"))]
 ```
 
-For the leadership values problem statement, the first objective is to collapse the data into the first four principal components through principal component analysis (PCA). PCA finds the directions which capture the most variability in the data, so the first four account for the maximum variation. PCA allows us to visualize trends in the leadership values: countries tend to have similar sentiments about variables that "point" in the same direction (had principal component values that aligned).
+For the leadership values problem statement, the first objective is to collapse the data into the first four principal components through principal component analysis (PCA). PCA finds the directions which capture the most variability (spread) in the data--the first four account for the maximum variation. PCA allows us to visualize trends in the leadership values: countries tend to have similar sentiments about variables that "point" in the same direction (had principal component values that aligned).
 
-Before performing PCA, though, we remove the second-order factor analysis variables due to the heavy correlation with the original predictor variables and a more difficult interpretation of these variables. Since our goal is to understand the relationship between certain leadership characteristics, keeping these complicated variables might reduce our understanding of some characteristics.
+Before performing PCA, though, we remove the second-order factor analysis variables due to the heavy correlation with the original predictor variables and a more difficult interpretation of these variables. Since our goal is to understand the relationship between certain leadership characteristics, keeping these complicated variables might reduce our understanding and make interpretation more difficult.
 
-After performing PCA, we visualize the directions of the first two principal components. We also perform $k$-means clustering on the first four principal components to determine the "groups" of leadership characteristics that have similar perceptions:
-```{r, out.width="70%"}
+After performing PCA, we  perform $k$-means clustering on the first four principal components to determine the "groups" of leadership characteristics that have similar perceptions. $K$-means clustering creates $k$ groups that are the "most similar" to the other observations in their groups, minimizing the between-group variability:
+```{r pca, out.width="70%"}
 # PCA
 num_data <- leadership[, vapply(leadership, is.numeric, logical(1))]
 rownames(num_data) <- leadership$`Country Name`
@@ -168,25 +165,8 @@ for (k in seq_along(w_ss)) {
 ## k = 5 seems best, but k = 3 provides more relevant groups
 cols <- rgb(c(0.25, 0.50, 0.00), c(0.50, 0.00, 0.50), c(0.00, 0.50, 0.50),
             alpha = 0.75)[k_clust[[3]]$cluster]
-plot(pca4[, 1:2], xlim = c(-0.5, 0.5), ylim = c(-0.4, 0.4), pch = 19,
-     col = cols, type = "n", las = 1,
-     main = "First Two Principal Components with Each Variable's Loading")
-arrows(0, 0, x1 = pca4[, 1], y1 = pca4[, 2], length = 0.1, col = cols)
-abline(h = 0)
-abline(v = 0)
-legend("bottomleft",
-       col = rgb(c(0.25, 0.50, 0.00), c(0.50, 0.00, 0.50), c(0.00, 0.50, 0.50),
-                 alpha = 0.75),
-       lty = 1,
-       legend = 1:3,
-       title = "Variable Cluster",
-       inset = 0.05,
-       cex = 0.75)
 ```
-
-
-
-```{r}
+```{r pca_heatmap}
 melt(pca4) %>%
   ggplot(aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() +
@@ -204,10 +184,12 @@ melt(pca4) %>%
   coord_flip()
 ```
 
+Here, we see three clusters: two large clusters and a group of two for the other cluster. The green cluster seems to describe positive characteristics (e.g., participative, inspirational), while the blue cluster appears to describe negative characteristics (e.g., malevolent, self-centered). From this, we note that these "positive" and "negative" characteristics tend to occur together. The third "cluster" (i.e., humane oriented and modesty) did not closely fit with the other groups, leading us to believe that they may be considered separately from the other characteristics.
 
-After considering the leadership characteristics, we cluster countries based on similar perceptions. We do this by using the variables of the countries transformed into the first four principal components, then running PCA on those components. The clustering results segregate the countries into the following segments:
 
-```{r}
+After considering the leadership characteristics, we cluster countries based on similar perceptions. We do this by using the variables of the countries transformed into the first four principal components, then running $k$-means clustering on those components. The clustering results segregate the countries into the following segments:
+
+```{r kmeans}
 # Use first four principal components for clustering
 pca_x <- pca$x[, 1:4]
 set.seed(85)
@@ -234,11 +216,11 @@ mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
                mapTitle = "Country Clusters with Similar Leadership Values",
                addLegend = FALSE)
 ```
-```{r, results = TRUE}
+```{r country_table, results = TRUE}
 country_clusters <- matrix(nrow = max(table(best_4$cluster)), ncol = 4)
 for (i in unique(best_4$cluster)) {
   country_clusters[seq_len(sum(best_4$cluster == i)), i] <-
-    names(best_4$cluster)[best_4$cluster == i]
+    sort(names(best_4$cluster)[best_4$cluster == i])
 }
 cluster_cols <- col_palette[seq_len(4) + 3]
 country_clusters[is.na(country_clusters)] <- ""
@@ -254,7 +236,9 @@ kbl(data.frame(country_clusters),
   column_spec(4, color = cluster_cols[4])
 ```
 
-```{r}
+From the above grouping, we see that regionality (generally) determines a country's respective cluster and leadership perspectives. Cluster 1 tends to describe Latin American and the Mediterranean, Cluster 2 generally includes Asia, and Cluster 4 describes the Anglo regions and northern Europe. The one cluster that appears to be "out there" is Cluster 3, which does not have a particular region associated with it. To visualize the differences between these clusters, we create a heatmap of the median variable values for each cluster:
+
+```{r cluster_values}
 characteristic_values <- sapply(num_data, FUN = function(x) {
   tapply(X = x, INDEX = leadership$`Similar Values`, FUN = median)
   })
@@ -274,6 +258,12 @@ melt(characteristic_values) %>%
         axis.text.y = element_text(color = cols, size = 8))
 ```
 
+From here, we see that, despite the clustering, the countries tend to agree on beneficial and detrimental leadership qualities; the main difference is in the intensity: clusters 1 and 4 seem to have the strongest responses (most positive and most negative), while cluster 3 does not seem to feel terribly strongly about positive leadership characteristics. The few qualities of intrigue, though, are the ones for which some clusters viewed positively (green) while others viewed negatively (red): 
+
+  - Status Conscious
+  - Internally Competitive (Conflict Inducer)
+  - Bureaucratic (Procedural)
+  - Autonomous
 
 ## Societal Practices and Values
 
@@ -376,6 +366,13 @@ As shown above, most of the $\beta_1$ values obtained were negative, including a
 
 
 # Suggestions for Further Research 
+
+Regarding the leadership investigation, some further research we may consider is investigating *why* Cluster 3 differs so greatly from the other three clusters. In Cluster 3 we have France, Qatar, Morocco, and South Africa (Black Sample). Understanding why these countries are so different may help us see if there is an underlying link. Similarly, we may want to consider the differences between South Africa's Black and White samples and Germany's East and West samples. Since the survey was conducted in 2006, Apartheid and the Berlin Wall, respectively, may play a role in any potential differences. Ultimately, the above two suggestions relate to us considering the country's framework: looking at other indices (such as a freedom index, government approval ratings, or a happiness index) could shift us from an unsupervised learning situation (just understanding relationships between variables) to a model-building mindset in which we might determine which characteristics seem to have associations with more freedom/approval/happiness.
+
+
+For both leadership and the societal analyses, further research may be conducting more surveys to look at the potential changes in ideology and perspectives over time to understanding the changing dynamics at both the national and global level.
+
+
 
 # Limitations
 
