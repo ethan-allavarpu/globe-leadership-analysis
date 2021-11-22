@@ -4,16 +4,10 @@
 %
 \documentclass[
 ]{article}
-\title{Stats 140XP: Final Project}
-\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
-\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
-Tan \and \textbf{Explore the GLOBE}}
-\date{1 December 2021}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -93,9 +87,15 @@ Tan \and \textbf{Explore the GLOBE}}
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifLuaTeX
+\ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+
+\title{Stats 140XP: Final Project}
+\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
+\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
+Tan \and \textbf{Explore the GLOBE}}
+\date{1 December 2021}
 
 \begin{document}
 \maketitle

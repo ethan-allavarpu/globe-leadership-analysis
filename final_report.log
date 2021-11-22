@@ -1,15 +1,15 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.10.21)  18 NOV 2021 16:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.10.21)  21 NOV 2021 17:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **final_report.tex
 (./final_report.tex
 LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-10-18> (/Users/ethan/Library/TinyTeX/texmf-dist/tex/
-latex/base/article.cls
-Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+L3 programming layer <2021-10-18> (/Users/daratanxe/Library/TinyTeX/texmf-dist/
+tex/latex/base/article.cls
+Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count182
 \c@section=\count183
@@ -22,21 +22,21 @@ File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2021/10/15 v2.17l AMS math features
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2021/04/20 v2.17j AMS math features
 \@mathmargin=\skip49
 For additional information on amsmath, use the `?' option.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2021/08/26 v2.01 AMS text
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks16
 \ex@=\dimen139
-)) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+)) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen140
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2021/08/26 v2.02 operator names
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count190
 LaTeX Info: Redefining \frac on input line 234.
@@ -73,18 +73,18 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \multlinegap=\skip50
 \multlinetaggap=\skip51
 \mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2938.
-LaTeX Info: Redefining \] on input line 2939.
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+)) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -118,27 +118,31 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2020/03/06 v1.0d TeX engine tests
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+)) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 2.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
+)) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@prehook=\toks21
 \inpenc@posthook=\toks22
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 227.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 )
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
@@ -150,60 +154,70 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.st
-y
+)
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.
+sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.st
+y
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks23
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+)
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.st
+y
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 )
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.
-sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinek
+eys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
-Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
-Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/letltxmacro/letltxmacro.st
+)
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.st
 y
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/letltxmacro/letltxmacro.
+sty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.st
+y
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
 \@linkdim=\dimen148
 \Hy@linkcounter=\count268
 \Hy@pagecounter=\count269
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref-langpatche
-s.def
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref-langpa
+tches.def
 File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
 nguages
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.st
+y
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count270
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -217,15 +231,17 @@ Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
 \c@Hy@tempcnt=\count271
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4804.
 \XeTeXLinkMargin=\dimen149
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.
+sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
@@ -241,7 +257,7 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6101.
 Package hyperref Info: PDF/A mode OFF on input line 6106.
 LaTeX Info: Redefining \ref on input line 6146.
 LaTeX Info: Redefining \pageref on input line 6150.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
@@ -250,31 +266,31 @@ package with kernel methods
 \c@Hfootnote=\count275
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
-Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
-kage
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
+e
 with kernel methods
 )
 \Fld@listcount=\count276
 \c@bookmark@seq@number=\count277
 
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilechec
-k.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfile
+check.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
 
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounte
-r.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniqueco
+unter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
 \Hy@SectionHShift=\skip52
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
 \Gm@cnth=\count278
@@ -289,20 +305,22 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layouthoffset=\dimen158
 \Gm@layoutvoffset=\dimen159
 \Gm@dimlist=\toks24
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cf
+g
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 )
 \Gin@req@height=\dimen160
 \Gin@req@width=\dimen161
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen162
 \lightrulewidth=\dimen163
@@ -321,8 +339,8 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count283
 \@lastruleclass=\count284
 \@thisrulewidth=\dimen174
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-05-07 v4.16 Multi-page Table package (DPC)
 \LTleft=\skip53
 \LTright=\skip54
 \LTpre=\skip55
@@ -339,8 +357,8 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \c@LT@tables=\count288
 \c@LT@chunks=\count289
 \LT@p@ftn=\toks25
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
 \col@sep=\dimen176
 \ar@mcellbox=\box57
 \extrarowheight=\dimen177
@@ -348,39 +366,40 @@ Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \extratabsurround=\skip57
 \backup@length=\skip58
 \ar@cellbox=\box58
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip59
 \multirow@cntb=\count290
 \multirow@dima=\skip60
 \bigstrutjot=\dimen178
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen179
 \WF@size=\dimen180
 \c@WF@wrappedlines=\count291
 \WF@box=\box59
 \WF@everypar=\toks27
 Package: wrapfig 2003/01/31  v 3.6
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/float/float.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count292
 \float@exts=\toks28
 \float@box=\box60
 \@float@everytoks=\toks29
 \@floatcapt=\box61
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 \everycr=\toks30
 \minrowclearance=\skip61
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.st
+y
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
 Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box62
 \sift@deathcycles=\count293
@@ -410,21 +429,23 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabu@vleads=\box66
 \tabu@cellskip=\skip62
 )
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/threeparttable/threeparttabl
-e.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/threeparttable/threepart
+table.sty
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box67
 )
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/threeparttablex/threeparttab
-lex.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/threeparttablex/threepar
+ttablex.sty
 Package: threeparttablex 2013/07/23 v0.3 by daleif
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.st
+y
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
 \TPTL@width=\skip63
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
 \UL@box=\box68
 \UL@hyphenbox=\box69
 \UL@skip=\skip64
@@ -435,14 +456,14 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \ULC@box=\box70
 Package: ulem 2019/11/18
 \ULdepth=\dimen194
-) (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
+) (/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen195
 \c@nlinenum=\count301
 \TeXr@lab=\toks34
 )
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
-ef
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdft
+ex.def
 File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count302
 \l__pdf_internal_box=\box71
@@ -468,24 +489,25 @@ LaTeX Font Info:    ... okay on input line 100.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 100.
 LaTeX Font Info:    ... okay on input line 100.
 
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
-ty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-ba
+se.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys
+.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring OFF on input line 100.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 )
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestr
-ing.sty
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitl
+estring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count303
@@ -533,22 +555,22 @@ LaTeX Info: Redefining \nameref on input line 100.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
 02.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
 02.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
 102.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
 102.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -559,12 +581,12 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 102.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 102
 .
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 102
 .
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (./final_report.toc)
 \tf@toc=\write4
@@ -572,7 +594,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 [1
 
-{/Users/ethan/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+{/Users/daratanxe/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 118.
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -581,45 +604,46 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 118.
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
 37.
-(/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+(/Users/daratanxe/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [2]
-<final_report_files/figure-latex/pca_heatmap-1.pdf, id=77, 469.755pt x 325.215p
-t>
+<final_report_files/figure-latex/pca_heatmap-1.pdf, id=77, 453.695pt x 316.1812
+4pt>
 File: final_report_files/figure-latex/pca_heatmap-1.pdf Graphic file (type pdf)
 
 <use final_report_files/figure-latex/pca_heatmap-1.pdf>
 Package pdftex.def Info: final_report_files/figure-latex/pca_heatmap-1.pdf  use
 d on input line 207.
-(pdftex.def)             Requested size: 399.29364pt x 276.43405pt.
-<final_report_files/figure-latex/kmeans-1.pdf, id=78, 469.755pt x 325.215pt>
+(pdftex.def)             Requested size: 399.29437pt x 278.26929pt.
+<final_report_files/figure-latex/kmeans-1.pdf, id=78, 353.32pt x 216.81pt>
 File: final_report_files/figure-latex/kmeans-1.pdf Graphic file (type pdf)
 <use final_report_files/figure-latex/kmeans-1.pdf>
 Package pdftex.def Info: final_report_files/figure-latex/kmeans-1.pdf  used on 
 input line 225.
-(pdftex.def)             Requested size: 399.29364pt x 276.43405pt.
-[3 <./final_report_files/figure-latex/pca_heatmap-1.pdf>] [4pdfTeX warning (ext
-4): destination with the same identifier (name{table.1}) has been already used,
- duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.271 
-       <./final_report_files/figure-latex/kmeans-1.pdf>]
-<final_report_files/figure-latex/cluster_values-1.pdf, id=106, 469.755pt x 325.
-215pt>
+(pdftex.def)             Requested size: 353.3353pt x 216.81938pt.
+[3 <./final_report_files/figure-latex/pca_heatmap-1.pdf>]
+<final_report_files/figure-latex/cluster_values-1.pdf, id=94, 457.71pt x 313.17
+pt>
 File: final_report_files/figure-latex/cluster_values-1.pdf Graphic file (type p
 df)
 <use final_report_files/figure-latex/cluster_values-1.pdf>
 Package pdftex.def Info: final_report_files/figure-latex/cluster_values-1.pdf  
 used on input line 272.
-(pdftex.def)             Requested size: 399.29364pt x 276.43405pt.
-<final_report_files/figure-latex/SPV Plots-1.pdf, id=107, 469.755pt x 325.215pt
->
+(pdftex.def)             Requested size: 399.30798pt x 273.2107pt.
+[4pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.272 ...gure-latex/cluster_values-1} \end{center}
+                                                   <./final_report_files/figure
+-latex/kmeans-1.pdf>]
+<final_report_files/figure-latex/SPV Plots-1.pdf, id=111, 457.71pt x 316.18124p
+t>
 File: final_report_files/figure-latex/SPV Plots-1.pdf Graphic file (type pdf)
 <use final_report_files/figure-latex/SPV Plots-1.pdf>
 Package pdftex.def Info: final_report_files/figure-latex/SPV Plots-1.pdf  used 
 on input line 303.
-(pdftex.def)             Requested size: 399.29364pt x 276.43405pt.
+(pdftex.def)             Requested size: 399.30798pt x 275.83772pt.
 [5 <./final_report_files/figure-latex/cluster_values-1.pdf>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -635,31 +659,32 @@ Package rerunfilecheck Info: File `final_report.out' has not changed.
 (rerunfilecheck)             Checksum: F86B06390C20FD30A231A5BC35D459A3;1320.
  ) 
 Here is how much of TeX's memory you used:
- 11667 strings out of 480539
- 171321 string characters out of 5901975
- 488686 words of memory out of 5000000
- 29040 multiletter control sequences out of 15000+600000
+ 11687 strings out of 480539
+ 172723 string characters out of 5901639
+ 488829 words of memory out of 5000000
+ 29055 multiletter control sequences out of 15000+600000
  459422 words of font info for 70 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,9n,66p,319b,395s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/Users/ethan/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/U
-sers/ethan/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/etha
-n/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/ethan/Library
-/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/ethan/Library/TinyTeX
-/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</Users/ethan/Library/TinyTeX/texm
-f-dist/fonts/type1/public/lm/lmbx10.pfb></Users/ethan/Library/TinyTeX/texmf-dis
-t/fonts/type1/public/lm/lmbx12.pfb></Users/ethan/Library/TinyTeX/texmf-dist/fon
-ts/type1/public/lm/lmmi10.pfb></Users/ethan/Library/TinyTeX/texmf-dist/fonts/ty
-pe1/public/lm/lmmi7.pfb></Users/ethan/Library/TinyTeX/texmf-dist/fonts/type1/pu
-blic/lm/lmr10.pfb></Users/ethan/Library/TinyTeX/texmf-dist/fonts/type1/public/l
-m/lmr12.pfb></Users/ethan/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr1
-7.pfb></Users/ethan/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><
-/Users/ethan/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></User
-s/ethan/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on final_report.pdf (7 pages, 328749 bytes).
+{/Users/daratanxe/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
+}{/Users/daratanxe/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Us
+ers/daratanxe/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/d
+aratanxe/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/darat
+anxe/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</Users/darata
+nxe/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/daratan
+xe/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/daratanx
+e/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/daratanxe
+/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/daratanxe/L
+ibrary/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/daratanxe/Lib
+rary/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/daratanxe/Libra
+ry/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/daratanxe/Library
+/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/daratanxe/Library/Ti
+nyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/daratanxe/Library/Tin
+yTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on final_report.pdf (7 pages, 330527 bytes).
 PDF statistics:
- 211 PDF objects out of 1000 (max. 8388607)
- 168 compressed objects within 2 object streams
+ 219 PDF objects out of 1000 (max. 8388607)
+ 172 compressed objects within 2 object streams
  35 named destinations out of 1000 (max. 500000)
  93 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -297,7 +297,6 @@ culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
 colors <- c('#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
             '#e377c2', '#7f7f7f', '#bcbd22', '#17becf')
 
-
 spv <- culture %>%
   select(country = 'Country', country_name = 'Country Name',
          country_cluster = 'Country Cluster', contains('Practices')) %>%
@@ -316,12 +315,12 @@ change_name <- !is.na(str_extract(spv$name, "(?<=\\().+(?=\\))"))
 spv$name[change_name] <- str_extract(spv$name, "(?<=\\().+(?=\\))")[change_name]
 
 ggplot(spv) +
-  geom_point(aes(practice, value, color = country_cluster),
+  geom_point(aes(value, practice, color = country_cluster),
              cex = 1.5, alpha = 0.65) +
   scale_color_manual(values = colors, name = 'Country Cluster') +
-  labs(title = 'Values vs. Practices by Cultural Dimension and Country Cluster',
+  labs(title = 'Practices vs. Values by Cultural Dimension and Country Cluster',
        caption = 'Note: Countries with missing country clusters were excluded.',
-       x = 'Societal Practices', y = 'Societal Values') +
+       x = 'Societal Values', y = 'Societal Practices') +
   theme_bw() +
   facet_wrap(~ name, nrow = 3, scales = 'free') + 
   theme(strip.text.x = element_text(size = 7))
