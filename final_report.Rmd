@@ -164,9 +164,11 @@ for (k in seq_along(w_ss)) {
 }
 ## k = 5 seems best, but k = 3 provides more relevant groups
 cols <- rgb(c(0.25, 0.50, 0.00), c(0.50, 0.00, 0.50), c(0.00, 0.50, 0.50),
-            alpha = 0.75)[k_clust[[3]]$cluster]
+            alpha = 0.75)[sort(k_clust[[3]]$cluster)]
+names(cols) <- names(sort(k_clust[[3]]$cluster))
 ```
 ```{r pca_heatmap}
+pca4 <- pca4[names(cols), ]
 melt(pca4) %>%
   ggplot(aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() +
