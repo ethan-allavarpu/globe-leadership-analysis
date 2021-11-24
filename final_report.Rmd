@@ -39,6 +39,10 @@ library(leaps)
 # library(purrr) -> tidyverse
 library(tidyverse)
 library(kableExtra)
+library(readxl)
+library(readr)
+library(stringr)
+library(rworldmap)
 ```
 
 
@@ -103,15 +107,7 @@ Here is a look at 6 full and complete observations from the social and cultural 
 
 # The Data
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
-                      results = FALSE, fig.align = "center")
-library(tidyverse)
-library(readxl)
-library(readr)
-library(stringr)
-library(rworldmap)
-```
+
 
 The data set we have chosen to analyze is the **Dana Landis Leadership** dataset, which comes from the GLOBE Research Survey. The data provided in the folder had survey results for (1) leadership and (2) societal and culture data and a PDF describing the nature of the survey, but nothing else. To glean more information, we found the two questionnaires (alpha and beta) described in the informational PDF to get the original questions. While we do not have a "codebook" in the traditional sense, the original questions asked may help guide us in understanding what each variable means and how the survey represents respondents' answers numerically. The survey is on a 1 to 7 scale, with 1 being a negative response, 4 a "neutral" score, and 7 positive.
 

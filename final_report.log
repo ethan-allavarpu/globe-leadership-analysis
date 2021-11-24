@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.10.21)  23 NOV 2021 20:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.10.21)  24 NOV 2021 08:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -583,68 +583,84 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
 37.
 (/Users/ethan/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [2]
-<final_report_files/figure-latex/pca_heatmap-1.pdf, id=77, 469.755pt x 325.215p
-t>
+)
+<final_report_files/figure-latex/leadership-1.pdf, id=71, 469.755pt x 325.215pt
+>
+File: final_report_files/figure-latex/leadership-1.pdf Graphic file (type pdf)
+<use final_report_files/figure-latex/leadership-1.pdf>
+Package pdftex.def Info: final_report_files/figure-latex/leadership-1.pdf  used
+ on input line 194.
+(pdftex.def)             Requested size: 446.26472pt x 308.9525pt.
+[2]
+<final_report_files/figure-latex/society-1.pdf, id=86, 469.755pt x 325.215pt>
+File: final_report_files/figure-latex/society-1.pdf Graphic file (type pdf)
+<use final_report_files/figure-latex/society-1.pdf>
+Package pdftex.def Info: final_report_files/figure-latex/society-1.pdf  used on
+ input line 219.
+(pdftex.def)             Requested size: 399.29364pt x 276.43405pt.
+[3 <./final_report_files/figure-latex/leadership-1.pdf>]
+<final_report_files/figure-latex/pca_heatmap-1.pdf, id=144, 469.755pt x 325.215
+pt>
 File: final_report_files/figure-latex/pca_heatmap-1.pdf Graphic file (type pdf)
 
 <use final_report_files/figure-latex/pca_heatmap-1.pdf>
 Package pdftex.def Info: final_report_files/figure-latex/pca_heatmap-1.pdf  use
-d on input line 207.
+d on input line 257.
 (pdftex.def)             Requested size: 399.29364pt x 276.43405pt.
-<final_report_files/figure-latex/kmeans-1.pdf, id=78, 469.755pt x 325.215pt>
+[4 <./final_report_files/figure-latex/society-1.pdf>]
+<final_report_files/figure-latex/kmeans-1.pdf, id=162, 469.755pt x 325.215pt>
 File: final_report_files/figure-latex/kmeans-1.pdf Graphic file (type pdf)
 <use final_report_files/figure-latex/kmeans-1.pdf>
 Package pdftex.def Info: final_report_files/figure-latex/kmeans-1.pdf  used on 
-input line 225.
+input line 275.
 (pdftex.def)             Requested size: 399.29364pt x 276.43405pt.
-[3 <./final_report_files/figure-latex/pca_heatmap-1.pdf>] [4pdfTeX warning (ext
+[5 <./final_report_files/figure-latex/pca_heatmap-1.pdf>] [6pdfTeX warning (ext
 4): destination with the same identifier (name{table.1}) has been already used,
  duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.271 
+l.321 
        <./final_report_files/figure-latex/kmeans-1.pdf>]
-<final_report_files/figure-latex/cluster_values-1.pdf, id=106, 469.755pt x 325.
+<final_report_files/figure-latex/cluster_values-1.pdf, id=190, 469.755pt x 325.
 215pt>
 File: final_report_files/figure-latex/cluster_values-1.pdf Graphic file (type p
 df)
 <use final_report_files/figure-latex/cluster_values-1.pdf>
 Package pdftex.def Info: final_report_files/figure-latex/cluster_values-1.pdf  
-used on input line 272.
+used on input line 322.
 (pdftex.def)             Requested size: 399.29364pt x 276.43405pt.
-<final_report_files/figure-latex/SPV Plots-1.pdf, id=107, 469.755pt x 325.215pt
+<final_report_files/figure-latex/SPV Plots-1.pdf, id=191, 469.755pt x 325.215pt
 >
 File: final_report_files/figure-latex/SPV Plots-1.pdf Graphic file (type pdf)
 <use final_report_files/figure-latex/SPV Plots-1.pdf>
 Package pdftex.def Info: final_report_files/figure-latex/SPV Plots-1.pdf  used 
-on input line 303.
+on input line 353.
 (pdftex.def)             Requested size: 399.29364pt x 276.43405pt.
-[5 <./final_report_files/figure-latex/cluster_values-1.pdf>]
+[7 <./final_report_files/figure-latex/cluster_values-1.pdf>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[6 <./final_report_files/figure-latex/SPV Plots-1.pdf>] [7pdfTeX warning (ext4)
+[8 <./final_report_files/figure-latex/SPV Plots-1.pdf>] [9pdfTeX warning (ext4)
 : destination with the same identifier (name{table.2}) has been already used, d
 uplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.411 \end{document}
+l.461 \end{document}
                     ] (./final_report.aux)
 Package rerunfilecheck Info: File `final_report.out' has not changed.
-(rerunfilecheck)             Checksum: F86B06390C20FD30A231A5BC35D459A3;1320.
+(rerunfilecheck)             Checksum: E0AC28A8BB719F6C1A15E62701A92675;1531.
  ) 
 Here is how much of TeX's memory you used:
- 11667 strings out of 480539
- 171321 string characters out of 5901975
- 488686 words of memory out of 5000000
- 29040 multiletter control sequences out of 15000+600000
+ 11695 strings out of 480539
+ 172320 string characters out of 5901975
+ 488758 words of memory out of 5000000
+ 29060 multiletter control sequences out of 15000+600000
  459422 words of font info for 70 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,9n,66p,319b,395s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,9n,66p,319b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/ethan/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/U
-sers/ethan/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/etha
-n/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/ethan/Library
+sers/ethan/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/etha
+n/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/ethan/Library
 /TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/ethan/Library/TinyTeX
 /texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</Users/ethan/Library/TinyTeX/texm
 f-dist/fonts/type1/public/lm/lmbx10.pfb></Users/ethan/Library/TinyTeX/texmf-dis
@@ -656,10 +672,10 @@ m/lmr12.pfb></Users/ethan/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr1
 7.pfb></Users/ethan/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><
 /Users/ethan/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></User
 s/ethan/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on final_report.pdf (7 pages, 328842 bytes).
+Output written on final_report.pdf (9 pages, 440813 bytes).
 PDF statistics:
- 211 PDF objects out of 1000 (max. 8388607)
- 168 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
- 93 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 297 PDF objects out of 1000 (max. 8388607)
+ 247 compressed objects within 3 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 119 words of extra memory for PDF output out of 10000 (max. 10000000)
 

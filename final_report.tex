@@ -113,7 +113,7 @@ Tan \and \textbf{Explore the GLOBE}}
 
 We wanted to answer two main questions: which leadership qualities do
 countries tend to view similarly and if countries align their
-perceptions societal practices and values. For determining leadership
+perceptions of societal practices and values. For determining leadership
 qualities and similar countries, we used principal component analysis
 (PCA) then \(k\)-means clustering to create four ``clusters'' of
 countries with similar leadership beliefs. We used the \_\_\_\_ method
@@ -169,12 +169,62 @@ survey:
 Here is a look at 6 full and complete observations from the social and
 cultural survey:
 
-\hypertarget{description-of-variables}{%
-\section{Description of Variables}\label{description-of-variables}}
-
 \hypertarget{visualization-and-exploratory-data-analysis}{%
 \section{Visualization and Exploratory Data
 Analysis}\label{visualization-and-exploratory-data-analysis}}
+
+\hypertarget{the-data}{%
+\section{The Data}\label{the-data}}
+
+The data set we have chosen to analyze is the \textbf{Dana Landis
+Leadership} dataset, which comes from the GLOBE Research Survey. The
+data provided in the folder had survey results for (1) leadership and
+(2) societal and culture data and a PDF describing the nature of the
+survey, but nothing else. To glean more information, we found the two
+questionnaires (alpha and beta) described in the informational PDF to
+get the original questions. While we do not have a ``codebook'' in the
+traditional sense, the original questions asked may help guide us in
+understanding what each variable means and how the survey represents
+respondents' answers numerically. The survey is on a 1 to 7 scale, with
+1 being a negative response, 4 a ``neutral'' score, and 7 positive.
+
+\hypertarget{leadership}{%
+\section{Leadership}\label{leadership}}
+
+\begin{center}\includegraphics[width=0.95\linewidth]{final_report_files/figure-latex/leadership-1} \end{center}
+
+The above global heatmap presents the beliefs about whether autocracy
+helps (higher values) or hinders (lower values) leaders in a given
+country. Multiple similar graphics were generated for a variety of
+leadership variables, ultimately leading us to recognize that different
+regions of the world may favor certain leadership qualities over others
+and that certain leadership qualities may be liked/disliked ``together''
+(i.e., they have associations).
+
+From boxplots we generated (not pictured), the difference by country
+cluster (as defined by the dataset) seems visible, prompting us to
+consider clustering countries to determine how they may be separated. We
+do want to note that there are only 62 observations--this totals to
+fewer than 62 countries because Germany and South Africa have two
+observations each (West vs.~East and White vs.~Black, respecively). The
+limited number of observations may limit us in the scope of our analysis
+because we have less than a third of the total countries (demonstrated
+by the vast swaths of grey on the world map for which there is no data)
+and clustering would further reduce block/group sizes.
+
+\hypertarget{societal-values-and-practices}{%
+\section{Societal Values and
+Practices}\label{societal-values-and-practices}}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/society-1} \end{center}
+
+The plot grid demonstrates how, contrary to what \emph{should} happen,
+the societal values of a country do not correlate well with the societal
+practices (what \emph{should be} does not align with what \emph{is}).
+This may be a source of further exploration, as we may want to see
+whether there is a significant difference between the values and
+practices. When we look at the per-region divisions though (by color),
+the trend (or lack thereof) seems to persist for these concepts.
 
 \hypertarget{analysis}{%
 \section{Analysis}\label{analysis}}

@@ -1,0 +1,43 @@
+---
+title: "GLOBE Leadership and Society Surveys"
+author: 
+  - \textbf{Explore the GLOBE}
+subtitle:
+  - Ethan Allavarpu $\cdot$ Raymond Bai $\cdot$ Jaclyn Chiu \newline Ariel Chow $\cdot$ Carlie Lin $\cdot$ Dara Tan
+date:
+  - STATS 140XP $\cdot$ Fall 2021
+output:
+  beamer_presentation:
+    theme: "Hannover"
+    colortheme: "spruce"
+    slide_level: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
+                      out.height = "90%")
+library(tidyverse)
+```
+
+# Introducing the Data
+## The Data
+
+## Exploratory Data Analysis
+
+## Problem Statements
+
+# Analysis
+
+## Leadership Clusters
+
+## Societal Values vs. Practices
+
+# Conclusions
+
+## Leadership Clusters
+
+## Societal Values vs. Practices
+
+# Limitations
+
+# Further Research

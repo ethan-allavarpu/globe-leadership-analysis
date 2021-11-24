@@ -1,11 +1,13 @@
 \contentsline {section}{Abstract}{2}{section*.2}%
 \contentsline {section}{Problem Statements}{2}{section*.3}%
 \contentsline {section}{Description of Dataset}{2}{section*.4}%
-\contentsline {section}{Description of Variables}{2}{section*.5}%
-\contentsline {section}{Visualization and Exploratory Data Analysis}{2}{section*.6}%
-\contentsline {section}{Analysis}{2}{section*.7}%
-\contentsline {subsection}{Leadership Values}{2}{section*.8}%
-\contentsline {subsection}{Societal Practices and Values}{5}{section*.9}%
-\contentsline {section}{Conclusions}{7}{section*.10}%
-\contentsline {section}{Suggestions for Further Research}{7}{section*.11}%
-\contentsline {section}{Limitations}{7}{section*.12}%
+\contentsline {section}{Visualization and Exploratory Data Analysis}{2}{section*.5}%
+\contentsline {section}{The Data}{2}{section*.6}%
+\contentsline {section}{Leadership}{3}{section*.7}%
+\contentsline {section}{Societal Values and Practices}{4}{section*.8}%
+\contentsline {section}{Analysis}{4}{section*.9}%
+\contentsline {subsection}{Leadership Values}{4}{section*.10}%
+\contentsline {subsection}{Societal Practices and Values}{7}{section*.11}%
+\contentsline {section}{Conclusions}{9}{section*.12}%
+\contentsline {section}{Suggestions for Further Research}{9}{section*.13}%
+\contentsline {section}{Limitations}{9}{section*.14}%
