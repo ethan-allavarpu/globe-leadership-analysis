@@ -47,6 +47,10 @@ library(rworldmap)
 # Introducing the Data
 ## The Data
 
+  - GLOBE (Global Leadership & Organizational Behavior Effectiveness)
+    - Goal: Identify the relationships between various leadership and societal characteristics
+    - Over 17,000 middle managers, 62 cultures
+    
 
 
 
@@ -142,6 +146,40 @@ ggplot(spv) +
 
 # Analysis
 
+## Leadership Clusters: Methodology
+
+  1. Remove second-order factor analysis variables (difficult for interpretation)
+  2. Perform PCA on the remaining numeric variables
+  3. Perform $k$-means clustering on the first four principal components
+  
+    - Characteristics
+    - Countries
+    
+## Leadership Clusters: Methodology
+```{r leader_methods, fig.height=8}
+plot(seq_len(10), axes = FALSE, xlab = "", ylab = "", type = "n")
+symbols(x = c(5, 2.5, 7.5),
+        y = c(7.5, 2.5, 2.5),
+        rectangles = matrix(c(3, 1.5,
+                              3, 1.5,
+                              3, 1.5),
+                            nrow = 3,
+                            byrow = TRUE),
+        inches = FALSE, add = TRUE)
+text(x = 5, y = 9, labels = "Methodology for Leadership Analysis", cex = 2.5)
+text(x = c(5, 2.5, 7.5),
+     y = c(7.5, 2.5, 2.5),
+     labels = c("PCA",
+                "k-means on characteristics",
+                "k-means on countries"), cex = c(2, 1.25, 1.25))
+arrows(x0 = 5, y0 = 7.5 - 1.5 / 2,
+       x1 = c(2.5, 7.5), y1 = 2.5 + 1.5 / 2,
+       length = 0.1, angle = 25)
+text(3.5, 5.25, "Use first four PCs", srt = 45, cex = 1.25)
+text(6.5, 5.25, "Use first four PCs", srt = 360 - 45, cex = 1.25)
+```
+
+
 ## Leadership Clusters: Characteristics
 ```{r pca, out.width="70%"}
 col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15, 0.32, 0.80),
@@ -212,8 +250,26 @@ melt(pca4) %>%
   coord_flip()
 ```
 
-## Leadership Clusters: Countries
+## Leadership Clusters: Characteristics
+	
+\definecolor{clust1}{HTML}{408000}
+\definecolor{clust2}{HTML}{800080}
+\definecolor{clust3}{HTML}{008080}
 
+  1. \textcolor{clust1}{Internally competitive, malevolent, status conscious, self-centred, bureaucratic, face saver, autocratic}
+  
+      - Negative characteristics
+    
+  2. \textcolor{clust2}{Humane-oriented, modesty}
+  
+      - Distinctly different group of two
+  
+  3. \textcolor{clust3}{Participative, team integrator, inspirational, autonomous, administratively competent, integrity, visionary, diplomatic, decisive, collaborative team orientation, self-sacrifice, performance-oriented}
+  
+      - Positive characteristics
+  
+
+## Leadership Clusters: Countries
 ```{r kmeans}
 # Use first four principal components for clustering
 pca_x <- pca$x[, 1:4]
@@ -238,9 +294,23 @@ mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
                colourPalette = col_palette[seq_len(4) + 3],
                borderCol = "black",
                missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
-               mapTitle = "Country Clusters with Similar Leadership Values",
+               mapTitle = "K-Means Clustering (k = 4) on the First Four Principal Components",
                addLegend = FALSE)
 ```
+
+*Note: East, West Germany in the same cluster. South Africa colored by Black sample (rather than the White sample)*
+
+## Leadership Clusters: Countries
+
+\definecolor{clust4}{HTML}{739999}
+\definecolor{clust5}{HTML}{000026}
+\definecolor{clust6}{HTML}{407326}
+\definecolor{clust7}{HTML}{BF7300}
+
+  - \textcolor{clust4}{Light Blue}: Latin America, Mediterranean
+  - \textcolor{clust5}{Dark Blue}: Asia
+  - \textcolor{clust6}{Green}: No specific regionality
+  - \textcolor{clust7}{Gold}: Western and Northern Europe, Anglo
 
 
 ## Societal Values vs. Practices

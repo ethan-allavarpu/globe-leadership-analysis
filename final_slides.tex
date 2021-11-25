@@ -131,6 +131,20 @@
 
 \begin{frame}{The Data}
 \protect\hypertarget{the-data}{}
+\begin{itemize}
+\tightlist
+\item
+  GLOBE (Global Leadership \& Organizational Behavior Effectiveness)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Goal: Identify the relationships between various leadership and
+    societal characteristics
+  \item
+    Over 17,000 middle managers, 62 cultures
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Exploratory Data Analysis}
@@ -171,14 +185,95 @@
 \hypertarget{analysis}{%
 \section{Analysis}\label{analysis}}
 
+\begin{frame}[fragile]{Leadership Clusters: Methodology}
+\protect\hypertarget{leadership-clusters-methodology}{}
+\begin{enumerate}
+\tightlist
+\item
+  Remove second-order factor analysis variables (difficult for
+  interpretation)
+\item
+  Perform PCA on the remaining numeric variables
+\item
+  Perform \(k\)-means clustering on the first four principal components
+\end{enumerate}
+
+\begin{verbatim}
+- Characteristics
+- Countries
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Leadership Clusters: Methodology}
+\protect\hypertarget{leadership-clusters-methodology-1}{}
+\includegraphics{final_slides_files/figure-beamer/leader_methods-1.pdf}
+\end{frame}
+
 \begin{frame}{Leadership Clusters: Characteristics}
 \protect\hypertarget{leadership-clusters-characteristics}{}
 \includegraphics{final_slides_files/figure-beamer/pca_heatmap-1.pdf}
 \end{frame}
 
+\begin{frame}{Leadership Clusters: Characteristics}
+\protect\hypertarget{leadership-clusters-characteristics-1}{}
+\definecolor{clust1}{HTML}{408000}
+\definecolor{clust2}{HTML}{800080}
+\definecolor{clust3}{HTML}{008080}
+
+\begin{enumerate}
+\item
+  \textcolor{clust1}{Internally competitive, malevolent, status conscious, self-centred, bureaucratic, face saver, autocratic}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Negative characteristics
+  \end{itemize}
+\item
+  \textcolor{clust2}{Humane-oriented, modesty}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Distinctly different group of two
+  \end{itemize}
+\item
+  \textcolor{clust3}{Participative, team integrator, inspirational, autonomous, administratively competent, integrity, visionary, diplomatic, decisive, collaborative team orientation, self-sacrifice, performance-oriented}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Positive characteristics
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
 \begin{frame}{Leadership Clusters: Countries}
 \protect\hypertarget{leadership-clusters-countries}{}
 \includegraphics{final_slides_files/figure-beamer/kmeans-1.pdf}
+
+\emph{Note: East, West Germany in the same cluster. South Africa colored
+by Black sample (rather than the White sample)}
+\end{frame}
+
+\begin{frame}{Leadership Clusters: Countries}
+\protect\hypertarget{leadership-clusters-countries-1}{}
+\definecolor{clust4}{HTML}{739999}
+\definecolor{clust5}{HTML}{000026}
+\definecolor{clust6}{HTML}{407326}
+\definecolor{clust7}{HTML}{BF7300}
+
+\begin{itemize}
+\tightlist
+\item
+  \textcolor{clust4}{Light Blue}: Latin America, Mediterranean
+\item
+  \textcolor{clust5}{Dark Blue}: Asia
+\item
+  \textcolor{clust6}{Green}: No specific regionality
+\item
+  \textcolor{clust7}{Gold}: Western and Northern Europe, Anglo
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Societal Values vs.~Practices}
