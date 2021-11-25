@@ -6,31 +6,286 @@ subtitle:
   - Ethan Allavarpu $\cdot$ Raymond Bai $\cdot$ Jaclyn Chiu \newline Ariel Chow $\cdot$ Carlie Lin $\cdot$ Dara Tan
 date:
   - STATS 140XP $\cdot$ Fall 2021
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
+  - \usepackage[normalem]{ulem}
+  - \usepackage{makecell}
+  - \usepackage{xcolor}
 output:
   beamer_presentation:
     theme: "Hannover"
     colortheme: "spruce"
     slide_level: 2
+    keep_tex: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
-                      out.height = "90%")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, results = FALSE)
+options(digits = 4)
+library(knitr)
+library(MASS)
+library(leaps)
 library(tidyverse)
+library(kableExtra)
+library(readxl)
+library(readr)
+library(reshape2)
+library(stringr)
+library(rworldmap)
 ```
 
 # Introducing the Data
 ## The Data
 
+
+
+
 ## Exploratory Data Analysis
+```{r eda_leader}
+source("iso_codes.R")
+col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15, 0.32, 0.80),
+                   c(0.50, 0.00, 0.50, 0.60, 0.00, 0.45, 0.45, 0.75, 0.25, 0.23),
+                   c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45, 0.70, 0.20),
+                   alpha = 0.75)
+leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+leadership$Country.Cluster <- trimws(leadership$Country.Cluster)
+society <- read.csv("GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
+society$Country.Name[society$Country.Name == "IRAN"] <- "Iran"
+society$Country.Cluster <- trimws(society$Country.Cluster)
+combined_data <- full_join(leadership, society,
+                           by = c("Country", "Country.Name", "Country.Cluster"))
+countries <- data.frame("country" = leadership$Country.Name)
+iso_codes <- as.data.frame(iso_codes)
+names(iso_codes) <- c("code", "country")
+country_codes <- countries %>% left_join(iso_codes)
+country_codes[is.na(country_codes$code), "code"] <- c("GBR", "CZE", "VEN",
+                                                      "IRN", "RUS", "KOR",
+                                                      "ZAF", "BOL", "CHE",
+                                                      "ZAF", "CAN", "DEU",
+                                                      "DEU", "USA")
+combined_data <- combined_data %>% mutate("Code" = country_codes$code)
+colnames(combined_data) <- vapply(colnames(combined_data),
+                                  function(x){ gsub(pattern = "[\\.]+",
+                                                    replacement = " ", x)},
+                                  character(1))
+mapped_data <- joinCountryData2Map(combined_data, nameJoinColumn = "Code")
+par(mai = rep(0.95, 4), xaxs = "i", yaxs = "i")
+# Edit the following function to create maps for different variables
+# nameColumnToPlot should be the variable name
+# numCats defines how many breaks you want (44 is the maximum)
+# colourPalette defines the range of colors to plot
+## alpha in rgb() is the transparency factor
+### Edit the from and to arguments to match the variable of interest
+### Divide by the maximum value of the variable of interest
+# Autocratic Scores by Country and Country Cluster ----
+mapCountryData(mapped_data, nameColumnToPlot = "Autocratic",
+               numCats = 43,
+               colourPalette = rgb(0.5, 0, 0,
+                                   alpha = seq(from = 1, to = 7,
+                                               length.out = 43) / 7),
+               borderCol = "black",
+               missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
+               mapTitle = "Autocratic Levels by Country")
+```
+
+## Exploratory Data Analysis
+
+```{r eda_social}
+culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
+colors <- c('#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
+            '#e377c2', '#7f7f7f', '#bcbd22', '#17becf')
+spv <- culture %>%
+  select(country = 'Country', country_name = 'Country Name',
+         country_cluster = 'Country Cluster', contains('Practices')) %>%
+  pivot_longer(contains('Practices'), values_to = 'practice') %>%
+  mutate(name = str_replace_all(name, ' Societal Practices', '')) %>%
+  full_join(culture %>%
+              select(country = 'Country', country_name = 'Country Name',
+                     country_cluster = 'Country Cluster', contains('Values')) %>%
+              pivot_longer(contains('Values')) %>%
+              mutate(name = str_replace_all(name, ' Societal Values', ''),
+                     name = str_replace(name, 'Human', 'Humane')),
+            by = c('country', 'country_name', 'country_cluster', 'name')) %>%
+  filter(!is.na(country_cluster))
+change_name <- !is.na(str_extract(spv$name, "(?<=\\().+(?=\\))"))
+spv$name[change_name] <- str_extract(spv$name, "(?<=\\().+(?=\\))")[change_name]
+ggplot(spv) +
+  geom_point(aes(practice, value, color = country_cluster),
+             cex = 1.5, alpha = 0.65) +
+  scale_color_manual(values = colors, name = 'Country Cluster') +
+  labs(title = 'Values vs. Practices by Cultural Dimension and Country Cluster',
+       caption = 'Note: Countries with missing country clusters were excluded.',
+       x = 'Societal Practices', y = 'Societal Values') +
+  theme_bw() +
+  facet_wrap(~ name, nrow = 3, scales = 'free') + 
+  theme(strip.text.x = element_text(size = 14))
+```
+
 
 ## Problem Statements
 
+  1. Which characteristics or traits do countries tend to group together when determining "good" leadership values?
+      - Which countries have similar perceptions of these leadership values?
+
+  2. Do societal practices and societal values align? 
+      - If they do not, which practices and values deviate most significantly?
+
 # Analysis
 
-## Leadership Clusters
+## Leadership Clusters: Characteristics
+```{r pca, out.width="70%"}
+col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15, 0.32, 0.80),
+                   c(0.50, 0.00, 0.50, 0.60, 0.00, 0.45, 0.45, 0.75, 0.25, 0.23),
+                   c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45, 0.70, 0.20),
+                   alpha = 0.75)
+
+leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+leadership$Country.Cluster <- trimws(leadership$Country.Cluster)
+countries <- data.frame("country" = leadership$Country.Name)
+iso_codes <- as.data.frame(iso_codes)
+names(iso_codes) <- c("code", "country")
+country_codes <- countries %>% left_join(iso_codes)
+country_codes[is.na(country_codes$code), "code"] <- c("GBR", "CZE", "VEN",
+                                                      "IRN", "RUS", "KOR",
+                                                      "ZAF", "BOL", "CHE",
+                                                      "ZAF", "CAN", "DEU",
+                                                      "DEU", "USA")
+leadership <- leadership %>% mutate("Code" = country_codes$code)
+rename_columns <- function(x) {
+  new_name <- gsub(pattern = "[\\.]+", replacement = " ", x)
+  new_name <- gsub(pattern = "Originally Labeled _", replacement = "(", new_name)
+  gsub(pattern = "_", replacement = ")", new_name)
+}
+colnames(leadership) <- vapply(colnames(leadership), rename_columns, character(1))
+leadership <- leadership %>% dplyr::select(-Country)
+leadership <- leadership[, is.na(str_match(names(leadership),
+                                           "Global Leadership Dimension"))]
+# PCA
+num_data <- leadership[, vapply(leadership, is.numeric, logical(1))]
+rownames(num_data) <- leadership$`Country Name`
+change_names <- str_extract_all(colnames(num_data),"(?<=[:digit:] ).*")
+colnames(num_data)[vapply(change_names, length, numeric(1)) > 0] <- unlist(change_names)
+pca <- prcomp(num_data)
+
+# Cluster the leadership characteristics
+pca4 <- pca$rotation[, 1:4]
+set.seed(0)
+w_ss <- numeric(20)
+k_clust <- list()
+length(k_clust) <- 20
+for (k in seq_along(w_ss)) {
+  k_clusters <- kmeans(pca4, centers = k, nstart = 20)
+  k_clust[[k]] <- k_clusters
+  w_ss[k] <- k_clusters$tot.withinss
+}
+## k = 5 seems best, but k = 3 provides more relevant groups
+cols <- rgb(c(0.25, 0.50, 0.00), c(0.50, 0.00, 0.50), c(0.00, 0.50, 0.50),
+            alpha = 0.75)[sort(k_clust[[3]]$cluster)]
+names(cols) <- names(sort(k_clust[[3]]$cluster))
+```
+```{r pca_heatmap}
+pca4 <- pca4[names(cols), ]
+melt(pca4) %>%
+  ggplot(aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = rgb(0.5, 0, 0, alpha = 1),
+                       high = rgb(0, 0.5, 0, alpha = 1),
+                       mid = "white",
+                       midpoint = 0, space = "Lab",
+                       name = "PCA Coefficient") +
+  labs(title = "PCA Coefficients for Each Variable",
+       x = "Variable", y = "Principal Component Number",
+       caption = "Note: Variables colored by cluster") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1),
+        axis.text.y = element_text(color = cols, size = 12)) +
+  coord_flip()
+```
+
+## Leadership Clusters: Countries
+
+```{r kmeans}
+# Use first four principal components for clustering
+pca_x <- pca$x[, 1:4]
+set.seed(85)
+w_ss <- numeric(30)
+k_clust <- list()
+length(k_clust) <- 30
+for (k in seq_along(w_ss)) {
+  k_clusters <- kmeans(pca_x, centers = k, nstart = 20)
+  k_clust[[k]] <- k_clusters
+  w_ss[k] <- k_clusters$tot.withinss
+}
+
+## 4 clusters appears to be the best
+best_4 <- k_clust[[4]]
+leadership <- mutate(leadership, "Similar Values" = factor(best_4$cluster), "Code" = country_codes$code)
+
+# K-means Clusters and Leadership Values ----
+mapped_data <- joinCountryData2Map(leadership, nameJoinColumn = "Code")
+mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
+               numCats = 4, catMethod = "categorical",
+               colourPalette = col_palette[seq_len(4) + 3],
+               borderCol = "black",
+               missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
+               mapTitle = "Country Clusters with Similar Leadership Values",
+               addLegend = FALSE)
+```
+
 
 ## Societal Values vs. Practices
+```{r SPV Plots}
+leadership <- read_csv('GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
+culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
+colors <- c('#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
+            '#e377c2', '#7f7f7f', '#bcbd22', '#17becf')
+
+spv <- culture %>%
+  select(country = 'Country', country_name = 'Country Name',
+         country_cluster = 'Country Cluster', contains('Practices')) %>%
+  pivot_longer(contains('Practices'), values_to = 'practice') %>%
+  mutate(name = str_replace_all(name, ' Societal Practices', '')) %>%
+  full_join(culture %>%
+              select(country = 'Country', country_name = 'Country Name',
+                     country_cluster = 'Country Cluster', contains('Values')) %>%
+              pivot_longer(contains('Values')) %>%
+              mutate(name = str_replace_all(name, ' Societal Values', ''),
+                     name = str_replace(name, 'Human', 'Humane')),
+            by = c('country', 'country_name', 'country_cluster', 'name')) %>%
+  filter(!is.na(country_cluster))
+
+change_name <- !is.na(str_extract(spv$name, "(?<=\\().+(?=\\))"))
+spv$name[change_name] <- str_extract(spv$name, "(?<=\\().+(?=\\))")[change_name]
+get_spv_slr <- function(n) {
+  model <- lm(practice ~ value, data = spv %>% filter(name == n))
+  results <- summary(model)$coefficients['value', ]
+  tibble(name = n, coefficient = unname(results['Estimate']),
+         p_value = unname(results['Pr(>|t|)']))
+}
+slr_results <- map_df(unique(spv$name), get_spv_slr) %>%
+  arrange(p_value)
+alpha <- 0.05 / nrow(slr_results)
+```
+
+```{r SPV SLR Table, results=TRUE}
+significant <- slr_results$p_value < alpha
+kable(slr_results, col.names = c('Cultural Dimension', 'Coefficient Value',
+                                 'p-value'), booktabs = TRUE,
+      caption = 'Results of Simple Linear Regression by Cultural Dimension') %>%
+  kable_styling(latex_options = "hold_position") %>%
+  row_spec(which(significant), background = '#E5F5E0') %>%
+  row_spec(which(!significant)[c(FALSE, TRUE)], background = '#F0F0F0')
+```
 
 # Conclusions
 

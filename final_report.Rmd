@@ -246,6 +246,8 @@ After performing PCA, we  perform $k$-means clustering on the first four princip
 # PCA
 num_data <- leadership[, vapply(leadership, is.numeric, logical(1))]
 rownames(num_data) <- leadership$`Country Name`
+change_names <- str_extract_all(colnames(num_data),"(?<=[:digit:] ).*")
+colnames(num_data)[vapply(change_names, length, numeric(1)) > 0] <- unlist(change_names)
 pca <- prcomp(num_data)
 
 # Cluster the leadership characteristics

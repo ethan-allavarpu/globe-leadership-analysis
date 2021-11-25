@@ -1,0 +1,9 @@
+\frametitle{Leadership Clusters: Countries}
+\protect\hypertarget{leadership-clusters-countries}{}
+\begin{verbatim}
+## 62 codes from your data successfully matched countries in the map
+## 0 codes from your data failed to match with a country code in the map
+## 184 codes from the map weren't represented in your data
+\end{verbatim}
+
+\includegraphics{final_slides_files/figure-beamer/kmeans-1.pdf}
