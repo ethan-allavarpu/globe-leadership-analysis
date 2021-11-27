@@ -1,5 +1,3 @@
 \beamer@sectionintoc {1}{Introducing the Data}{2}{0}{1}
 \beamer@sectionintoc {2}{Analysis}{7}{0}{2}
 \beamer@sectionintoc {3}{Conclusions}{17}{0}{3}
-\beamer@sectionintoc {4}{Limitations}{20}{0}{4}
-\beamer@sectionintoc {5}{Further Research}{21}{0}{5}

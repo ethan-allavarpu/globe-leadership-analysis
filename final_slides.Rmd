@@ -50,6 +50,8 @@ library(rworldmap)
   - GLOBE (Global Leadership & Organizational Behavior Effectiveness)
     - Goal: Identify the relationships between various leadership and societal characteristics
     - Over 17,000 middle managers, 62 cultures
+  - Outside source: ISO Codes from Wikipedia
+    - Uniform identifiers for countries for visualization purposes
     
 
 
@@ -389,8 +391,34 @@ kable(slr_results, col.names = c('Cultural Dimension', 'Coefficient Value',
 
 ## Leadership Clusters
 
+\definecolor{clust6}{HTML}{407326}
+
+  - Characteristics clustered largely on negative or positive connotations
+    - Exceptions: Humane oriented, modesty
+  - Countries clustered heavily on geographic region
+    - Exceptions: \textcolor{clust6}{Green cluster}
+
 ## Societal Values vs. Practices
 
-# Limitations
+  - Practices do not align
+    - Correlations often negative
+  - Consider how this might affect policy implementation
+  
+## Further Research
 
-# Further Research
+  - Investigate how other indices (e.g., freedom index, happiness index, government approval ratings) explain groupings for leadership values
+  - Potential causes behind inverse relationship between societal values and practices
+    - Are people valuing certain things *because* they aren't present in the society?
+  - Expand the survey to more countries to see if regional trends/clusters remain
+
+## Limitations
+
+  - Only 62 cultures observed
+  - Some countries split
+    - Germany: East vs. West (possibly related to Berlin Wall)
+    - South Africa: White vs. Black (possibly related to Apartheid)
+  - Data appears to be from 15+ years ago
+    - Potentially outdated information
+    - May consider a resurvey
+  - Unsure of how second-order factor analysis performed
+  - No "official" codebook--just found the survey questions

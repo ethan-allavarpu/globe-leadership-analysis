@@ -5,6 +5,12 @@
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\title{GLOBE Leadership and Society Surveys}
+\subtitle{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
+\newline Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara Tan}
+\author{\textbf{Explore the GLOBE}}
+\date{STATS 140XP \(\cdot\) Fall 2021}
+
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
@@ -45,8 +51,8 @@
 }
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -113,15 +119,9 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-
-\title{GLOBE Leadership and Society Surveys}
-\subtitle{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
-\newline Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara Tan}
-\author{\textbf{Explore the GLOBE}}
-\date{STATS 140XP \(\cdot\) Fall 2021}
 
 \begin{document}
 \frame{\titlepage}
@@ -143,6 +143,14 @@
     societal characteristics
   \item
     Over 17,000 middle managers, 62 cultures
+  \end{itemize}
+\item
+  Outside source: ISO Codes from Wikipedia
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Uniform identifiers for countries for visualization purposes
   \end{itemize}
 \end{itemize}
 \end{frame}
@@ -319,16 +327,100 @@ In-group Collectivism & 0.4393 & 0.0991\\
 
 \begin{frame}{Leadership Clusters}
 \protect\hypertarget{leadership-clusters-1}{}
+\definecolor{clust6}{HTML}{407326}
+
+\begin{itemize}
+\tightlist
+\item
+  Characteristics clustered largely on negative or positive connotations
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Exceptions: Humane oriented, modesty
+  \end{itemize}
+\item
+  Countries clustered heavily on geographic region
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Exceptions: \textcolor{clust6}{Green cluster}
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Societal Values vs.~Practices}
 \protect\hypertarget{societal-values-vs.-practices}{}
+\begin{itemize}
+\tightlist
+\item
+  Practices do not align
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Correlations often negative
+  \end{itemize}
+\item
+  Consider how this might affect policy implementation
+\end{itemize}
 \end{frame}
 
-\hypertarget{limitations}{%
-\section{Limitations}\label{limitations}}
+\begin{frame}{Further Research}
+\protect\hypertarget{further-research}{}
+\begin{itemize}
+\tightlist
+\item
+  Investigate how other indices (e.g., freedom index, happiness index,
+  government approval ratings) explain groupings for leadership values
+\item
+  Potential causes behind inverse relationship between societal values
+  and practices
 
-\hypertarget{further-research}{%
-\section{Further Research}\label{further-research}}
+  \begin{itemize}
+  \tightlist
+  \item
+    Are people valuing certain things \emph{because} they aren't present
+    in the society?
+  \end{itemize}
+\item
+  Expand the survey to more countries to see if regional trends/clusters
+  remain
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Limitations}
+\protect\hypertarget{limitations}{}
+\begin{itemize}
+\tightlist
+\item
+  Only 62 cultures observed
+\item
+  Some countries split
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Germany: East vs.~West (possibly related to Berlin Wall)
+  \item
+    South Africa: White vs.~Black (possibly related to Apartheid)
+  \end{itemize}
+\item
+  Data appears to be from 15+ years ago
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Potentially outdated information
+  \item
+    May consider a resurvey
+  \end{itemize}
+\item
+  Unsure of how second-order factor analysis performed
+\item
+  No ``official'' codebook--just found the survey questions
+\end{itemize}
+\end{frame}
 
 \end{document}
