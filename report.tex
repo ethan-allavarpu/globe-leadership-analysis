@@ -116,10 +116,18 @@ countries tend to view similarly and if countries align their
 perceptions of societal practices and values. For determining leadership
 qualities and similar countries, we used principal component analysis
 (PCA) then \(k\)-means clustering to create four ``clusters'' of
-countries with similar leadership beliefs. We used the \_\_\_\_ method
-to \_\_\_\_. We found that \_\_\_\_. We also looked at \_\_\_\_\_. In
-the future, we recommend looking into \_\_\_\_\_. Some limitations to
-our project are \_\_\_\_\_\_.
+countries with similar leadership beliefs. For determining the alignment
+of perceptions of societal practices and values, we used linear
+regression models for each pair. Then, we performed t-tests for each
+dimension to check for significant slopes. We found that leadership
+characteristics are generally clustered by if the trait is negative or
+positive and that leadership values are clustered by region, except for
+one interesting case. On the perceptions side, we shockingly discovered
+that societal practices and societal values of countries do not align
+and are instead opposing. In the future, we recommend looking into
+causes behind the interesting disconnect between practices and values.
+Some limitations to our project are the data silences due to the lack of
+information from many countries.
 
 \hypertarget{problem-statements}{%
 \section{Problem Statements}\label{problem-statements}}
@@ -163,43 +171,64 @@ survey represents respondents answers numerically. The survey is on a 1
 to 7 scale, with 1 being a negative response, 4 a ``neutral'' score, and
 7 positive.
 
-Here is a look at 6 full and complete observations from the leadership
-survey:
+The GLOBE (Global Leadership \& Organizational Behavior Effectiveness)
+research program is an interdisciplinary study aiming to identify the
+interrelationships between societal culture, societal effectiveness and
+organizational leadership. Surveying from over 17,000 middle managers
+from 62 cultures, the 2004 research survey provides data that measures
+the leadership and societal culture practices of each country (House et
+al, 2004).
 
-Here is a look at 6 full and complete observations from the social and
-cultural survey:
+A single, complete observation from the leadership survey is about a
+specific culture (either a country or a subcountry) about the following
+characteristics: Country; Country Name; Performance Oriented;
+Autocratic; Modesty; Charismatic 3 Self sacrifice; Team 1 Collaborative
+Team Orientation; Decisive; Diplomatic; Face saver; Charismatic 1
+Visionary; Humane oriented; Integrity; Bureaucratic Originally Labeled
+\emph{Procedural}; Administratively Competent; Self centred; Autonomous;
+Status Conscious; Charismatic 2 Inspirational; Malevolent; Team 2 Team
+Integrator; Internally Competitive Originally Labeled \emph{Conflict
+Inducer}; Participative; Charismatic Value based Global Leadership
+Dimension; Team Oriented Global Leadership Dimension; Self Protective
+Global Leadership Dimension; Participative Global Leadership Dimension;
+Humane Oriented Global Leadership Dimension; Autonomous Global
+Leadership Dimension; Country Cluster.
+
+A single, complete observation from the society and culture survey has a
+similar structure as the leadership survey: each observation is for a
+specific culture (either a country or a subcountry) about the following
+characteristics: Country; Country Name; Uncertainty Avoidance Societal
+Practices; Future Orientation Societal Practices; Power Distance
+Societal Practices; Collectivism I Societal Practices Institutional
+Collectivism ; Humane Orientation Societal Practices; Performance
+Orientation Societal Practices; Collectivism II Societal Practices In
+group Collectivism ; Gender Egalitarianism Societal Practices;
+Assertiveness Societal Practices; Uncertainty Avoidance Societal Values;
+Future Orientation Societal Values; Power Distance Societal Values;
+Collectivism I Societal Values Institutional Collectivism ; Human
+Orientation Societal Values; Performance Orientation Societal Values;
+Collectivism II Societal Values In group Collectivism ; Gender
+Egalitarianism Societal Values; Assertiveness Societal Values; Country
+Cluster.
 
 \hypertarget{visualization-and-exploratory-data-analysis}{%
 \section{Visualization and Exploratory Data
 Analysis}\label{visualization-and-exploratory-data-analysis}}
 
-\hypertarget{the-data}{%
-\section{The Data}\label{the-data}}
-
-The data set we have chosen to analyze is the \textbf{Dana Landis
-Leadership} dataset, which comes from the GLOBE Research Survey. The
-data provided in the folder had survey results for (1) leadership and
-(2) societal and culture data and a PDF describing the nature of the
-survey, but nothing else. To glean more information, we found the two
-questionnaires (alpha and beta) described in the informational PDF to
-get the original questions. While we do not have a ``codebook'' in the
-traditional sense, the original questions asked may help guide us in
-understanding what each variable means and how the survey represents
-respondents' answers numerically. The survey is on a 1 to 7 scale, with
-1 being a negative response, 4 a ``neutral'' score, and 7 positive.
-
 \hypertarget{leadership}{%
-\section{Leadership}\label{leadership}}
+\subsection{Leadership}\label{leadership}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{final_report_files/figure-latex/leadership-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{report_files/figure-latex/leadership-1} \end{center}
 
-The above global heatmap presents the beliefs about whether autocracy
-helps (higher values) or hinders (lower values) leaders in a given
-country. Multiple similar graphics were generated for a variety of
-leadership variables, ultimately leading us to recognize that different
-regions of the world may favor certain leadership qualities over others
-and that certain leadership qualities may be liked/disliked ``together''
-(i.e., they have associations).
+The above map shows autocratic levels by country. The lighter colors
+correspond with lower levels of autocracy while the darker colors
+correspond with higher levels of autocracy. For example, we see that
+Russia, a well-known autocratic country, is shaded darkly. Notably,
+there do seem to be clusters of autocratic countries in the East and
+clusters of less autocratic countries in the West. The East is known for
+being more collectivist while the West is known for being more
+individualistic. As we delve into later, beliefs and cultures do seem to
+vary by region.
 
 From boxplots we generated (not pictured), the difference by country
 cluster (as defined by the dataset) seems visible, prompting us to
@@ -213,10 +242,10 @@ by the vast swaths of grey on the world map for which there is no data)
 and clustering would further reduce block/group sizes.
 
 \hypertarget{societal-values-and-practices}{%
-\section{Societal Values and
+\subsection{Societal Values and
 Practices}\label{societal-values-and-practices}}
 
-\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/society-1} \end{center}
+\begin{center}\includegraphics[width=0.85\linewidth]{report_files/figure-latex/society-1} \end{center}
 
 The plot grid demonstrates how, contrary to what \emph{should} happen,
 the societal values of a country do not correlate well with the societal
@@ -254,17 +283,31 @@ characteristics that have similar perceptions. \(K\)-means clustering
 creates \(k\) groups that are the ``most similar'' to the other
 observations in their groups, minimizing the between-group variability:
 
-\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/pca_heatmap-1} \end{center}
+\definecolor{clust1}{HTML}{408000}
+\definecolor{clust2}{HTML}{800080}
+\definecolor{clust3}{HTML}{008080}
 
-Here, we see three clusters: two large clusters and a group of two for
-the other cluster. The green cluster seems to describe positive
-characteristics (e.g., participative, inspirational), while the blue
-cluster appears to describe negative characteristics (e.g., malevolent,
-self-centered). From this, we note that these ``positive'' and
-``negative'' characteristics tend to occur together. The third
-``cluster'' (i.e., humane oriented and modesty) did not closely fit with
-the other groups, leading us to believe that they may be considered
-separately from the other characteristics.
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textcolor{clust1}{Internally competitive, malevolent, status conscious, self-centred, bureaucratic, face saver, autocratic}
+\item
+  \textcolor{clust2}{Humane-oriented, modesty}
+\item
+  \textcolor{clust3}{Participative, team integrator, inspirational, autonomous, administratively competent, integrity, visionary, diplomatic, decisive, collaborative team orientation, self-sacrifice, performance-oriented}
+\end{enumerate}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{report_files/figure-latex/pca_heatmap-1} \end{center}
+
+The green cluster seems to describe positive characteristics (e.g.,
+participative, inspirational), while the blue cluster appears to
+describe negative characteristics (e.g., malevolent, self-centered).
+From this, we note that these ``positive'' and ``negative''
+characteristics tend to occur together. The third ``cluster'' (i.e.,
+humane oriented and modesty) did not closely fit with the other groups,
+leading us to believe that they may be considered separately from the
+other characteristics.
 
 After considering the leadership characteristics, we cluster countries
 based on similar perceptions. We do this by using the variables of the
@@ -272,7 +315,7 @@ countries transformed into the first four principal components, then
 running \(k\)-means clustering on those components. The clustering
 results segregate the countries into the following segments:
 
-\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/kmeans-1} \end{center}
+\begin{center}\includegraphics[width=0.85\linewidth]{report_files/figure-latex/kmeans-1} \end{center}
 \begin{table}[h]
 
 \caption{\label{tab:country_table}Regions with Similar Leadership Perceptions}
@@ -310,16 +353,22 @@ Cluster 1 & Cluster 2 & Cluster 3 & Cluster 4\\
 \end{tabular}
 \end{table}
 
+\emph{Note: East and West Germany belong to the same cluster and are
+colored as such. South Africa is colored by the cluster the Black sample
+belongs in, rather than the White sample. Countries that are not
+included in the data are colored gray.}
+
 From the above grouping, we see that regionality (generally) determines
 a country's respective cluster and leadership perspectives. Cluster 1
-tends to describe Latin American and the Mediterranean, Cluster 2
-generally includes Asia, and Cluster 4 describes the Anglo regions and
-northern Europe. The one cluster that appears to be ``out there'' is
-Cluster 3, which does not have a particular region associated with it.
-To visualize the differences between these clusters, we create a heatmap
-of the median variable values for each cluster:
+(light blue) tends to describe Latin American and the Mediterranean,
+Cluster 2 (dark blue) generally includes Asia, and Cluster 4 (gold)
+describes the Anglo regions and northern Europe. The one cluster that
+appears to be ``out there'' is Cluster 3 (green), which does not have a
+particular region associated with it. To visualize the differences
+between these clusters, we create a heatmap of the median variable
+values for each cluster:
 
-\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/cluster_values-1} \end{center}
+\begin{center}\includegraphics[width=0.85\linewidth]{report_files/figure-latex/cluster_values-1} \end{center}
 
 From here, we see that, despite the clustering, the countries tend to
 agree on beneficial and detrimental leadership qualities; the main
@@ -345,12 +394,6 @@ negatively (red):
 \hypertarget{societal-practices-and-values}{%
 \subsection{Societal Practices and
 Values}\label{societal-practices-and-values}}
-
-To determine whether societal practices and societal values align, we
-first create scatterplots of societal values against societal practices
-for each of the nine cultural dimensions:
-
-\begin{center}\includegraphics[width=0.85\linewidth]{final_report_files/figure-latex/SPV Plots-1} \end{center}
 
 From the scatterplots above, we note that societal practices and
 societal values do not always align. For instance, in the case of the
@@ -424,6 +467,24 @@ values.
 \hypertarget{conclusions}{%
 \section{Conclusions}\label{conclusions}}
 
+Leadership characteristics are largely clustered based on whether each
+trait is negative or positive. For example, the traits malevolent and
+self centered have similar ratings while the traits integrity and
+inspiration also have similar ratings. Additionally, leadership values
+tend to be clustered based on their geographic region. This suggests
+countries within smaller distances of one another have similar more
+related leadership perspectives.
+
+Our findings indicate that the societal practices and societal values of
+countries do not align and are instead opposing. Thus, we conclude that
+a country's societal value does not entail the same practices being
+practiced among its constituents. This analysis can be useful for
+government officials trying to develop policies that promote cultural
+values. If a country places a high value on uncertainty avoidance (the
+desire to rely on social norms and procedures to avoid unpredictable
+events), then the same country may undergo unexpected and unconventional
+events in the future.
+
 \hypertarget{suggestions-for-further-research}{%
 \section{Suggestions for Further
 Research}\label{suggestions-for-further-research}}
@@ -447,15 +508,21 @@ seem to have associations with more freedom/approval/happiness.
 For both leadership and the societal analyses, further research may be
 conducting more surveys to look at the potential changes in ideology and
 perspectives over time to understanding the changing dynamics at both
-the national and global level.
+the national and global level. Researchers should also look into the
+potential causes behind the inverse relationship between social values
+and practices.
 
 \hypertarget{limitations}{%
 \section{Limitations}\label{limitations}}
 
-While promising, there are a few issues with the data we have to
-consider. First, the number of observations: 62 observations is a rather
-small dataset, which suggest that any analysis will likely be limited.
-Also, the data silences are important and should not be overlooked. Why
-were certain countries not surveyed?
+In the dataset, there are only 62 countries observed, limiting the
+significance of the analysis and the confidence we have in clustering
+countries by geographical similarities. In addition, there is no
+explanation as to why only certain countries were surveyed. We also
+recognize that at the time of data collection, the Apartheid and the
+Berlin Wall potentially played significant factors in the differing
+valuations of social and leadership values for citizens in South Africa
+and Germany, respectively. It is notable that East and West Germany are
+split up and South Africa is also split up by race.
 
 \end{document}

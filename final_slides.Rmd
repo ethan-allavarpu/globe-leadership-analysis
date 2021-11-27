@@ -150,10 +150,7 @@ ggplot(spv) +
 
   1. Remove second-order factor analysis variables (difficult for interpretation)
   2. Perform PCA on the remaining numeric variables
-  3. Perform $k$-means clustering on the first four principal components
-  
-    - Characteristics
-    - Countries
+  3. Perform $k$-means clustering on the first four principal components for both characteristics and countries
     
 ## Leadership Clusters: Methodology
 ```{r leader_methods, fig.height=8}
@@ -312,6 +309,28 @@ mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
   - \textcolor{clust6}{Green}: No specific regionality
   - \textcolor{clust7}{Gold}: Western and Northern Europe, Anglo
 
+## Leadership Clusters
+```{r cluster_values}
+characteristic_values <- sapply(num_data, FUN = function(x) {
+  tapply(X = x, INDEX = leadership$`Similar Values`, FUN = median)
+  })
+cols <- cols[colnames(characteristic_values)]
+cols <- cols[apply(characteristic_values, 2, mean) %>% order()]
+characteristic_values <- characteristic_values[, apply(characteristic_values,
+                                                       2, mean) %>% order()]
+melt(characteristic_values) %>%
+  ggplot(aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = rgb(0.5, 0, 0, alpha = 1),
+                       high = rgb(0, 0.5, 0, alpha = 1),
+                       midpoint = 4, space = "Lab",
+                       name = "Median Survey Score") +
+  labs(title = "Median Leadership Category Scores by Cluster",
+       x = "Cluster", y = "Leadership Category") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(color = col_palette[seq_len(4) + 3]),
+        axis.text.y = element_text(color = cols, size = 8))
+```
 
 ## Societal Values vs. Practices
 ```{r SPV Plots}
