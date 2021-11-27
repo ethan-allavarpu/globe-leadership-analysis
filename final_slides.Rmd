@@ -332,7 +332,16 @@ melt(characteristic_values) %>%
         axis.text.y = element_text(color = cols, size = 8))
 ```
 
-## Societal Values vs. Practices
+## Societal Values vs. Practices: Methodology
+
+For each cultural dimension:
+
+- Simple linear regression model: $y = \beta_0 + \beta_1 x$
+
+- $t$-test: $H_0: \beta_1 = 0$ versus $H_1: \beta_1 \ne 0$
+
+## Societal Values vs. Practices: Findings
+
 ```{r SPV Plots}
 leadership <- read_csv('GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
 culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')

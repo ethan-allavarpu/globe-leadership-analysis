@@ -5,12 +5,6 @@
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\title{GLOBE Leadership and Society Surveys}
-\subtitle{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
-\newline Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara Tan}
-\author{\textbf{Explore the GLOBE}}
-\date{STATS 140XP \(\cdot\) Fall 2021}
-
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
@@ -51,8 +45,8 @@
 }
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -119,9 +113,15 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifLuaTeX
+\ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+
+\title{GLOBE Leadership and Society Surveys}
+\subtitle{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
+\newline Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara Tan}
+\author{\textbf{Explore the GLOBE}}
+\date{STATS 140XP \(\cdot\) Fall 2021}
 
 \begin{document}
 \frame{\titlepage}
@@ -277,8 +277,20 @@ by Black sample (rather than the White sample)}
 \includegraphics{final_slides_files/figure-beamer/cluster_values-1.pdf}
 \end{frame}
 
-\begin{frame}{Societal Values vs.~Practices}
-\protect\hypertarget{societal-values-vs.-practices}{}
+\begin{frame}{Societal Values vs.~Practices: Methodology}
+\protect\hypertarget{societal-values-vs.-practices-methodology}{}
+For each cultural dimension:
+
+\begin{itemize}
+\item
+  Simple linear regression model: \(y = \beta_0 + \beta_1 x\)
+\item
+  \(t\)-test: \(H_0: \beta_1 = 0\) versus \(H_1: \beta_1 \ne 0\)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Societal Values vs.~Practices: Findings}
+\protect\hypertarget{societal-values-vs.-practices-findings}{}
 \begin{table}[!h]
 
 \caption{\label{tab:SPV SLR Table}Results of Simple Linear Regression by Cultural Dimension}
@@ -310,7 +322,7 @@ In-group Collectivism & 0.4393 & 0.0991\\
 \end{frame}
 
 \begin{frame}{Societal Values vs.~Practices}
-\protect\hypertarget{societal-values-vs.-practices-1}{}
+\protect\hypertarget{societal-values-vs.-practices}{}
 \end{frame}
 
 \hypertarget{limitations}{%
