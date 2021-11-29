@@ -50,7 +50,9 @@ library(rworldmap)
   - GLOBE (Global Leadership & Organizational Behavior Effectiveness)
     - Goal: Identify the relationships between various leadership and societal characteristics
     - Over 17,000 middle managers, 62 cultures
-    - Survey from 1 (negative) to 7 (positive)
+    - Leadership survey from 1 (negative) to 7 (positive)
+    - Societal survey varied depending on the question
+      - Did not end up affecting our analysis
   - Outside source: ISO Codes from Wikipedia
     - Uniform identifiers for countries for visualization purposes
     
