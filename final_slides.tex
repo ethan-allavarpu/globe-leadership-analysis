@@ -143,6 +143,8 @@
     societal characteristics
   \item
     Over 17,000 middle managers, 62 cultures
+  \item
+    Survey from 1 (negative) to 7 (positive)
   \end{itemize}
 \item
   Outside source: ISO Codes from Wikipedia
@@ -196,7 +198,6 @@
 \begin{frame}{Leadership Clusters: Methodology}
 \protect\hypertarget{leadership-clusters-methodology}{}
 \begin{enumerate}
-\tightlist
 \item
   Remove second-order factor analysis variables (difficult for
   interpretation)
@@ -205,6 +206,13 @@
 \item
   Perform \(k\)-means clustering on the first four principal components
   for both characteristics and countries
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Choose first four PCs because they explain around 80\% of the
+    variation
+  \end{itemize}
 \end{enumerate}
 \end{frame}
 
@@ -294,6 +302,15 @@ For each cultural dimension:
   Simple linear regression model: \(y = \beta_0 + \beta_1 x\)
 \item
   \(t\)-test: \(H_0: \beta_1 = 0\) versus \(H_1: \beta_1 \ne 0\)
+\item
+  Bonferroni Correction
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Change significance threshold from \(\alpha = 0.05\) to
+    \(\alpha = \frac{0.05}{9} \approx 0.0056\)
+  \end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -327,6 +344,7 @@ In-group Collectivism & 0.4393 & 0.0991\\
 
 \begin{frame}{Leadership Clusters}
 \protect\hypertarget{leadership-clusters-1}{}
+\definecolor{clust2}{HTML}{800080}
 \definecolor{clust6}{HTML}{407326}
 
 \begin{itemize}
@@ -337,7 +355,7 @@ In-group Collectivism & 0.4393 & 0.0991\\
   \begin{itemize}
   \tightlist
   \item
-    Exceptions: Humane oriented, modesty
+    Exceptions: \textcolor{clust2}{Humane oriented, modesty}
   \end{itemize}
 \item
   Countries clustered heavily on geographic region

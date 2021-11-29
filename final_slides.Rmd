@@ -50,6 +50,7 @@ library(rworldmap)
   - GLOBE (Global Leadership & Organizational Behavior Effectiveness)
     - Goal: Identify the relationships between various leadership and societal characteristics
     - Over 17,000 middle managers, 62 cultures
+    - Survey from 1 (negative) to 7 (positive)
   - Outside source: ISO Codes from Wikipedia
     - Uniform identifiers for countries for visualization purposes
     
@@ -151,8 +152,11 @@ ggplot(spv) +
 ## Leadership Clusters: Methodology
 
   1. Remove second-order factor analysis variables (difficult for interpretation)
+  
   2. Perform PCA on the remaining numeric variables
+  
   3. Perform $k$-means clustering on the first four principal components for both characteristics and countries
+      - Choose first four PCs because they explain around 80% of the variation
     
 ## Leadership Clusters: Methodology
 ```{r leader_methods, fig.height=8}
@@ -342,6 +346,10 @@ For each cultural dimension:
 
 - $t$-test: $H_0: \beta_1 = 0$ versus $H_1: \beta_1 \ne 0$
 
+- Bonferroni Correction
+
+  - Change significance threshold from $\alpha = 0.05$ to $\alpha = \frac{0.05}{9} \approx `r round(0.05 / 9, 4)`$
+
 ## Societal Values vs. Practices: Findings
 
 ```{r SPV Plots}
@@ -391,10 +399,11 @@ kable(slr_results, col.names = c('Cultural Dimension', 'Coefficient Value',
 
 ## Leadership Clusters
 
+\definecolor{clust2}{HTML}{800080}
 \definecolor{clust6}{HTML}{407326}
 
   - Characteristics clustered largely on negative or positive connotations
-    - Exceptions: Humane oriented, modesty
+    - Exceptions: \textcolor{clust2}{Humane oriented, modesty}
   - Countries clustered heavily on geographic region
     - Exceptions: \textcolor{clust6}{Green cluster}
 

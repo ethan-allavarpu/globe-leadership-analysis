@@ -1,7 +1,6 @@
 \frametitle{Leadership Clusters: Methodology}
 \protect\hypertarget{leadership-clusters-methodology}{}
 \begin{enumerate}
-\tightlist
 \item
   Remove second-order factor analysis variables (difficult for
   interpretation)
@@ -9,9 +8,9 @@
   Perform PCA on the remaining numeric variables
 \item
   Perform \(k\)-means clustering on the first four principal components
+  for both characteristics and countries
 \end{enumerate}
 
 \begin{verbatim}
-- Characteristics
-- Countries
+- Choose first four PCs because they explain 80% of the variation
 \end{verbatim}
