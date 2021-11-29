@@ -4,10 +4,16 @@
 %
 \documentclass[
 ]{article}
+\title{Stats 140XP: Final Project}
+\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
+\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
+Tan \and \textbf{Explore the GLOBE}}
+\date{1 December 2021}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -87,15 +93,9 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-
-\title{Stats 140XP: Final Project}
-\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
-\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
-Tan \and \textbf{Explore the GLOBE}}
-\date{1 December 2021}
 
 \begin{document}
 \maketitle
@@ -283,9 +283,9 @@ characteristics that have similar perceptions. \(K\)-means clustering
 creates \(k\) groups that are the ``most similar'' to the other
 observations in their groups, minimizing the between-group variability:
 
-\definecolor{clust1}{HTML}{408000}
+\definecolor{clust3}{HTML}{408000}
 \definecolor{clust2}{HTML}{800080}
-\definecolor{clust3}{HTML}{008080}
+\definecolor{clust1}{HTML}{008080}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

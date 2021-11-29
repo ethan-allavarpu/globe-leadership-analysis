@@ -255,9 +255,9 @@ melt(pca4) %>%
 
 ## Leadership Clusters: Characteristics
 	
-\definecolor{clust1}{HTML}{408000}
+\definecolor{clust3}{HTML}{408000}
 \definecolor{clust2}{HTML}{800080}
-\definecolor{clust3}{HTML}{008080}
+\definecolor{clust1}{HTML}{008080}
 
   1. \textcolor{clust1}{Internally competitive, malevolent, status conscious, self-centred, bureaucratic, face saver, autocratic}
   

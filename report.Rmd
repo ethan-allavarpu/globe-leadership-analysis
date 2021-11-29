@@ -227,9 +227,9 @@ Before performing PCA, though, we remove the second-order factor analysis variab
 
 After performing PCA, we  perform $k$-means clustering on the first four principal components to determine the "groups" of leadership characteristics that have similar perceptions. $K$-means clustering creates $k$ groups that are the "most similar" to the other observations in their groups, minimizing the between-group variability:
 
-\definecolor{clust1}{HTML}{408000}
+\definecolor{clust3}{HTML}{408000}
 \definecolor{clust2}{HTML}{800080}
-\definecolor{clust3}{HTML}{008080}
+\definecolor{clust1}{HTML}{008080}
 
   1. \textcolor{clust1}{Internally competitive, malevolent, status conscious, self-centred, bureaucratic, face saver, autocratic}
   2. \textcolor{clust2}{Humane-oriented, modesty}
