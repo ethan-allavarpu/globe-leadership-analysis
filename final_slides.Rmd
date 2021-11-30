@@ -1,5 +1,5 @@
 ---
-title: "GLOBE Leadership and Society Surveys"
+title: "GLOBE Leadership and Societal Perspectives"
 author: 
   - \textbf{Explore the GLOBE}
 subtitle:

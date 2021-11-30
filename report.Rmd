@@ -1,9 +1,10 @@
 ---
-title: 'Stats 140XP: Final Project'
-author: 
+title: "GLOBE Research: Leadership and Societal Perspectives"
+subtitle: 'Stats 140XP Final Project'
+author:
   - Ethan Allavarpu $\cdot$ Raymond Bai $\cdot$ Jaclyn Chiu $\cdot$ Ariel Chow $\cdot$ Carlie Lin $\cdot$ Dara Tan
   - \textbf{Explore the GLOBE}
-date: "1 December 2021"
+date: "10 December 2021"
 header-includes:
   - \usepackage{booktabs}
   - \usepackage{longtable}
@@ -66,7 +67,7 @@ We wanted to answer two main questions: which leadership qualities do countries 
     
 # Description of Dataset
 
-The data set we have chosen to analyze is the **Dana Landis Leadership** dataset, which comes from the GLOBE Research Survey. The data provided in the folder had survey results for (1) leadership and (2) societal and culture data and a PDF describing the nature of the survey, but nothing more. To glean more information, we found the two questionnaires (alpha and beta) described in the informational PDF to get the original questions asked in the surveys. While we do not have a "codebook" in a traditional sense, the original questions asked may help guide us in understanding what each variable means and how the survey represents respondents answers numerically. The survey is on a 1 to 7 scale, with 1 being a negative response, 4 a "neutral" score, and 7 positive.
+The data set we have chosen to analyze is the **Dana Landis Leadership** dataset, which comes from the GLOBE Research Survey. The data provided in the folder had survey results for (1) leadership and (2) societal and culture data and a PDF describing the nature of the survey, but nothing more. To glean more information, we found the two questionnaires (alpha and beta) described in the informational PDF to get the original questions asked in the surveys. While we do not have a "codebook" in a traditional sense, the original questions asked may help guide us in understanding what each variable means and how the survey represents respondents answers numerically. The survey is on a 1 to 7 scale. For the leadership data, 1 was a negative response, 4 a "neutral" score, and 7 positive. For the societal data, the "positive" and "negative" values depended on the question, but for the relationships we analyzed, this did not impact our results.
 
 The GLOBE (Global Leadership & Organizational Behavior Effectiveness) research program is an interdisciplinary study aiming to identify the interrelationships between societal culture, societal effectiveness and organizational leadership. Surveying from over 17,000 middle managers from 62 cultures, the 2004 research survey provides data that measures the leadership and societal culture practices of each country (House et al, 2004).
 
@@ -282,7 +283,7 @@ The green cluster seems to describe positive characteristics (e.g., participativ
 
 After considering the leadership characteristics, we cluster countries based on similar perceptions. We do this by using the variables of the countries transformed into the first four principal components, then running $k$-means clustering on those components. The clustering results segregate the countries into the following segments:
 
-```{r kmeans}
+```{r kmeans_count, include = FALSE}
 # Use first four principal components for clustering
 pca_x <- pca$x[, 1:4]
 set.seed(85)
@@ -309,6 +310,9 @@ mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
                mapTitle = "Country Clusters with Similar Leadership Values",
                addLegend = FALSE)
 ```
+
+\begin{center}\includegraphics[width=0.95\linewidth]{report_files/figure-latex/kmeans-1} \end{center}
+
 ```{r country_table, results = TRUE}
 country_clusters <- matrix(nrow = max(table(best_4$cluster)), ncol = 4)
 for (i in unique(best_4$cluster)) {
