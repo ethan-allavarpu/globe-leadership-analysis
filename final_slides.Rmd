@@ -51,8 +51,10 @@ library(rworldmap)
     - Goal: Identify the relationships between various leadership and societal characteristics
     - Over 17,000 middle managers, 62 cultures
     - Leadership survey from 1 (negative) to 7 (positive)
-    - Societal survey varied depending on the question
+    - Societal survey not necessarily coded the same as leadership
       - Did not end up affecting our analysis
+      - Only cared about relationships between variables
+      - Societal coded the same way for a given characteristic
   - Outside source: ISO Codes from Wikipedia
     - Uniform identifiers for countries for visualization purposes
     
