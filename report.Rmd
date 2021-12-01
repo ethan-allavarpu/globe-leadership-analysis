@@ -67,7 +67,7 @@ We wanted to answer two main questions: which leadership qualities do countries 
     
 # Description of Dataset
 
-The data set we have chosen to analyze is the **Dana Landis Leadership** dataset, which comes from the GLOBE Research Survey. The data provided in the folder had survey results for (1) leadership and (2) societal and culture data and a PDF describing the nature of the survey, but nothing more. To glean more information, we found the two questionnaires (alpha and beta) described in the informational PDF to get the original questions asked in the surveys. While we do not have a "codebook" in a traditional sense, the original questions asked may help guide us in understanding what each variable means and how the survey represents respondents answers numerically. The survey is on a 1 to 7 scale. For the leadership data, 1 was a negative response, 4 a "neutral" score, and 7 positive. For the societal data, the "positive" and "negative" values depended on the question, but for the relationships we analyzed, this did not impact our results.
+The dataset we have chosen to analyze is the **Dana Landis Leadership** dataset, which comes from the GLOBE Research Survey. The data provided in the folder had survey results for (1) leadership and (2) societal and culture data and a PDF describing the nature of the survey, but nothing more. To glean more information, we found the two questionnaires (alpha and beta) described in the informational PDF to get the original questions asked in the surveys. While we do not have a "codebook" in a traditional sense, the original questions asked may help guide us in understanding what each variable means and how the survey represents respondents answers numerically. The survey is on a 1 to 7 scale. For the leadership data, 1 was a negative response, 4 a "neutral" score, and 7 positive. For the societal data, the "positive" and "negative" values depended on the question, but for the relationships we analyzed, this did not impact our results.
 
 The GLOBE (Global Leadership & Organizational Behavior Effectiveness) research program is an interdisciplinary study aiming to identify the interrelationships between societal culture, societal effectiveness and organizational leadership. Surveying from over 17,000 middle managers from 62 cultures, the 2004 research survey provides data that measures the leadership and societal culture practices of each country (House et al, 2004).
 
@@ -87,9 +87,9 @@ colnames(society) <- vapply(colnames(society),
                                   character(1))
 ```
 
-A single, complete observation from the leadership survey is about a specific culture (either a country or a subcountry) about the following characteristics: `r paste(colnames(leadership), collapse = "; ")`.
+A single, complete observation from the leadership survey is for a specific culture (either a country or a subcountry) about the following characteristics: `r paste(colnames(leadership), collapse = "; ")`.
 
-A single, complete observation from the society and culture survey has a similar structure as the leadership survey: each observation is for a specific culture (either a country or a subcountry) about the following characteristics: `r paste(colnames(society), collapse = "; ")`.
+A single, complete observation from the society and culture survey has a similar structure as the leadership survey--each observation is for a specific culture (either a country or a subcountry) about the following characteristics: `r paste(trimws(colnames(society)), collapse = "; ")`.
 
 
 # Visualization and Exploratory Data Analysis
@@ -139,13 +139,13 @@ mapCountryData(mapped_data, nameColumnToPlot = "Autocratic",
                                                length.out = 43) / 7),
                borderCol = "black",
                missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
-               mapTitle = "Autocratic Levels by Country")
+               mapTitle = "Figure 1: Autocratic Levels by Country")
 ```
 
 
-The above map shows autocratic levels by country. The lighter colors correspond with lower levels of autocracy while the darker colors correspond with higher levels of autocracy. For example, we see that Russia, a well-known autocratic country, is shaded darkly. Notably, there do seem to be clusters of autocratic countries in the East and clusters of less autocratic countries in the West. The East is known for being more collectivist while the West is known for being more individualistic. As we delve into later, beliefs and cultures do seem to vary by region. 
+The map in Figure 1 shows autocratic levels by country. The lighter colors correspond to lower levels of autocracy while the darker colors correspond to higher levels of autocracy. For example, we see that Russia, a well-known autocratic country, is shaded darkly. Notably, there do seem to be clusters of autocratic countries in the East and clusters of less autocratic countries in the West. The East is known for being more collectivist while the West is known for being more individualistic. As we delve into later, beliefs and cultures do seem to vary by region. 
 
-From boxplots we generated (not pictured), the difference by country cluster (as defined by the dataset) seems visible, prompting us to consider clustering countries to determine how they may be separated. We do want to note that there are only 62 observations--this totals to fewer than 62 countries because Germany and South Africa have two observations each (West vs. East and White vs. Black, respecively). The limited number of observations may limit us in the scope of our analysis because we have less than a third of the total countries (demonstrated by the vast swaths of grey on the world map for which there is no data) and clustering would further reduce block/group sizes.
+From boxplots we generated (not pictured), the difference by country cluster (as defined by the dataset) seems visible, prompting us to consider clustering countries to determine how they may be separated. We do want to note that there are only 62 observations--this totals to fewer than 62 countries because Germany and South Africa have two observations each (West vs. East and White vs. Black, respecively). The limited number of observations may limit the scope of our analysis because we have less than a third of the total countries (demonstrated by the vast swaths of grey on the world map for which there is no data) and clustering would further reduce block/group sizes.
 
 ## Societal Values and Practices
 
@@ -173,7 +173,7 @@ ggplot(spv) +
   geom_point(aes(practice, value, color = country_cluster),
              cex = 1.5, alpha = 0.65) +
   scale_color_manual(values = colors, name = 'Country Cluster') +
-  labs(title = 'Values vs. Practices by Cultural Dimension and Country Cluster',
+  labs(title = 'Figure 2: Values vs. Practices by Cultural Dimension\nand Country Cluster',
        caption = 'Note: Countries with missing country clusters were excluded.',
        x = 'Societal Practices', y = 'Societal Values') +
   theme_bw() +
@@ -181,7 +181,7 @@ ggplot(spv) +
   theme(strip.text.x = element_text(size = 7))
 ```
 
-The plot grid demonstrates how, contrary to what *should* happen, the societal values of a country do not correlate well with the societal practices (what *should be* does not align with what *is*). This may be a source of further exploration, as we may want to see whether there is a significant difference between the values and practices. When we look at the per-region divisions though (by color), the trend (or lack thereof) seems to persist for these concepts.
+The plot grid in Figure 2 demonstrates how, contrary to what we might expect, the societal values of a country do not align well with the societal practices (what *should be* does not align with what *is*). This may be a source of further exploration, as we may want to see whether there is a significant misalignment between the values and practices. When we look at the per-region divisions though (by color), the trend (or lack thereof) seems to persist for these concepts.
 
 
 
@@ -270,7 +270,7 @@ melt(pca4) %>%
                        mid = "white",
                        midpoint = 0, space = "Lab",
                        name = "PCA Coefficient") +
-  labs(title = "PCA Coefficients for Each Variable",
+  labs(title = "Figure 3: PCA Coefficients for Each Variable",
        x = "Variable", y = "Principal Component Number",
        caption = "Note: Variables colored by cluster") +
   theme_minimal() +
@@ -307,7 +307,7 @@ mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
                colourPalette = col_palette[seq_len(4) + 3],
                borderCol = "black",
                missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
-               mapTitle = "Country Clusters with Similar Leadership Values",
+               mapTitle = "Figure 4: Country Clusters with Similar Leadership Values",
                addLegend = FALSE)
 ```
 
@@ -353,7 +353,7 @@ melt(characteristic_values) %>%
                        high = rgb(0, 0.5, 0, alpha = 1),
                        midpoint = 4, space = "Lab",
                        name = "Median Survey Score") +
-  labs(title = "Median Leadership Category Scores by Cluster",
+  labs(title = "Figure 5: Median Leadership Category Scores by Cluster",
        x = "Cluster", y = "Leadership Category") +
   theme_minimal() +
   theme(axis.text.x = element_text(color = col_palette[seq_len(4) + 3]),
@@ -369,9 +369,9 @@ From here, we see that, despite the clustering, the countries tend to agree on b
 
 ## Societal Practices and Values
 
-From the scatterplots above, we note that societal practices and societal values do not always align. For instance, in the case of the Humane Orientation cultural dimension, there does not appear to be any correlation between practices and values at all, with societal practices in this dimension varying from less than 3.5 to more than 5.0 on the survey's seven-point scale even though societal values were rated relatively similarly across all of the surveyed countries. In some other cases, such as for the Uncertainty Avoidance cultural dimension, there appears to be a negative correlation between practices and values, as indicated by the general trend of scores for practices in this dimension decreasing even as scores for values increase. This negative correlation might suggest that, rather than aligning, societal practices and societal values are in fact in conflict.
+From the scatterplots in Figure 2, we note that societal practices and societal values do not always align. For instance, in the case of the Humane Orientation cultural dimension, there does not appear to be any correlation between practices and values at all, with societal practices in this dimension varying from less than 3.5 to more than 5.0 on the survey's seven-point scale even though societal values were rated relatively similarly across all of the surveyed countries. In some other cases, such as for the Uncertainty Avoidance cultural dimension, there appears to be a negative correlation between practices and values, as indicated by the general trend of scores for practices in this dimension decreasing even as scores for values increase. This negative correlation might suggest that, rather than aligning, societal practices and societal values are in fact in conflict.
 
-To quantify the observations we made from our scatterplots above, we fit simple linear regression models for each of the nine cultural dimensions, using the societal values rating as the predictor and the societal practices rating as the response. In other words, we fit the model:
+To quantify these observations, we fit simple linear regression models for each of the nine cultural dimensions, using the societal values rating as the predictor and the societal practices rating as the response. In other words, we fit the model:
 
 $$
 y = \beta_0 + \beta_1 x

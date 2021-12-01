@@ -4,23 +4,10 @@
 %
 \documentclass[
 ]{article}
-\title{GLOBE Research: Leadership and Societal Perspectives}
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-\subtitle{Stats 140XP Final Project}
-\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
-\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
-Tan \and \textbf{Explore the GLOBE}}
-\date{10 December 2021}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -100,9 +87,22 @@ Tan \and \textbf{Explore the GLOBE}}
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifLuaTeX
+\ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+
+\title{GLOBE Research: Leadership and Societal Perspectives}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Stats 140XP Final Project}
+\author{Ethan Allavarpu \(\cdot\) Raymond Bai \(\cdot\) Jaclyn Chiu
+\(\cdot\) Ariel Chow \(\cdot\) Carlie Lin \(\cdot\) Dara
+Tan \and \textbf{Explore the GLOBE}}
+\date{10 December 2021}
 
 \begin{document}
 \maketitle
@@ -165,7 +165,7 @@ information from many countries.
 \hypertarget{description-of-dataset}{%
 \section{Description of Dataset}\label{description-of-dataset}}
 
-The data set we have chosen to analyze is the \textbf{Dana Landis
+The dataset we have chosen to analyze is the \textbf{Dana Landis
 Leadership} dataset, which comes from the GLOBE Research Survey. The
 data provided in the folder had survey results for (1) leadership and
 (2) societal and culture data and a PDF describing the nature of the
@@ -188,7 +188,7 @@ from 62 cultures, the 2004 research survey provides data that measures
 the leadership and societal culture practices of each country (House et
 al, 2004).
 
-A single, complete observation from the leadership survey is about a
+A single, complete observation from the leadership survey is for a
 specific culture (either a country or a subcountry) about the following
 characteristics: Country; Country Name; Performance Oriented;
 Autocratic; Modesty; Charismatic 3 Self sacrifice; Team 1 Collaborative
@@ -204,19 +204,19 @@ Humane Oriented Global Leadership Dimension; Autonomous Global
 Leadership Dimension; Country Cluster.
 
 A single, complete observation from the society and culture survey has a
-similar structure as the leadership survey: each observation is for a
+similar structure as the leadership survey--each observation is for a
 specific culture (either a country or a subcountry) about the following
 characteristics: Country; Country Name; Uncertainty Avoidance Societal
 Practices; Future Orientation Societal Practices; Power Distance
 Societal Practices; Collectivism I Societal Practices Institutional
-Collectivism ; Humane Orientation Societal Practices; Performance
+Collectivism; Humane Orientation Societal Practices; Performance
 Orientation Societal Practices; Collectivism II Societal Practices In
-group Collectivism ; Gender Egalitarianism Societal Practices;
+group Collectivism; Gender Egalitarianism Societal Practices;
 Assertiveness Societal Practices; Uncertainty Avoidance Societal Values;
 Future Orientation Societal Values; Power Distance Societal Values;
-Collectivism I Societal Values Institutional Collectivism ; Human
+Collectivism I Societal Values Institutional Collectivism; Human
 Orientation Societal Values; Performance Orientation Societal Values;
-Collectivism II Societal Values In group Collectivism ; Gender
+Collectivism II Societal Values In group Collectivism; Gender
 Egalitarianism Societal Values; Assertiveness Societal Values; Country
 Cluster.
 
@@ -229,9 +229,9 @@ Analysis}\label{visualization-and-exploratory-data-analysis}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{report_files/figure-latex/leadership-1} \end{center}
 
-The above map shows autocratic levels by country. The lighter colors
-correspond with lower levels of autocracy while the darker colors
-correspond with higher levels of autocracy. For example, we see that
+The map in Figure 1 shows autocratic levels by country. The lighter
+colors correspond to lower levels of autocracy while the darker colors
+correspond to higher levels of autocracy. For example, we see that
 Russia, a well-known autocratic country, is shaded darkly. Notably,
 there do seem to be clusters of autocratic countries in the East and
 clusters of less autocratic countries in the West. The East is known for
@@ -245,7 +245,7 @@ consider clustering countries to determine how they may be separated. We
 do want to note that there are only 62 observations--this totals to
 fewer than 62 countries because Germany and South Africa have two
 observations each (West vs.~East and White vs.~Black, respecively). The
-limited number of observations may limit us in the scope of our analysis
+limited number of observations may limit the scope of our analysis
 because we have less than a third of the total countries (demonstrated
 by the vast swaths of grey on the world map for which there is no data)
 and clustering would further reduce block/group sizes.
@@ -256,13 +256,13 @@ Practices}\label{societal-values-and-practices}}
 
 \begin{center}\includegraphics[width=0.85\linewidth]{report_files/figure-latex/society-1} \end{center}
 
-The plot grid demonstrates how, contrary to what \emph{should} happen,
-the societal values of a country do not correlate well with the societal
-practices (what \emph{should be} does not align with what \emph{is}).
-This may be a source of further exploration, as we may want to see
-whether there is a significant difference between the values and
-practices. When we look at the per-region divisions though (by color),
-the trend (or lack thereof) seems to persist for these concepts.
+The plot grid in Figure 2 demonstrates how, contrary to what we might
+expect, the societal values of a country do not align well with the
+societal practices (what \emph{should be} does not align with what
+\emph{is}). This may be a source of further exploration, as we may want
+to see whether there is a significant misalignment between the values
+and practices. When we look at the per-region divisions though (by
+color), the trend (or lack thereof) seems to persist for these concepts.
 
 \hypertarget{analysis}{%
 \section{Analysis}\label{analysis}}
@@ -405,7 +405,7 @@ negatively (red):
 \subsection{Societal Practices and
 Values}\label{societal-practices-and-values}}
 
-From the scatterplots above, we note that societal practices and
+From the scatterplots in Figure 2, we note that societal practices and
 societal values do not always align. For instance, in the case of the
 Humane Orientation cultural dimension, there does not appear to be any
 correlation between practices and values at all, with societal practices
@@ -419,11 +419,10 @@ decreasing even as scores for values increase. This negative correlation
 might suggest that, rather than aligning, societal practices and
 societal values are in fact in conflict.
 
-To quantify the observations we made from our scatterplots above, we fit
-simple linear regression models for each of the nine cultural
-dimensions, using the societal values rating as the predictor and the
-societal practices rating as the response. In other words, we fit the
-model:
+To quantify these observations, we fit simple linear regression models
+for each of the nine cultural dimensions, using the societal values
+rating as the predictor and the societal practices rating as the
+response. In other words, we fit the model:
 
 \[
 y = \beta_0 + \beta_1 x
