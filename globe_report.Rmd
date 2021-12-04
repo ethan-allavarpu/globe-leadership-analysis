@@ -1,0 +1,441 @@
+---
+title: "GLOBE Research: Leadership and Societal Perspectives"
+subtitle: 'Stats 140XP Final Project'
+author:
+  - Ethan Allavarpu $\cdot$ Raymond Bai $\cdot$ Jaclyn Chiu $\cdot$ Ariel Chow $\cdot$ Carlie Lin $\cdot$ Dara Tan
+  - \textbf{Explore the GLOBE}
+date: "10 December 2021"
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
+  - \usepackage[normalem]{ulem}
+  - \usepackage{makecell}
+  - \usepackage{xcolor}
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 1
+    number_sections: false
+    keep_tex: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA, fig.align = "center",
+                      warning = FALSE, message = FALSE, results = FALSE,
+                      out.width = "85%")
+options(digits = 4)
+library(knitr)
+library(MASS)
+library(leaps)
+library(kableExtra)
+library(tidyverse)
+library(readxl)
+library(readr)
+library(stringr)
+library(rworldmap)
+```
+
+
+\newpage
+
+# Abstract
+
+We wanted to answer two main questions: which leadership qualities do countries tend to view similarly and if countries align their perceptions of societal practices and values. For determining leadership qualities and similar countries, we used principal component analysis (PCA) then $k$-means clustering to create four "clusters" of countries with similar leadership beliefs. For determining the alignment of perceptions of societal practices and values, we used linear regression models for each pair. Then, we performed t-tests for each dimension to check for significant slopes. We found that leadership characteristics are generally clustered by if the trait is negative or positive and that leadership values are clustered by region, except for one interesting case. On the perceptions side, we shockingly discovered that societal practices and societal values of countries do not align and are instead opposing. In the future, we recommend looking into causes behind the interesting disconnect between practices and values. Some limitations to our project are the data silences due to the lack of information from many countries.  
+
+# Problem Statements
+
+
+1. Which characteristics or traits do countries tend to group together when determining "good" leadership values?
+    - Which countries have similar perceptions of these leadership values?
+
+2. Do societal practices and societal values align? 
+    - If they do not, which practices and values deviate most significantly?
+    
+    
+# Description of Dataset
+
+The dataset we have chosen to analyze is the **Dana Landis Leadership** dataset, which comes from the GLOBE Research Survey. The data provided in the folder had survey results for (1) leadership and (2) societal and culture data and a PDF describing the nature of the survey, but nothing more. To glean more information, we found the two questionnaires (alpha and beta) described in the informational PDF to get the original questions asked in the surveys. While we do not have a "codebook" in a traditional sense, the original questions asked may help guide us in understanding what each variable means and how the survey represents respondents answers numerically. The survey is on a 1 to 7 scale. For the leadership data, 1 was a negative response, 4 a "neutral" score, and 7 positive. For the societal data, the "positive" and "negative" values depended on the question, but for the relationships we analyzed, this did not impact our results.
+
+The GLOBE (Global Leadership & Organizational Behavior Effectiveness) research program is an interdisciplinary study aiming to identify the interrelationships between societal culture, societal effectiveness and organizational leadership. Surveying from over 17,000 middle managers from 62 cultures, the 2004 research survey provides data that measures the leadership and societal culture practices of each country (House et al, 2004).
+
+```{r}
+set.seed(75)
+leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+leadership$Country.Cluster <- trimws(leadership$Country.Cluster)
+society <- read.csv("GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
+society$Country.Name[society$Country.Name == "IRAN"] <- "Iran"
+society$Country.Cluster <- trimws(society$Country.Cluster)
+colnames(leadership) <- vapply(colnames(leadership),
+                                  function(x){ gsub(pattern = "[\\.]+",
+                                                    replacement = " ", x)},
+                                  character(1))
+colnames(society) <- vapply(colnames(society),
+                                  function(x){ gsub(pattern = "[\\.]+",
+                                                    replacement = " ", x)},
+                                  character(1))
+rename_columns <- function(x) {
+  new_name <- gsub(pattern = "[\\.]+", replacement = " ", x)
+  new_name <- gsub(pattern = "Originally Labeled _", replacement = "(", new_name)
+  gsub(pattern = "_", replacement = ")", new_name)
+}
+colnames(leadership) <- vapply(colnames(leadership), rename_columns, character(1))
+change_names <- str_extract_all(colnames(leadership),"(?<=[:digit:] ).*")
+colnames(leadership)[vapply(change_names, length, numeric(1)) > 0] <- unlist(change_names)
+```
+
+A single, complete observation from the leadership survey is for a specific culture (either a country or a subcountry) and has `r ncol(leadership)` variables: one for the country, one for the country name, one for the country cluster, and then `r ncol(leadership) - 3` other variables about leadership qualities (e.g., `r paste(sample(colnames(leadership)[-c(1, 2, 30)], size = 3), collapse = "; ")`).
+
+A single, complete observation from the society and culture survey has a similar structure as the leadership survey--each observation is for a specific culture (either a country or a subcountry) and has `r ncol(society)` variables: one for the country, one for the country name, one for the country cluster, and then `r ncol(society) - 3` other variables about society and culture qualities (e.g., `r paste(sample(colnames(society)[-c(1, 2, 21)], size = 3), collapse = "; ")`).
+
+
+# Visualization and Exploratory Data Analysis
+
+## Leadership
+```{r leadership, out.width="95%"}
+source("iso_codes.R")
+col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15, 0.32, 0.80),
+                   c(0.50, 0.00, 0.50, 0.60, 0.00, 0.45, 0.45, 0.75, 0.25, 0.23),
+                   c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45, 0.70, 0.20),
+                   alpha = 0.75)
+leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+leadership$Country.Cluster <- trimws(leadership$Country.Cluster)
+society <- read.csv("GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
+society$Country.Name[society$Country.Name == "IRAN"] <- "Iran"
+society$Country.Cluster <- trimws(society$Country.Cluster)
+combined_data <- full_join(leadership, society,
+                           by = c("Country", "Country.Name", "Country.Cluster"))
+countries <- data.frame("country" = leadership$Country.Name)
+iso_codes <- as.data.frame(iso_codes)
+names(iso_codes) <- c("code", "country")
+country_codes <- countries %>% left_join(iso_codes)
+country_codes[is.na(country_codes$code), "code"] <- c("GBR", "CZE", "VEN",
+                                                      "IRN", "RUS", "KOR",
+                                                      "ZAF", "BOL", "CHE",
+                                                      "ZAF", "CAN", "DEU",
+                                                      "DEU", "USA")
+combined_data <- combined_data %>% mutate("Code" = country_codes$code)
+colnames(combined_data) <- vapply(colnames(combined_data),
+                                  function(x){ gsub(pattern = "[\\.]+",
+                                                    replacement = " ", x)},
+                                  character(1))
+mapped_data <- joinCountryData2Map(combined_data, nameJoinColumn = "Code")
+par(mai = rep(0.95, 4), xaxs = "i", yaxs = "i")
+# Edit the following function to create maps for different variables
+# nameColumnToPlot should be the variable name
+# numCats defines how many breaks you want (44 is the maximum)
+# colourPalette defines the range of colors to plot
+## alpha in rgb() is the transparency factor
+### Edit the from and to arguments to match the variable of interest
+### Divide by the maximum value of the variable of interest
+# Autocratic Scores by Country and Country Cluster ----
+mapCountryData(mapped_data, nameColumnToPlot = "Autocratic",
+               numCats = 43,
+               colourPalette = rgb(0.5, 0, 0,
+                                   alpha = seq(from = 1, to = 7,
+                                               length.out = 43) / 7),
+               borderCol = "black",
+               missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
+               mapTitle = "Figure 1: Autocratic Levels by Country")
+```
+
+
+The map in Figure 1 shows autocratic levels by country. The lighter colors correspond to lower levels of autocracy while the darker colors correspond to higher levels of autocracy. For example, we see that Russia, a well-known autocratic country, is shaded darkly. Notably, there do seem to be clusters of autocratic countries in the East and clusters of less autocratic countries in the West. The East is known for being more collectivist while the West is known for being more individualistic. As we delve into later, beliefs and cultures do seem to vary by region. 
+
+From boxplots we generated (not pictured), the difference by country cluster (as defined by the dataset) seems visible, prompting us to consider clustering countries to determine how they may be separated. We do want to note that there are only 62 observations--this totals to fewer than 62 countries because Germany and South Africa have two observations each (West vs. East and White vs. Black, respecively). The limited number of observations may limit the scope of our analysis because we have less than a third of the total countries (demonstrated by the vast swaths of grey on the world map for which there is no data) and clustering would further reduce block/group sizes.
+
+## Societal Values and Practices
+
+```{r society, out.width="95%"}
+leadership <- read_csv('GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
+culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
+colors <- c('#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
+            '#e377c2', '#7f7f7f', '#bcbd22', '#17becf')
+spv <- culture %>%
+  select(country = 'Country', country_name = 'Country Name',
+         country_cluster = 'Country Cluster', contains('Practices')) %>%
+  pivot_longer(contains('Practices'), values_to = 'practice') %>%
+  mutate(name = str_replace_all(name, ' Societal Practices', '')) %>%
+  full_join(culture %>%
+              select(country = 'Country', country_name = 'Country Name',
+                     country_cluster = 'Country Cluster', contains('Values')) %>%
+              pivot_longer(contains('Values')) %>%
+              mutate(name = str_replace_all(name, ' Societal Values', ''),
+                     name = str_replace(name, 'Human', 'Humane')),
+            by = c('country', 'country_name', 'country_cluster', 'name')) %>%
+  filter(!is.na(country_cluster))
+change_name <- !is.na(str_extract(spv$name, "(?<=\\().+(?=\\))"))
+spv$name[change_name] <- str_extract(spv$name, "(?<=\\().+(?=\\))")[change_name]
+ggplot(spv) +
+  geom_point(aes(practice, value, color = country_cluster),
+             cex = 1.5, alpha = 0.65) +
+  scale_color_manual(values = colors, name = 'Country Cluster') +
+  labs(title = 'Figure 2: Values vs. Practices by Cultural Dimension\nand Country Cluster',
+       caption = 'Note: Countries with missing country clusters were excluded.',
+       x = 'Societal Practices', y = 'Societal Values') +
+  theme_bw() +
+  facet_wrap(~ name, nrow = 3, scales = 'free') + 
+  theme(strip.text.x = element_text(size = 7))
+```
+
+The plot grid in Figure 2 demonstrates how, contrary to what we might expect, the societal values of a country do not align well with the societal practices (what *should be* does not align with what *is*). This may be a source of further exploration, as we may want to see whether there is a significant misalignment between the values and practices. When we look at the per-region divisions though (by color), the trend (or lack thereof) seems to persist for these concepts.
+
+
+
+# Analysis
+## Leadership Values
+
+```{r leadership_setup}
+library(tidyverse)
+library(rworldmap)
+library(reshape2)
+source("iso_codes.R")
+
+col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15, 0.32, 0.80),
+                   c(0.50, 0.00, 0.50, 0.60, 0.00, 0.45, 0.45, 0.75, 0.25, 0.23),
+                   c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45, 0.70, 0.20),
+                   alpha = 0.75)
+
+leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+leadership$Country.Cluster <- trimws(leadership$Country.Cluster)
+countries <- data.frame("country" = leadership$Country.Name)
+iso_codes <- as.data.frame(iso_codes)
+names(iso_codes) <- c("code", "country")
+country_codes <- countries %>% left_join(iso_codes)
+country_codes[is.na(country_codes$code), "code"] <- c("GBR", "CZE", "VEN",
+                                                      "IRN", "RUS", "KOR",
+                                                      "ZAF", "BOL", "CHE",
+                                                      "ZAF", "CAN", "DEU",
+                                                      "DEU", "USA")
+leadership <- leadership %>% mutate("Code" = country_codes$code)
+rename_columns <- function(x) {
+  new_name <- gsub(pattern = "[\\.]+", replacement = " ", x)
+  new_name <- gsub(pattern = "Originally Labeled _", replacement = "(", new_name)
+  gsub(pattern = "_", replacement = ")", new_name)
+}
+colnames(leadership) <- vapply(colnames(leadership), rename_columns, character(1))
+leadership <- leadership %>% dplyr::select(-Country)
+leadership <- leadership[, is.na(str_match(names(leadership),
+                                           "Global Leadership Dimension"))]
+```
+
+For the leadership values problem statement, the first objective is to collapse the data into the first four principal components through principal component analysis (PCA). PCA finds the directions which capture the most variability (spread) in the data--the first four account for the maximum variation. PCA allows us to visualize trends in the leadership values: countries tend to have similar sentiments about variables that "point" in the same direction (had principal component values that aligned).
+
+Before performing PCA, though, we remove the second-order factor analysis variables due to the heavy correlation with the original predictor variables and a more difficult interpretation of these variables. Since our goal is to understand the relationship between certain leadership characteristics, keeping these complicated variables might reduce our understanding and make interpretation more difficult.
+
+After performing PCA, we  perform $k$-means clustering on the first four principal components to determine the "groups" of leadership characteristics that have similar perceptions. $K$-means clustering creates $k$ groups that are the "most similar" to the other observations in their groups, minimizing the between-group variability:
+
+```{r pca, out.width="70%"}
+# PCA
+num_data <- leadership[, vapply(leadership, is.numeric, logical(1))]
+rownames(num_data) <- leadership$`Country Name`
+change_names <- str_extract_all(colnames(num_data),"(?<=[:digit:] ).*")
+colnames(num_data)[vapply(change_names, length, numeric(1)) > 0] <- unlist(change_names)
+pca <- prcomp(num_data)
+
+# Cluster the leadership characteristics
+pca4 <- pca$rotation[, 1:4]
+set.seed(0)
+w_ss <- numeric(20)
+k_clust <- list()
+length(k_clust) <- 20
+for (k in seq_along(w_ss)) {
+  k_clusters <- kmeans(pca4, centers = k, nstart = 20)
+  k_clust[[k]] <- k_clusters
+  w_ss[k] <- k_clusters$tot.withinss
+}
+## k = 5 seems best, but k = 3 provides more relevant groups
+cols <- rgb(c(0.25, 0.50, 0.00), c(0.50, 0.00, 0.50), c(0.00, 0.50, 0.50),
+            alpha = 0.75)[sort(k_clust[[3]]$cluster)]
+names(cols) <- names(sort(k_clust[[3]]$cluster))
+```
+```{r pca_heatmap, fig.height=8, fig.width=7}
+pca4 <- pca4[names(cols), ]
+melt(pca4) %>%
+  mutate(Var1 = str_replace(Var1, " (\\(.*\\))", "\n\\1")) %>%
+  ggplot(aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = rgb(0.5, 0, 0, alpha = 1),
+                       high = rgb(0, 0.5, 0, alpha = 1),
+                       mid = "white",
+                       midpoint = 0, space = "Lab",
+                       name = "PCA Coefficient") +
+  labs(title = "Figure 3: PCA Coefficients for Each Variable",
+       x = "Variable", y = "Principal Component Number",
+       caption = "Note: Variables colored by cluster") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1),
+        axis.text.y = element_text(color = cols, size = 10),
+        axis.title = element_text(size = 12),
+        plot.title = element_text(size = 14)) +
+  coord_flip()
+```
+
+\definecolor{clust3}{HTML}{408000}
+\definecolor{clust2}{HTML}{800080}
+\definecolor{clust1}{HTML}{008080}
+
+  1. \textcolor{clust1}{Internally competitive, malevolent, status conscious, self-centred, bureaucratic, face saver, autocratic}
+  2. \textcolor{clust2}{Humane-oriented, modesty}
+  3. \textcolor{clust3}{Participative, team integrator, inspirational, autonomous, administratively competent, integrity, visionary, diplomatic, decisive, collaborative team orientation, self-sacrifice, performance-oriented}
+  
+
+The green cluster seems to describe positive characteristics (e.g., participative, inspirational), while the blue cluster appears to describe negative characteristics (e.g., malevolent, self-centered). From this, we note that these "positive" and "negative" characteristics tend to occur together. The third "cluster" (i.e., humane oriented and modesty) did not closely fit with the other groups, leading us to believe that they may be considered separately from the other characteristics.
+
+After considering the leadership characteristics, we cluster countries based on similar perceptions. We do this by using the variables of the countries transformed into the first four principal components, then running $k$-means clustering on those components. The clustering results segregate the countries into the following segments:
+
+
+```{r country_table, results = TRUE}
+# Use first four principal components for clustering
+pca_x <- pca$x[, 1:4]
+set.seed(85)
+w_ss <- numeric(30)
+k_clust <- list()
+length(k_clust) <- 30
+for (k in seq_along(w_ss)) {
+  k_clusters <- kmeans(pca_x, centers = k, nstart = 20)
+  k_clust[[k]] <- k_clusters
+  w_ss[k] <- k_clusters$tot.withinss
+}
+
+## 4 clusters appears to be the best
+best_4 <- k_clust[[4]]
+leadership <- mutate(leadership, "Similar Values" = factor(best_4$cluster))
+
+country_clusters <- matrix(nrow = max(table(best_4$cluster)), ncol = 4)
+for (i in unique(best_4$cluster)) {
+  country_clusters[seq_len(sum(best_4$cluster == i)), i] <-
+    sort(names(best_4$cluster)[best_4$cluster == i])
+}
+cluster_cols <- col_palette[seq_len(4) + 3]
+country_clusters[is.na(country_clusters)] <- ""
+kbl(data.frame(country_clusters),
+    col.names = paste("Cluster", 1:4),
+    booktabs = TRUE,
+    position = "ht",
+    caption = "Regions with Similar Leadership Perceptions") %>%
+  kable_styling(latex_options = "striped") %>%
+  column_spec(1, color = cluster_cols[1]) %>%
+  column_spec(2, color = cluster_cols[2]) %>%
+  column_spec(3, color = cluster_cols[3]) %>%
+  column_spec(4, color = cluster_cols[4])
+```
+
+```{r kmeans_count, fig.height=5.5, fig.width=7.5}
+# K-means Clusters and Leadership Values ----
+mapped_data <- joinCountryData2Map(leadership, nameJoinColumn = "Code")
+mapCountryData(mapped_data, nameColumnToPlot = "Similar Values",
+               numCats = 4, catMethod = "categorical",
+               colourPalette = col_palette[seq_len(4) + 3],
+               borderCol = "black",
+               missingCountryCol = rgb(0, 0, 0, alpha = 0.5),
+               mapTitle = "Figure 4: Country Clusters with Similar Leadership Values",
+               addLegend = FALSE)
+```
+
+*Note: East and West Germany belong to the same cluster and are colored as such. South Africa is colored by the cluster the Black sample belongs in, rather than the White sample. Countries that are not included in the data are colored gray.*
+
+
+From the above grouping, we see that regionality (generally) determines a country's respective cluster and leadership perspectives. Cluster 1 (light blue) tends to describe Latin American and the Mediterranean, Cluster 2 (dark blue) generally includes Asia, and Cluster 4 (gold) describes the Anglo regions and northern Europe. The one cluster that appears to be "out there" is Cluster 3 (green), which does not have a particular region associated with it. To visualize the differences between these clusters, we create a heatmap of the median variable values for each cluster:
+
+
+```{r cluster_values, fig.height=7, fig.width=7}
+characteristic_values <- sapply(num_data, FUN = function(x) {
+  tapply(X = x, INDEX = leadership$`Similar Values`, FUN = median)
+  })
+cols <- cols[colnames(characteristic_values)]
+cols <- cols[apply(characteristic_values, 2, mean) %>% order()]
+characteristic_values <- characteristic_values[, apply(characteristic_values,
+                                                       2, mean) %>% order()]
+melt(characteristic_values) %>%
+  mutate(Var2 = str_replace(Var2, " (\\(.*\\))", "\n\\1")) %>%
+  ggplot(aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = rgb(0.5, 0, 0, alpha = 1),
+                       high = rgb(0, 0.5, 0, alpha = 1),
+                       midpoint = 4, space = "Lab",
+                       name = "Median Survey Score") +
+  labs(title = "Figure 5: Median Leadership Category Scores\nby Cluster",
+       x = "Cluster", y = "Leadership Category") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(color = col_palette[seq_len(4) + 3]),
+        axis.text.y = element_text(color = cols, size = 10),
+        axis.title = element_text(size = 12),
+        plot.title = element_text(size = 14))
+```
+
+From here, we see that, despite the clustering, the countries tend to agree on beneficial and detrimental leadership qualities; the main difference is in the intensity: clusters 1 and 4 seem to have the strongest responses (most positive and most negative), while cluster 3 does not seem to feel terribly strongly about positive leadership characteristics. The few qualities of intrigue, though, are the ones for which some clusters viewed positively (green) while others viewed negatively (red): 
+
+  - Status Conscious
+  - Internally Competitive (Conflict Inducer)
+  - Bureaucratic (Procedural)
+  - Autonomous
+
+## Societal Practices and Values
+
+From the scatterplots in Figure 2, we note that societal practices and societal values do not always align. For instance, in the case of the Humane Orientation cultural dimension, there does not appear to be any correlation between practices and values at all, with societal practices in this dimension varying from less than 3.5 to more than 5.0 on the survey's seven-point scale even though societal values were rated relatively similarly across all of the surveyed countries. In some other cases, such as for the Uncertainty Avoidance cultural dimension, there appears to be a negative correlation between practices and values, as indicated by the general trend of scores for practices in this dimension decreasing even as scores for values increase. This negative correlation might suggest that, rather than aligning, societal practices and societal values are in fact in conflict.
+
+To quantify these observations, we fit simple linear regression models for each of the nine cultural dimensions, using the societal values rating as the predictor and the societal practices rating as the response. In other words, we fit the model:
+$$
+y = \beta_0 + \beta_1 x
+$$
+Where $x$ is the societal values rating and $y$ is the societal practices rating for each of the nine cultural dimensions. Additionally, we performed $t$-tests for each dimension, to test the hypotheses $H_0: \beta_1 = 0$ and $H_1: \beta_1 \ne 0$. For this, we employed the *Bonferroni correction* to change the significance threshold from $\alpha = 0.05$ to $\alpha = \frac{0.05}{9} \approx `r round(0.05 / 9, 4)`$ since maintaining a significance level of $\alpha = 0.05$ would increase the experiment-wise error rate: $P(\text{Any False Positive}) = 1 - P(\text{No False Positives}) = 1 - 0.95^{9} \approx `r round(1 - 0.95^9, 4)`$. The table below shows the values of $\beta_1$ that we obtained and the corresponding p-values. Cultural dimensions for which the p-value is lower than the corrected $\alpha \approx `r round(0.05 / 9, 4)`$ are indicated with green shading.
+
+```{r SPV SLR Calculations}
+get_spv_slr <- function(n) {
+  model <- lm(practice ~ value, data = spv %>% filter(name == n))
+  results <- summary(model)$coefficients['value', ]
+  tibble(name = n, coefficient = unname(results['Estimate']),
+         p_value = unname(results['Pr(>|t|)']))
+}
+slr_results <- map_df(unique(spv$name), get_spv_slr) %>%
+  arrange(p_value)
+alpha <- 0.05 / nrow(slr_results)
+```
+
+```{r SPV SLR Table, results = TRUE}
+significant <- slr_results$p_value < alpha
+kable(slr_results, col.names = c('Cultural Dimension', 'Coefficient Value',
+                                 'p-value'), booktabs = TRUE,
+      caption = 'Results of Simple Linear Regression by Cultural Dimension') %>%
+  kable_styling(latex_options = "hold_position") %>%
+  row_spec(which(significant), background = '#E5F5E0') %>%
+  row_spec(which(!significant)[c(FALSE, TRUE)], background = '#F0F0F0')
+```
+
+As shown above, most of the $\beta_1$ values obtained were negative, including all four values that were significant at the $\alpha = `r round(alpha, 4) * 100`$% significant level as calculated using the Bonferroni correction. This means that, as the rating for the societal values of a cultural dimension increase, the rating for the societal practices of that cultural dimension actually decrease. In other words, rather than being aligned, societal practices in fact run counter to societal values.
+
+# Conclusions
+
+Leadership characteristics are largely clustered based on whether each trait is negative or positive. For example, the traits malevolent and self centered have similar ratings while the traits integrity and inspiration also have similar ratings. Additionally, leadership values tend to be clustered based on their geographic region. This suggests countries within smaller distances of one another have similar more related leadership perspectives.
+
+Our findings indicate that the societal practices and societal values of countries do not align and are instead opposing. Thus, we conclude that a country's societal value does not entail the same practices being practiced among its constituents. This analysis can be useful for government officials trying to develop policies that promote cultural values. If a country places a high value on uncertainty avoidance (the desire to rely on social norms and procedures to avoid unpredictable events), then the same country may undergo unexpected and unconventional events in the future.
+
+
+# Suggestions for Further Research 
+
+Regarding the leadership investigation, some further research we may consider is investigating *why* Cluster 3 differs so greatly from the other three clusters. In Cluster 3 we have France, Qatar, Morocco, and South Africa (Black Sample). Understanding why these countries are so different may help us see if there is an underlying link. Similarly, we may want to consider the differences between South Africa's Black and White samples and Germany's East and West samples. Since the survey was conducted in 2004, Apartheid and the Berlin Wall, respectively, may play a role in any potential differences. Ultimately, the above two suggestions relate to us considering the country's framework: looking at other indices (such as a freedom index, government approval ratings, or a happiness index) could shift us from an unsupervised learning situation (just understanding relationships between variables) to a model-building mindset in which we might determine which characteristics seem to have associations with more freedom/approval/happiness.
+
+
+For both leadership and the societal analyses, further research may be conducting more surveys to look at the potential changes in ideology and perspectives over time to understanding the changing dynamics at both the national and global level. Researchers should also look into the potential causes behind the inverse relationship between social values and practices.
+
+
+
+
+# Limitations
+
+In the dataset, there are only 62 countries observed, limiting the significance of the analysis and the confidence we have in clustering countries by geographical similarities. In addition, there is no explanation as to why only certain countries were surveyed. We also recognize that at the time of data collection, the Apartheid and the Berlin Wall potentially played significant factors in the differing valuations of social and leadership values for citizens in South Africa and Germany, respectively. It is notable that East and West Germany are split up and South Africa is also split up by race.
+
+# References
+
+  - ISO Country Codes: \url{https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3}
+  - \emph{House, Robert J, et al., editors. Culture, Leadership, and Organizations the Globe Study of 62 Societies. SAGE Publications, 2004.}
+
