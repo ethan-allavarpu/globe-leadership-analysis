@@ -194,8 +194,8 @@ cols <- rgb(c(0.25, 0.50, 0.00), c(0.50, 0.00, 0.50), c(0.00, 0.50, 0.50),
             alpha = 0.75)[sort(k_clust[[3]]$cluster)]
 names(cols) <- names(sort(k_clust[[3]]$cluster))
 pca4 <- pca4[names(cols), ]
+rownames(pca4) <- str_replace(rownames(pca4), " (\\(.*\\))", "\n\\1")
 melt(pca4) %>%
-  mutate(Var1 = str_replace(Var1, " (\\(.*\\))", "\n\\1")) %>%
   ggplot(aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() +
   scale_fill_gradient2(low = rgb(0.5, 0, 0, alpha = 1),
@@ -264,8 +264,9 @@ cols <- cols[colnames(characteristic_values)]
 cols <- cols[apply(characteristic_values, 2, mean) %>% order()]
 characteristic_values <- characteristic_values[, apply(characteristic_values,
                                                        2, mean) %>% order()]
+
+colnames(characteristic_values) <- str_replace(colnames(characteristic_values), " (\\(.*\\))", "\n\\1")
 melt(characteristic_values) %>%
-  mutate(Var2 = str_replace(Var2, " (\\(.*\\))", "\n\\1")) %>%
   ggplot(aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() +
   scale_fill_gradient2(low = rgb(0.5, 0, 0, alpha = 1),
