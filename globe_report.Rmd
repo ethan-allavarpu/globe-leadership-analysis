@@ -51,7 +51,7 @@ library(rworldmap)
 
 Our team wanted to answer two main questions: which leadership qualities do countries tend to view similarly and if countries align their perceptions of societal practices and values. For determining leadership qualities and similar countries, we used principal component analysis (PCA) then $k$-means clustering to create four "clusters" of countries with similar leadership beliefs. For determining the alignment of perceptions of societal practices and values, we used linear regression models for each pair. Then, we performed t-tests for each dimension to check for significant slopes. We found that leadership characteristics are generally clustered by whether the trait is negative or positive and by geological region, except for one interesting case. For the second question, we shockingly discovered that societal practices and societal values of countries do not align and are instead opposing. In the future, we recommend looking into causes behind the interesting disconnect between practices and values. Some limitations to our project are the data silences due to the lack of information from many countries.  
 
-# Problem Statements
+# Research Questions
 
 
 1. Which characteristics or traits do countries tend to group together when determining "good" leadership values?

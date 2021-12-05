@@ -116,8 +116,8 @@ Tan \and \textbf{Explore the GLOBE}}
 \hypertarget{abstract}{%
 \section{Abstract}\label{abstract}}
 
-We wanted to answer two main questions: which leadership qualities do
-countries tend to view similarly and if countries align their
+Our team wanted to answer two main questions: which leadership qualities
+do countries tend to view similarly and if countries align their
 perceptions of societal practices and values. For determining leadership
 qualities and similar countries, we used principal component analysis
 (PCA) then \(k\)-means clustering to create four ``clusters'' of
@@ -125,17 +125,17 @@ countries with similar leadership beliefs. For determining the alignment
 of perceptions of societal practices and values, we used linear
 regression models for each pair. Then, we performed t-tests for each
 dimension to check for significant slopes. We found that leadership
-characteristics are generally clustered by if the trait is negative or
-positive and that leadership values are clustered by region, except for
-one interesting case. On the perceptions side, we shockingly discovered
-that societal practices and societal values of countries do not align
-and are instead opposing. In the future, we recommend looking into
-causes behind the interesting disconnect between practices and values.
-Some limitations to our project are the data silences due to the lack of
-information from many countries.
+characteristics are generally clustered by whether the trait is negative
+or positive and by geological region, except for one interesting case.
+For the second question, we shockingly discovered that societal
+practices and societal values of countries do not align and are instead
+opposing. In the future, we recommend looking into causes behind the
+interesting disconnect between practices and values. Some limitations to
+our project are the data silences due to the lack of information from
+many countries.
 
-\hypertarget{problem-statements}{%
-\section{Problem Statements}\label{problem-statements}}
+\hypertarget{research-questions}{%
+\section{Research Questions}\label{research-questions}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -214,7 +214,7 @@ The map in Figure 1 shows autocratic levels by country. The lighter
 colors correspond to lower levels of autocracy while the darker colors
 correspond to higher levels of autocracy. For example, we see that
 Russia, a well-known autocratic country, is shaded darkly. Notably,
-there do seem to be clusters of autocratic countries in the East and
+there appears to be clusters of autocratic countries in the East and
 clusters of less autocratic countries in the West. The East is known for
 being more collectivist while the West is known for being more
 individualistic. As we delve into later, beliefs and cultures do seem to
@@ -252,13 +252,12 @@ color), the trend (or lack thereof) seems to persist for these concepts.
 \subsection{Leadership Values}\label{leadership-values}}
 
 For the leadership values problem statement, the first objective is to
-collapse the data into the first four principal components through
-principal component analysis (PCA). PCA finds the directions which
-capture the most variability (spread) in the data--the first four
-account for the maximum variation. PCA allows us to visualize trends in
-the leadership values: countries tend to have similar sentiments about
-variables that ``point'' in the same direction (had principal component
-values that aligned).
+collapse the data into the major principal components through principal
+component analysis (PCA). PCA finds the directions which capture the
+most variability (spread) in the data and allows us to visualize trends
+in the leadership values: countries tend to have similar sentiments
+about variables that ``point'' in the same direction (had principal
+component values that aligned).
 
 Before performing PCA, though, we remove the second-order factor
 analysis variables due to the heavy correlation with the original
@@ -267,11 +266,12 @@ variables. Since our goal is to understand the relationship between
 certain leadership characteristics, keeping these complicated variables
 might reduce our understanding and make interpretation more difficult.
 
-After performing PCA, we perform \(k\)-means clustering on the first
-four principal components to determine the ``groups'' of leadership
-characteristics that have similar perceptions. \(K\)-means clustering
-creates \(k\) groups that are the ``most similar'' to the other
-observations in their groups, minimizing the between-group variability:
+After performing PCA, we keep the first four principle components that
+account for 80\% of all data variations, and perform \(k\)-means
+clustering to determine the ``groups'' of leadership characteristics
+that have similar perceptions. \(K\)-means clustering creates \(k\)
+groups that are the ``most similar'' to the other observations in their
+groups, minimizing the between-group variability:
 
 \begin{center}\includegraphics[width=0.85\linewidth]{globe_report_files/figure-latex/pca_heatmap-1} \end{center}
 
@@ -444,11 +444,10 @@ In-group Collectivism & 0.4393 & 0.0991\\
 As shown above, most of the \(\beta_1\) values obtained were negative,
 including all four values that were significant at the
 \(\alpha = 0.56\)\% significant level as calculated using the Bonferroni
-correction. This means that, as the rating for the societal values of a
-cultural dimension increase, the rating for the societal practices of
-that cultural dimension actually decrease. In other words, rather than
-being aligned, societal practices in fact run counter to societal
-values.
+correction. This means that, as the ratings for the societal values of a
+cultural dimension increase, the ratings for the corresponding societal
+practices actually decrease. In other words, rather than being aligned,
+societal practices in fact run counter to societal values.
 
 \hypertarget{conclusions}{%
 \section{Conclusions}\label{conclusions}}
@@ -491,12 +490,12 @@ situation (just understanding relationships between variables) to a
 model-building mindset in which we might determine which characteristics
 seem to have associations with more freedom/approval/happiness.
 
-For both leadership and the societal analyses, further research may be
-conducting more surveys to look at the potential changes in ideology and
-perspectives over time to understanding the changing dynamics at both
-the national and global level. Researchers should also look into the
-potential causes behind the inverse relationship between social values
-and practices.
+For both leadership and the societal analyses, further research may
+conduct additional surveys to look at the potential changes in ideology
+and perspectives over time to understanding the changing dynamics at
+both the national and global level. Researchers should also look into
+the potential causes behind the inverse relationship between social
+values and practices.
 
 \hypertarget{limitations}{%
 \section{Limitations}\label{limitations}}
