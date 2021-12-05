@@ -126,10 +126,10 @@ of perceptions of societal practices and values, we used linear
 regression models for each pair. Then, we performed t-tests for each
 dimension to check for significant slopes. We found that leadership
 characteristics are generally clustered by whether the trait is negative
-or positive and by geological region, except for one interesting case.
-For the second question, we shockingly discovered that societal
-practices and societal values of countries do not align and are instead
-opposing. In the future, we recommend looking into causes behind the
+or positive and by geographical region, except for one interesting case.
+For the second question, we discovered that societal practices and
+societal values of countries do not align--instead, they are generally
+opposing. In the future, we recommend looking into the causes behind the
 interesting disconnect between practices and values. Some limitations to
 our project are the data silences due to the lack of information from
 many countries.
@@ -172,7 +172,7 @@ questionnaires (alpha and beta) described in the informational PDF to
 get the original questions asked in the surveys. While we do not have a
 ``codebook'' in a traditional sense, the original questions asked may
 help guide us in understanding what each variable means and how the
-survey represents respondents answers numerically. The survey is on a 1
+survey represents respondents' answers numerically. The survey is on a 1
 to 7 scale. For the leadership data, 1 was a negative response, 4 a
 ``neutral'' score, and 7 positive. For the societal data, the
 ``positive'' and ``negative'' values depended on the question, but for
@@ -180,14 +180,14 @@ the relationships we analyzed, this did not impact our results.
 
 The GLOBE (Global Leadership \& Organizational Behavior Effectiveness)
 research program is an interdisciplinary study aiming to identify the
-interrelationships between societal culture, societal effectiveness and
+interrelationships between societal culture, societal effectiveness, and
 organizational leadership. Surveying from over 17,000 middle managers
 from 62 cultures, the 2004 research survey provides data that measures
 the leadership and societal culture practices of each country (House et
 al, 2004).
 
 A single, complete observation from the leadership survey is for a
-specific culture (either a country or a subcountry) and has 30
+specific culture (either a country or a sub-country) and has 30
 variables: one for the country, one for the country name, one for the
 country cluster, and then 27 other variables about leadership qualities
 (e.g., Face saver; Participative Global Leadership Dimension;
@@ -195,7 +195,7 @@ Participative).
 
 A single, complete observation from the society and culture survey has a
 similar structure as the leadership survey--each observation is for a
-specific culture (either a country or a subcountry) and has 21
+specific culture (either a country or a sub-country) and has 21
 variables: one for the country, one for the country name, one for the
 country cluster, and then 18 other variables about society and culture
 qualities (e.g., Assertiveness Societal Practices; Future Orientation
@@ -214,22 +214,22 @@ The map in Figure 1 shows autocratic levels by country. The lighter
 colors correspond to lower levels of autocracy while the darker colors
 correspond to higher levels of autocracy. For example, we see that
 Russia, a well-known autocratic country, is shaded darkly. Notably,
-there appears to be clusters of autocratic countries in the East and
+there appear to be clusters of autocratic countries in the East and
 clusters of less autocratic countries in the West. The East is known for
 being more collectivist while the West is known for being more
 individualistic. As we delve into later, beliefs and cultures do seem to
 vary by region.
 
-From boxplots we generated (not pictured), the difference by country
-cluster (as defined by the dataset) seems visible, prompting us to
-consider clustering countries to determine how they may be separated. We
-do want to note that there are only 62 observations--this totals to
-fewer than 62 countries because Germany and South Africa have two
-observations each (West vs.~East and White vs.~Black, respecively). The
-limited number of observations may limit the scope of our analysis
-because we have less than a third of the total countries (demonstrated
-by the vast swaths of grey on the world map for which there is no data)
-and clustering would further reduce block/group sizes.
+From some exploratory boxplots, the difference by country cluster (as
+defined by the dataset) seems visible, prompting us to consider
+clustering countries to determine how they may be separated. We do want
+to note that there are only 62 observations--this totals to fewer than
+62 countries because Germany and South Africa have two observations each
+(West vs.~East and White vs.~Black, respectively). The limited number of
+observations may limit the scope of our analysis because we have less
+than a third of the total countries (demonstrated by the vast swaths of
+grey on the world map for which there is no data) and clustering would
+further reduce block/group sizes.
 
 \hypertarget{societal-values-and-practices}{%
 \subsection{Societal Values and
@@ -266,8 +266,8 @@ variables. Since our goal is to understand the relationship between
 certain leadership characteristics, keeping these complicated variables
 might reduce our understanding and make interpretation more difficult.
 
-After performing PCA, we keep the first four principle components that
-account for 80\% of all data variations, and perform \(k\)-means
+After performing PCA, we keep the first four principal components that
+account for 80\% of all data variation and perform \(k\)-means
 clustering to determine the ``groups'' of leadership characteristics
 that have similar perceptions. \(K\)-means clustering creates \(k\)
 groups that are the ``most similar'' to the other observations in their
@@ -454,7 +454,7 @@ societal practices in fact run counter to societal values.
 
 Leadership characteristics are largely clustered based on whether each
 trait is negative or positive. For example, the traits malevolent and
-self centered have similar ratings while the traits integrity and
+self-centered have similar ratings while the traits integrity and
 inspiration also have similar ratings. Additionally, leadership values
 tend to be clustered based on their geographic region. This suggests
 countries within smaller distances of one another have similar more
@@ -490,25 +490,26 @@ situation (just understanding relationships between variables) to a
 model-building mindset in which we might determine which characteristics
 seem to have associations with more freedom/approval/happiness.
 
-For both leadership and the societal analyses, further research may
-conduct additional surveys to look at the potential changes in ideology
-and perspectives over time to understanding the changing dynamics at
-both the national and global level. Researchers should also look into
-the potential causes behind the inverse relationship between social
-values and practices.
+For both leadership and societal analyses, further research may conduct
+additional surveys to look at the potential changes in ideology and
+perspectives over time to understand the changing dynamics at both the
+national and global levels. Researchers should also look into the
+potential causes behind the inverse relationship between social values
+and practices.
 
 \hypertarget{limitations}{%
 \section{Limitations}\label{limitations}}
 
-In the dataset, there are only 62 countries observed, limiting the
+In the dataset, there are only 62 cultures observed, limiting the
 significance of the analysis and the confidence we have in clustering
 countries by geographical similarities. In addition, there is no
 explanation as to why only certain countries were surveyed. We also
 recognize that at the time of data collection, the Apartheid and the
 Berlin Wall potentially played significant factors in the differing
 valuations of social and leadership values for citizens in South Africa
-and Germany, respectively. It is notable that East and West Germany are
-split up and South Africa is also split up by race.
+and Germany, respectively. The date of the survey (2004) may also lead
+to dated responses--a more recent survey of societal and leadership
+dimensions may be necessary.
 
 \hypertarget{references}{%
 \section{References}\label{references}}
