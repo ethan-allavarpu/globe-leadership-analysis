@@ -19,8 +19,8 @@ library(stringr)
 ## Data loading, "beautifying" and joining
 
 ```{r}
-leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
-social <- read.csv("GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
+leadership <- read.csv("data/raw/GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+social <- read.csv("data/raw/GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
 
 colnames(leadership) <- vapply(colnames(leadership),
                                function(x){gsub(pattern = "[\\.]+",

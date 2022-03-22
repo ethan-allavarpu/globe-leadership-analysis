@@ -1,3 +1,0 @@
-\beamer@sectionintoc {1}{Introducing the Data}{2}{0}{1}
-\beamer@sectionintoc {2}{Analysis}{7}{0}{2}
-\beamer@sectionintoc {3}{Conclusions}{17}{0}{3}

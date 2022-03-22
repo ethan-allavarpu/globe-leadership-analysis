@@ -1,7 +1,7 @@
 
 library(tidyverse)
-leadership <- read_csv('GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
-culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
+leadership <- read_csv('data/raw/GGLOBE-Phase-2-Aggregated-Leadership-Data.csv')
+culture <- read_csv('data/raw/GGLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
 
   # data preparation ----
 

@@ -29,9 +29,9 @@ col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15, 0.32, 0.80)
                    c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45, 0.70, 0.20),
                    alpha = 0.75)
 
-leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+leadership <- read.csv("data/raw/GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
 leadership$Country.Cluster <- trimws(leadership$Country.Cluster)
-society <- read.csv("GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
+society <- read.csv("data/raw/GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
 society$Country.Name[society$Country.Name == "IRAN"] <- "Iran"
 society$Country.Cluster <- trimws(society$Country.Cluster)
 
@@ -69,8 +69,8 @@ mapCountryData(mapped_data, nameColumnToPlot = "Autocratic",
                mapTitle = "Autocratic Levels by Country")
 
 # Societal Values and Practices ----
-leadership <- read_csv('GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
-culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
+leadership <- read_csv('data/raw/GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
+culture <- read_csv('data/raw/GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
 colors <- c('#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
             '#e377c2', '#7f7f7f', '#bcbd22', '#17becf')
 
@@ -106,16 +106,16 @@ ggplot(spv) +
 # Code used for EDA not included in the report ----
 library(tidyverse)
 library(rworldmap)
-source("iso_codes.R")
+source("code/iso_codes.R")
 
 col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15, 0.32, 0.80),
                    c(0.50, 0.00, 0.50, 0.60, 0.00, 0.45, 0.45, 0.75, 0.25, 0.23),
                    c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45, 0.70, 0.20),
                    alpha = 0.75)
 
-leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+leadership <- read.csv("data/raw/GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
 leadership$Country.Cluster <- trimws(leadership$Country.Cluster)
-society <- read.csv("GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
+society <- read.csv("data/raw/GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
 society$Country.Name[society$Country.Name == "IRAN"] <- "Iran"
 society$Country.Cluster <- trimws(society$Country.Cluster)
 
@@ -204,8 +204,8 @@ combined_data %>%
 
 # ---
 
-leadership <- read_csv('GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
-culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
+leadership <- read_csv('data/raw/GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
+culture <- read_csv('data/raw/GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
 colors <- c('#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
             '#e377c2', '#7f7f7f', '#bcbd22', '#17becf')
 
@@ -258,8 +258,8 @@ ggplot(tc) +
 
 # ---
 
-leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
-social <- read.csv("GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
+leadership <- read.csv("data/raw/GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+social <- read.csv("data/raw/GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv")
 
 colnames(leadership) <- vapply(colnames(leadership),
                                function(x){gsub(pattern = "[\\.]+",

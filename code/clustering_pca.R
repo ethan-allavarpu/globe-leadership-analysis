@@ -1,14 +1,14 @@
 library(tidyverse)
 library(rworldmap)
 library(reshape2)
-source("iso_codes.R")
+source("code/iso_codes.R")
 
 col_palette <- rgb(c(0.50, 0.50, 0.00, 0.45, 0.00, 0.25, 0.75, 0.15, 0.32, 0.80),
                    c(0.50, 0.00, 0.50, 0.60, 0.00, 0.45, 0.45, 0.75, 0.25, 0.23),
                    c(0.00, 0.50, 0.50, 0.60, 0.15, 0.15, 0.00, 0.45, 0.70, 0.20),
                    alpha = 0.75)
 
-leadership <- read.csv("GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
+leadership <- read.csv("data/raw/GLOBE-Phase-2-Aggregated-Leadership-Data.csv")
 leadership$Country.Cluster <- trimws(leadership$Country.Cluster)
 countries <- data.frame("country" = leadership$Country.Name)
 iso_codes <- as.data.frame(iso_codes)

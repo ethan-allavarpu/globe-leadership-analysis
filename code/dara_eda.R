@@ -1,7 +1,7 @@
 
 library(tidyverse)
-leadership <- read_csv('GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
-culture <- read_csv('GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
+leadership <- read_csv('data/raw/GLOBE-Phase-2-Aggregated-Leadership-Data.csv')
+culture <- read_csv('data/raw/GLOBE-Phase-2-Aggregated-Societal-Culture-Data.csv')
 colors <- c('#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
             '#e377c2', '#7f7f7f', '#bcbd22', '#17becf')
 
@@ -68,7 +68,7 @@ tc <- leadership %>%
               summarize(charismatic = mean(value), .groups = 'drop'),
             by = c('country', 'country_name', 'country_cluster')) %>%
   filter(!is.na(country_cluster))
-  
+
 ggplot(tc) +
   geom_point(aes(team, charismatic, color = country_cluster),
              cex = 2.3, alpha = 0.65) +
@@ -82,7 +82,7 @@ ggplot(tc) +
 
 leadership %>%
   select(country = 'Country', country_name = 'Country Name',
-         country_cluster = 'Country Cluster', 
+         country_cluster = 'Country Cluster',
          contains('Global Leadership Dimension')) %>%
   filter(!is.na(country_cluster)) %>%
   pivot_longer(contains('Global Leadership Dimension')) %>%
